@@ -1,0 +1,135 @@
+"0","knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)"
+"0",""
+"0","library(tidyverse)"
+"2","package ‘tidyverse’ was built under R version 3.4.4"
+"2","[30m-- [1mAttaching packages[22m --------------------------------------- tidyverse 1.2.1 --[39m
+"
+"2","[30m[32mv[30m [34mggplot2[30m 3.3.2     [32mv[30m [34mpurrr  [30m 0.3.4
+[32mv[30m [34mtibble [30m 3.0.1     [32mv[30m [34mdplyr  [30m 1.0.0
+[32mv[30m [34mtidyr  [30m 1.1.0     [32mv[30m [34mstringr[30m 1.4.0
+[32mv[30m [34mreadr  [30m 1.3.1     [32mv[30m [34mforcats[30m 0.5.0[39m
+"
+"2","package ‘readr’ was built under R version 3.4.4"
+"2","package ‘stringr’ was built under R version 3.4.4"
+"2","[30m-- [1mConflicts[22m ------------------------------------------ tidyverse_conflicts() --
+[31mx[30m [34mlubridate[30m::[32mas.difftime()[30m masks [34mbase[30m::as.difftime()
+[31mx[30m [34mlubridate[30m::[32mdate()[30m        masks [34mbase[30m::date()
+[31mx[30m [34mdplyr[30m::[32mfilter()[30m          masks [34mstats[30m::filter()
+[31mx[30m [34mlubridate[30m::[32mintersect()[30m   masks [34mbase[30m::intersect()
+[31mx[30m [34mdplyr[30m::[32mlag()[30m             masks [34mstats[30m::lag()
+[31mx[30m [34mlubridate[30m::[32msetdiff()[30m     masks [34mbase[30m::setdiff()
+[31mx[30m [34mlubridate[30m::[32munion()[30m       masks [34mbase[30m::union()[39m
+"
+"0","library(png)"
+"0","library(knitr)"
+"0","library(markdown)"
+"0","library(lmerTest)"
+"2","package ‘lmerTest’ was built under R version 3.4.4"
+"2","Loading required package: lme4
+"
+"2","package ‘lme4’ was built under R version 3.4.4"
+"2","Loading required package: Matrix
+"
+"2","package ‘Matrix’ was built under R version 3.4.4"
+"2","
+Attaching package: ‘Matrix’
+
+"
+"2","The following objects are masked from ‘package:tidyr’:
+
+    expand, pack, unpack
+
+"
+"2","
+Attaching package: ‘lmerTest’
+
+"
+"2","The following object is masked from ‘package:lme4’:
+
+    lmer
+
+"
+"2","The following object is masked from ‘package:stats’:
+
+    step
+
+"
+"0","library(ggthemes)"
+"0","library(psych)"
+"2","
+Attaching package: ‘psych’
+
+"
+"2","The following objects are masked from ‘package:ggplot2’:
+
+    %+%, alpha
+
+"
+"0","library(magrittr)"
+"2","
+Attaching package: ‘magrittr’
+
+"
+"2","The following object is masked from ‘package:purrr’:
+
+    set_names
+
+"
+"2","The following object is masked from ‘package:tidyr’:
+
+    extract
+
+"
+"0","library(langcog)"
+"2","
+Attaching package: ‘langcog’
+
+"
+"2","The following objects are masked from ‘package:ggthemes’:
+
+    scale_color_solarized, scale_colour_solarized,
+    scale_fill_solarized
+
+"
+"2","The following object is masked from ‘package:base’:
+
+    scale
+
+"
+"0","library(tidyboot)"
+"2","package ‘tidyboot’ was built under R version 3.4.4"
+"2","
+Attaching package: ‘tidyboot’
+
+"
+"2","The following objects are masked from ‘package:langcog’:
+
+    ci_lower, ci_upper
+
+"
+"0","library(fs)"
+"0","library(ggmap)"
+"2","package ‘ggmap’ was built under R version 3.4.4"
+"2","Google's Terms of Service: https://cloud.google.com/maps-platform/terms/.
+"
+"2","Please cite ggmap if you use it! See citation(""ggmap"") for details.
+"
+"2","
+Attaching package: ‘ggmap’
+
+"
+"2","The following object is masked from ‘package:magrittr’:
+
+    inset
+
+"
+"0","library(lubridate)"
+"0",""
+"0","source(path(here::here(), ""file_paths.R""))"
+"2","package ‘here’ was built under R version 3.4.4"
+"2","here() starts at C:/Users/demay/Box/Benjamin deMayo's Files/cdi_prolific
+"
+"0","source(functions_script)"
+"0",""
+"0","#Variables to tinker with"
+"0","min_completion_time = 8.5"

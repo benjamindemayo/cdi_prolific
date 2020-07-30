@@ -1,0 +1,309 @@
+---
+title: "Norming WebCDI"
+author: "Benny deMayo"
+date: "6/15/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+
+library(tidyverse)
+library(png)
+library(knitr)
+library(markdown)
+library(lmerTest)
+library(ggthemes)
+library(psych)
+library(magrittr)
+library(langcog)
+library(tidyboot)
+library(fs)
+library(zipcode)
+library(ggmap)
+library(lubridate)
+
+source(path(here::here(), "file_paths.R"))
+source(functions_script)
+
+#Variables to tinker with
+min_completion_time = 8.5
+```
+
+```{r}
+facebook_ws_raw <- 
+  readInWebCDI(fb_ws_directory) %>% 
+  select( #drop a bunch of columns that were screwing up the merge with prolific data
+    -opt_out,
+    -country,
+    -sibling_boolean,
+    -sibling_data,
+    -sibling_count,
+    -caregiver_other
+  )
+
+all_wg_raw <- readInWebCDI(fb_wg_directory)
+
+prolific_raw <- 
+  readInWebCDI(prolific_data_directory) %>% 
+  select(
+    colnames(facebook_ws_raw), #drop columns that are prolific specific
+    -opt_out, #drop a bunch of columns that were screwing up the merge with facebook data
+    -country,
+    -sibling_boolean,
+    -sibling_data,
+    -sibling_count,
+    -caregiver_other
+  ) 
+
+#all of the ws data collected
+all_ws_raw <- 
+  facebook_ws_raw %>% 
+  bind_rows(prolific_raw) %>% 
+  mutate(completed = case_when(
+    stringr::str_to_lower(completed) == "true" ~ TRUE,
+    stringr::str_to_lower(completed) == "false" ~ FALSE
+  ))
+
+```
+
+```{r}
+wg <- 
+  all_wg_raw %>% 
+  filterBirthweight() %>% 
+  filterMultilingual() %>% 
+  filterVision() %>% 
+  getCompletionInterval() %>% 
+  getEthnicities() %>% 
+  getMaternalEd() %>% 
+  filter(
+    completed == TRUE,
+    completion_time >= min_completion_time
+  )
+
+ws <- 
+  all_ws_raw %>% 
+  filterBirthweight() %>% 
+  filterMultilingual() %>% 
+  filterVision() %>% 
+  getCompletionInterval() %>% 
+  getEthnicities() %>% 
+  getMaternalEd() %>% 
+  filter(
+    completed == TRUE,
+    completion_time >= min_completion_time
+  )
+
+```
+
+```{r}
+#Calculating exclusions
+
+completed_wg <- 
+  all_wg_raw %>% 
+  filter(completed == TRUE) %>% 
+  getCompletionInterval()
+
+completed_ws <- 
+  all_ws_raw %>% 
+  filter(completed == TRUE) %>% 
+  getCompletionInterval()
+
+total_admin <- 
+  nrow(completed_wg) + nrow(completed_ws)
+
+wg_exclusions <- 
+  nrow(completed_wg) - 
+  nrow(
+    completed_wg %>% 
+      filterMultilingual() %>% 
+      filterBirthweight() %>% 
+      filterVision() %>% 
+      filter(completion_time >= min_completion_time)
+  )
+
+ws_exclusions <- 
+  nrow(completed_ws) - 
+  nrow(
+    completed_ws %>% 
+      filterMultilingual() %>% 
+      filterBirthweight() %>% 
+      filterVision() %>% 
+      filter(completion_time >= min_completion_time)
+  )
+
+total_exclusions <- ws_exclusions + wg_exclusions
+
+```
+
+
+```{r}
+#combine relevant demographic information from both WS and WG
+demographics_df <- 
+  bind_rows(
+    wg %>% 
+      select(
+        study_name,
+        subject_id,
+        age,
+        ethnicity, 
+        maternal_ed, 
+        words_produced = `Words Produced` 
+      ),
+    ws %>% 
+      select(
+        study_name,
+        subject_id,
+        age,
+        ethnicity,
+        maternal_ed,
+        words_produced = `Total Produced`
+      )
+  )
+
+total_n <- nrow(demographics_df)
+ethnicity_na_n <- nrow(demographics_df %>% filter(is.na(ethnicity)))
+ethnicity_total_n <- total_n - ethnicity_na_n
+maternal_ed_na_n <- nrow(demographics_df %>% filter(is.na(maternal_ed)))
+maternal_ed_total_n <- total_n - maternal_ed_na_n
+```
+
+```{r}
+
+#Ethnicity plot creation
+ethnicity_plot_df <- 
+  demographics_df %>% 
+  getEthnicitySummary() %>% 
+  filter(!is.na(ethnicity)) %>% 
+  mutate(`Current study` = prop.table(n)) %>% 
+  left_join(old_ethnicity_numbers, by = "ethnicity") %>% 
+  select(-n) %>% 
+  pivot_longer(
+    cols = c(`Current study`, `2007 manual`),
+    names_to = "study",
+    values_to = "proportion"
+  )
+
+ethnicity_plot <-
+  ethnicity_plot_df %>% 
+  ggplot(aes(ethnicity, proportion, fill = study)) +
+  geom_col(position = "dodge") +
+  labs(
+    y = "Proportion of\nrespondents",
+    title = "Breakdown of participant ethnicity",
+    caption = str_c(
+      "A total of ",
+      total_admin,
+      " CDI's were collected. ",
+      total_exclusions,
+      " did not meet inclusion criteria\n(multilingual status, vision/hearing impairments, premature birth, completion\ntime under ",
+      min_completion_time,
+      " minutes); ",
+      ethnicity_na_n,
+      " did not report ethnicity, leaving a final N = ",
+      ethnicity_total_n,
+      "."
+    )
+  ) +
+  theme_few() +
+  theme(
+    legend.title = element_blank(),
+    axis.text = element_text(size = 14),
+    axis.title = element_text(size = 13),
+    legend.text = element_text(size = 13),
+    axis.title.x = element_blank(),
+    plot.title = element_text(size = 15),
+    plot.caption = element_text(hjust = 0)
+  )
+
+ethnicity_plot
+
+```
+
+
+```{r}
+#Maternal education plots
+
+maternal_ed_plot_df <- 
+  demographics_df %>% 
+  count(maternal_ed) %>% 
+  mutate(`Current study` = prop.table(n)) %>% 
+  left_join(old_momed_numbers, by = "maternal_ed") %>% 
+  select(-n) %>% 
+  pivot_longer(
+    cols = c(`Current study`, `2007 manual`),
+    names_to = "study",
+    values_to = "proportion"
+  ) %>% 
+  mutate(
+    maternal_ed = fct_relevel(
+      maternal_ed,
+      "Some high school or less",
+      "High school diploma",
+      "Some college education",
+      "College diploma or more"
+    )
+  )
+
+x_axis_labs <- c(
+  "Some high school\n or less",
+  "High school\ndiploma",
+  "Some college\neducation",
+  "College diploma\nor more"
+)
+
+maternal_ed_plot <- 
+  maternal_ed_plot_df %>% 
+  ggplot(aes(maternal_ed, proportion, fill = study)) +
+  geom_col(position = "dodge") +
+  labs(
+    x = "Education Level",
+    y = "Proportion of\nrespondents",
+    title = "Maternal education",
+    caption = str_c(
+      "A total of ",
+      total_admin,
+      " CDI's were collected. ",
+      total_exclusions,
+      " did not meet inclusion\ncriteria",
+      " (multilingual status, vision/hearing impairments, premature\nbirth, completion time under ",
+      min_completion_time,
+      " minutes); leaving a final N = ",
+      total_n,
+      "."
+    )
+  ) +
+  theme_few() +
+  theme(
+    legend.title = element_blank(),
+    axis.text.x = element_text(angle = 30, vjust = 0.9, hjust = 1, size = 13.5),
+    axis.title.x = element_blank(),
+    legend.text = element_text(size = 13),
+    plot.caption = element_text(hjust = 0)
+  ) +
+  scale_x_discrete(labels = x_axis_labs)
+
+maternal_ed_plot
+  
+```
+
+```{r}
+momed_ses_df <- 
+  demographics_df %>% 
+  mutate(highschool = case_when(
+    maternal_ed == "Some high school or less" ~ "high_school",
+    maternal_ed == "High school diploma" ~ "high_school",
+    maternal_ed == "Some college education" ~ "college",
+    maternal_ed == "College diploma or more" ~ "college"
+  ))
+
+momed_ses_df %>% 
+  filter(
+    age <= 30
+  ) %>% 
+  ggplot(aes(age, words_produced, color = highschool)) +
+  geom_point() +
+  geom_smooth(method = "lm")
+```
+
+

@@ -1,0 +1,81 @@
+study_name,subject_id,age,ethnicity,maternal_ed,words_produced,sex,Total Produced Percentile-sex
+prolific_june_5,29,16,Black,College diploma or more,316,Male,98
+prolific_june_5,28,16,Black,Some college education,36,Male,46
+prolific_june_5,25,22,Mixed/other,Some college education,NA,Male,1
+prolific_june_5,23,24,Black,Some college education,71,Male,11
+prolific_june_5,22,17,Mixed/other,Some college education,28,Female,19
+prolific_june_5,21,16,Mixed/other,Some college education,12,Male,13
+prolific_june_5,20,26,Black,College diploma or more,330,Female,32
+prolific_june_5,19,25,Black,College diploma or more,32,Female,2
+prolific_june_5,17,36,Black,College diploma or more,233,Female,5
+prolific_june_5,16,17,Black,Some college education,51,Male,50
+prolific_june_5,15,17,Black,College diploma or more,240,Female,87
+prolific_june_5,14,29,Black,College diploma or more,296,Male,21
+prolific_june_5,13,20,Mixed/other,College diploma or more,26,Male,10
+prolific_june_5,12,35,Black,College diploma or more,93,Male,3
+prolific_june_5,10,32,Black,College diploma or more,295,Male,16
+prolific_june_5,9,34,Black,Some college education,680,Female,99
+prolific_june_5,8,24,Black,College diploma or more,369,Male,70
+prolific_june_5,7,18,Black,Some college education,123,Male,67
+prolific_june_5,6,19,Black,College diploma or more,39,Male,23
+prolific_june_5,5,36,Black,College diploma or more,81,Male,3
+prolific_june_5,4,16,Black,High school diploma,258,Male,96
+prolific_june_5,2,34,Black,College diploma or more,488,Female,29
+prolific_june_5,3,28,Mixed/other,High school diploma,52,Male,3
+prolific_june_5,1,24,Mixed/other,College diploma or more,159,Female,21
+prolific_may_20,71,19,White,College diploma or more,42,Female,17
+prolific_may_20,70,22,Black,High school diploma,106,Male,32
+prolific_may_20,69,25,White,Some college education,26,Female,1
+prolific_may_20,66,27,White,High school diploma,78,Male,5
+prolific_may_20,65,24,White,Some college education,135,Male,25
+prolific_may_20,64,17,White,Some college education,185,Female,81
+prolific_may_20,63,23,White,High school diploma,246,Female,41
+prolific_may_20,62,28,Mixed/other,High school diploma,75,Female,2
+prolific_may_20,61,16,Mixed/other,High school diploma,29,Male,40
+prolific_may_20,60,20,White,Some college education,149,Female,46
+prolific_may_20,59,23,White,High school diploma,141,Female,23
+prolific_may_20,58,26,White,High school diploma,190,Male,23
+prolific_may_20,57,17,Mixed/other,High school diploma,17,Female,10
+prolific_may_20,55,18,White,Some college education,17,Female,7
+prolific_may_20,54,24,Mixed/other,High school diploma,106,Female,12
+prolific_may_20,53,25,White,High school diploma,114,Male,16
+prolific_may_20,52,26,White,Some college education,94,Male,9
+prolific_may_20,51,21,White,Some college education,50,Female,11
+prolific_may_20,47,17,White,High school diploma,42,Female,29
+prolific_may_20,46,20,Mixed/other,High school diploma,9,Male,3
+prolific_may_20,45,19,White,Some college education,15,Other,1
+prolific_may_20,44,25,White,Some college education,447,Female,61
+prolific_may_20,43,24,White,Some college education,209,Female,28
+prolific_may_20,42,23,White,College diploma or more,12,Male,2
+prolific_may_20,41,20,White,Some college education,82,Male,40
+prolific_may_20,40,24,White,Some college education,442,Male,80
+prolific_may_20,36,19,White,Some college education,70,Female,29
+prolific_may_20,35,27,White,Some college education,601,Female,83
+prolific_may_20,34,30,White,High school diploma,566,Female,45
+prolific_may_20,33,19,White,Some college education,91,Male,52
+prolific_may_20,32,18,White,College diploma or more,57,Male,44
+prolific_may_20,31,23,White,Some college education,144,Female,23
+prolific_may_20,30,20,White,College diploma or more,490,Female,95
+prolific_may_20,29,25,Mixed/other,High school diploma,83,Female,6
+prolific_may_20,28,18,White,Some college education,28,Female,13
+prolific_may_20,25,22,Mixed/other,High school diploma,445,Female,84
+prolific_may_20,24,16,White,High school diploma,78,Female,57
+prolific_may_20,23,21,White,College diploma or more,118,Female,30
+prolific_may_20,22,19,Black,Some college education,126,Male,62
+prolific_may_20,21,30,White,Some college education,88,Female,2
+prolific_may_20,19,17,White,College diploma or more,78,Male,61
+prolific_may_20,18,18,White,High school diploma,226,Female,81
+prolific_may_20,17,25,White,High school diploma,552,Male,90
+prolific_may_20,16,25,White,Some college education,226,Female,25
+prolific_may_20,14,17,White,Some college education,86,Female,52
+prolific_may_20,13,16,White,Some college education,49,Male,56
+prolific_may_20,10,26,White,Some college education,450,Male,70
+prolific_may_20,9,23,White,College diploma or more,22,Female,2
+prolific_may_20,8,27,White,Some college education,NA,Male,1
+prolific_may_20,7,16,White,High school diploma,81,Female,58
+prolific_may_20,6,28,White,Some college education,259,Male,22
+prolific_may_20,5,25,White,Some college education,125,Male,18
+prolific_may_20,4,21,White,Some college education,111,Other,1
+prolific_may_20,3,24,White,College diploma or more,419,Female,64
+prolific_may_20,2,30,White,Some college education,677,Female,98
+prolific_may_20,1,27,White,Some college education,587,Male,87
