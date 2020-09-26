@@ -36,3 +36,15 @@ fb_ws_directory <-
 #functions that are useful for Web-CDI data processing
 functions_script <- 
   fs::path(project_root, "analysis", "cdi_functions.R")
+
+##All data
+
+##All data WS1
+all_data_ws1_path <- 
+  fs::path(project_root, "data/full_dataset/webcdi_ws1.csv")
+
+all_data_ws2_path <- 
+  fs::path(project_root, "data/full_dataset/webcdi_ws2.csv")
+
+all_data_wg_path <- 
+  fs::path(project_root, "data/full_dataset/webcdi_wg.csv")
