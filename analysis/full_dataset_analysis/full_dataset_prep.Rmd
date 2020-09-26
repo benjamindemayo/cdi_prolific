@@ -41,6 +41,38 @@ all_ws_1 <-
   )
 
 all_ws_2 <- 
-  readInWebCDI(all_)
+  readInWebCDI(all_data_ws2_path) %>% 
+  select( #drop a bunch of columns that were screwing up the merge with prolific data
+    -opt_out,
+    -country,
+    -sibling_boolean,
+    -sibling_data,
+    -sibling_count,
+    -caregiver_other
+  )
+
+all_ws_raw <- 
+  all_ws_1 %>% 
+  bind_rows(all_ws_2) %>% 
+  mutate(completed = case_when(
+    stringr::str_to_lower(completed) == "true" ~ TRUE,
+    stringr::str_to_lower(completed) == "false" ~ FALSE
+  ))
+
+all_wg_raw <- readInWebCDI(all_data_wg_path)
+```
+
+
+#Getting exclusion data
+```{r}
+birthweights <- 
+  all_wg_raw %>% 
+  mutateBirthweight() %>% 
+  select(study_name, subject_id, due_date_diff, birth_weight_lb, premature) %>%
+  filter(is.na(premature))
+
+
+
+
 ```
 

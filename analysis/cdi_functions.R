@@ -30,6 +30,29 @@ readInWebCDI <- function(directory) {
 
 #accepts: df of CDI data
 #returns: df of CDI data filtering out kids who don't meet birthweight or prematurity criteria
+mutateBirthweight <- function(data) {
+  clean_data <- 
+    data %>% 
+    mutate_at(
+      .vars = c("due_date_diff", "birth_weight_lb", "birth_weight_kg"),
+      .funs = ~as.numeric(.)
+    ) %>% 
+    mutate_at(
+      .vars = c("due_date_diff"),
+      .funs = ~case_when(
+        is.na(.) ~ 0, #turn non-NA's in this column into zeros
+        TRUE ~ .
+      )
+    ) %>% 
+    mutate(premature = case_when(
+      due_date_diff >= 4 & birth_weight_lb < 5.5 ~ TRUE,
+      due_date_diff >= 4 & birth_weight_kg < 2.5 ~ TRUE,
+      TRUE ~ FALSE
+    ))
+  
+  return(clean_data)
+}
+
 filterBirthweight <- function(data) {
   clean_data <- 
     data %>% 
@@ -44,7 +67,11 @@ filterBirthweight <- function(data) {
         TRUE ~ .
       )
     ) %>% 
-    mutate(premature = due_date_diff >= 4 & birth_weight_lb < 5.5) %>% 
+    mutate(premature = case_when(
+      due_date_diff >= 4 & birth_weight_lb < 5.5 ~ TRUE,
+      due_date_diff >= 4 & birth_weight_kg < 2.5 ~ TRUE,
+      TRUE ~ FALSE
+    )) %>% 
     filter(premature == FALSE)
   
   return(clean_data)
