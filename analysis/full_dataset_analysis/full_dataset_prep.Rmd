@@ -63,13 +63,6 @@ all_wg_raw <- readInWebCDI(all_data_wg_path)
 ```
 
 
-#Getting exclusion data
-```{r}
-birthweights <- 
-  all_wg_raw %>% 
-  mutateBirthweight() %>% 
-  select(study_name, subject_id, due_date_diff, birth_weight_lb, premature) %>%
-  filter(is.na(premature))
 
 
 

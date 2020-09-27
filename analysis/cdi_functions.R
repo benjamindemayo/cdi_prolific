@@ -49,36 +49,19 @@ mutateBirthweight <- function(data) {
       due_date_diff >= 4 & birth_weight_kg < 2.5 ~ TRUE,
       TRUE ~ FALSE
     ))
-  
   return(clean_data)
 }
 
 filterBirthweight <- function(data) {
-  clean_data <- 
+  filtered_data <- 
     data %>% 
-    mutate_at(
-      .vars = c("due_date_diff", "birth_weight_lb"),
-      .funs = ~as.numeric(.)
-    ) %>% 
-    mutate_at(
-      .vars = c("due_date_diff"),
-      .funs = ~case_when(
-        is.na(.) ~ 0, #turn non-NA's in this column into zeros
-        TRUE ~ .
-      )
-    ) %>% 
-    mutate(premature = case_when(
-      due_date_diff >= 4 & birth_weight_lb < 5.5 ~ TRUE,
-      due_date_diff >= 4 & birth_weight_kg < 2.5 ~ TRUE,
-      TRUE ~ FALSE
-    )) %>% 
+    mutateBirthweight() %>% 
     filter(premature == FALSE)
-  
-  return(clean_data)
+  return(filtered_data)
 }
 
 #Filter out kids in multilingual environments
-filterMultilingual <- function(data) {
+mutateMultilingual <- function(data) {
   clean_data <- 
     data %>% 
     mutate_at(
@@ -87,8 +70,15 @@ filterMultilingual <- function(data) {
     ) %>% 
     mutate(
       language_hours_per_week = language_days_per_week * language_hours_per_day
-    ) %>% 
+    )
+  return(clean_data)
+}
+
+filterMultilingual <- function(data) {
+  filtered_data <- 
+    mutateMultilingual %>% 
     filter(is.na(language_hours_per_week) | language_hours_per_week <= 16)
+  return(filtered_data)
 }
 
 #Filter out kids with vision or hearing loss
