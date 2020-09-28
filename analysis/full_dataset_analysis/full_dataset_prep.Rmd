@@ -62,6 +62,41 @@ all_ws_raw <-
 all_wg_raw <- readInWebCDI(all_data_wg_path)
 ```
 
+```{r}
+hearing_vision_issues <- 
+  all_wg_raw %>% 
+  mutateVision() %>% 
+  filter(has_vision_issue | has_hearing_issue) %>% 
+  select(
+    subject_id, 
+    study_name,
+    vision_problems_boolean,
+    vision_problems, 
+    hearing_loss_boolean,
+    hearing_loss, 
+    has_vision_issue, 
+    has_hearing_issue
+  )
+
+#gives only the rows that have a narrative response in them
+narrative_responses_ws <- 
+  all_ws_raw %>% 
+  select(
+    subject_id,
+    study_name,
+    ear_infections,
+    hearing_loss,
+    vision_problems,
+    illnesses,
+    services,
+    worried,
+    learning_disability
+  ) %>% 
+  rowwise() %>% 
+  mutate(
+    all_na = all(is.na(c_across(!c(subject_id, study_name))))
+  ) %>% 
+  filter(!all_na)
 
 
 
