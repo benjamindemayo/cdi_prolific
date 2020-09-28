@@ -82,6 +82,15 @@ filterMultilingual <- function(data) {
 }
 
 #Filter out kids with vision or hearing loss
+mutateVision <- function(data) {
+  mutated_data <- 
+    data %>% 
+    mutate(
+      has_hearing_issue = hearing_loss_boolean == "1",
+      has_vision_issue = vision_problems_boolean == "1"
+    )
+}
+
 filterVision <- function(data) {
   clean_data <- 
     data %>% 
