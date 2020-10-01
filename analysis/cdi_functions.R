@@ -82,24 +82,31 @@ filterMultilingual <- function(data) {
 }
 
 #Filter out kids with vision or hearing loss
-mutateVision <- function(data) {
-  mutated_data <- 
-    data %>% 
-    mutate(
-      has_hearing_issue = hearing_loss_boolean == "1",
-      has_vision_issue = vision_problems_boolean == "1"
-    )
-}
 
 filterVision <- function(data) {
   clean_data <- 
     data %>% 
     filter(
-      hearing_loss_boolean != "1" | is.na(hearing_loss_boolean),
-      vision_problems_boolean != "1" | is.na(vision_problems_boolean)
+      vision_exclude == 1 | is.na(vision_problems_boolean)
     )
   
   return(clean_data)
+}
+
+filterIllnesses <- function(data) {
+  clean_data <- 
+    data %>% 
+    filter(illnesses_exclude != 1)
+  
+  return(clean_data)
+}
+
+filterHearing <- function(data) {
+  clean_data <- 
+    data %>% 
+    filter(
+      hearing_loss_boolean == "1" | is.na(hearing_loss_boolean)
+    )
 }
 
 #Append a column with the completion interval on it

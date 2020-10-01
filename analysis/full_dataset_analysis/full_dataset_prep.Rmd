@@ -28,7 +28,7 @@ min_completion_time = 8.5
 
 First read in all of the relevant data.
 
-```{r}
+```{r message=FALSE}
 all_ws_1 <- 
   readInWebCDI(all_data_ws1_path) %>% 
   select( #drop a bunch of columns that were screwing up the merge with prolific data
@@ -63,7 +63,7 @@ all_wg_raw <- readInWebCDI(all_data_wg_path)
 ```
 
 ```{r}
-hearing_vision_issues <- 
+hearing_vision_issues_wg <- 
   all_wg_raw %>% 
   mutateVision() %>% 
   filter(has_vision_issue | has_hearing_issue) %>% 
