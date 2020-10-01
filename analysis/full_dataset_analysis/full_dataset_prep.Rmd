@@ -62,44 +62,42 @@ all_ws_raw <-
 all_wg_raw <- readInWebCDI(all_data_wg_path)
 ```
 
+
+Filter out: multilingual exposure, illnesses, vision and hearing problems.
 ```{r}
-hearing_vision_issues_wg <- 
+
+#WG
+wg_filtered <- 
   all_wg_raw %>% 
-  mutateVision() %>% 
-  filter(has_vision_issue | has_hearing_issue) %>% 
-  select(
-    subject_id, 
-    study_name,
-    vision_problems_boolean,
-    vision_problems, 
-    hearing_loss_boolean,
-    hearing_loss, 
-    has_vision_issue, 
-    has_hearing_issue
-  )
+  filterIllnesses() %>% 
+  filterBirthweight() %>% 
+  filterMultilingual() %>% 
+  filterVision() %>% 
+  filterHearing() %>% 
+  getEthnicities() %>% 
+  getMaternalEd() %>%
+  filter_age_wg()
 
-#gives only the rows that have a narrative response in them
-narrative_responses_ws <- 
+ws_filtered <- 
   all_ws_raw %>% 
-  select(
-    subject_id,
-    study_name,
-    ear_infections,
-    hearing_loss,
-    vision_problems,
-    illnesses,
-    services,
-    worried,
-    learning_disability
-  ) %>% 
-  rowwise() %>% 
-  mutate(
-    all_na = all(is.na(c_across(!c(subject_id, study_name))))
-  ) %>% 
-  filter(!all_na)
+  filterIllnesses() %>% 
+  filterBirthweight() %>% 
+  filterMultilingual() %>% 
+  filterVision() %>% 
+  filterHearing() %>% 
+  getEthnicities() %>% 
+  getMaternalEd() %>% 
+  filter_age_ws()
 
 
+```
 
+
+```{r}
+ws_filtered %>% 
+  ggplot(aes(age, `Total Produced`, color = maternal_ed)) +
+  geom_point() +
+  geom_smooth(method = "lm")
 
 
 ```

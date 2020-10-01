@@ -76,6 +76,7 @@ mutateMultilingual <- function(data) {
 
 filterMultilingual <- function(data) {
   filtered_data <- 
+    data %>% 
     mutateMultilingual %>% 
     filter(is.na(language_hours_per_week) | language_hours_per_week <= 16)
   return(filtered_data)
@@ -86,18 +87,30 @@ filterMultilingual <- function(data) {
 filterVision <- function(data) {
   clean_data <- 
     data %>% 
-    filter(
-      vision_exclude == 1 | is.na(vision_problems_boolean)
-    )
+    mutate(
+      vision_exclude = case_when(
+        vision_exclude == "1" ~ 1,
+        TRUE ~ 0
+      )
+    ) %>% 
+    filter(vision_exclude == 0)
   
   return(clean_data)
+  
 }
+
 
 filterIllnesses <- function(data) {
   clean_data <- 
     data %>% 
-    filter(illnesses_exclude != 1)
-  
+    mutate(
+      illnesses_exclude = case_when(
+         illnesses_exclude == "1" ~ 1,
+        TRUE ~ 0
+      )
+    ) %>% 
+    filter(illnesses_exclude == 0)
+
   return(clean_data)
 }
 
@@ -105,7 +118,7 @@ filterHearing <- function(data) {
   clean_data <- 
     data %>% 
     filter(
-      hearing_loss_boolean == "1" | is.na(hearing_loss_boolean)
+      hearing_loss_boolean != "1" | is.na(hearing_loss_boolean)
     )
 }
 
@@ -205,4 +218,41 @@ old_momed_numbers <-
     ),
     `2007 manual` = c(.075, .2385, .248, .4385)
   )
+
+get_narrative_responses <- function(data) {
+  nar_responses <- 
+    data %>% 
+    select(
+      subject_id,
+      study_name,
+      ear_infections,
+      hearing_loss,
+      vision_problems,
+      illnesses,
+      services,
+      worried,
+      learning_disability
+    ) %>% 
+    rowwise() %>% 
+    mutate(
+      all_na = all(is.na(c_across(!c(subject_id, study_name))))
+    ) %>% 
+    filter(!all_na)
+  
+  return(nar_responses)
+}
+
+filter_age_ws <- function(data) {
+  clean_data <- 
+    data %>% 
+    filter(age >= 16 & age <= 30)
+  return(clean_data)
+} 
+
+filter_age_wg <- function(data) {
+  clean_data <- 
+    data %>% 
+    filter(age >= 8 & age <= 18)
+  return(clean_data)
+}
 
