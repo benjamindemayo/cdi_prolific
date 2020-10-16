@@ -200,10 +200,10 @@ getMaternalEd <- function(data) {
     mutate(
       maternal_ed = fct_relevel(
         maternal_ed,
-        "Some high school or less",
-        "High school diploma",
-        "Some college education",
-        "College diploma or more"
+       "College diploma or more",
+       "Some college education",
+       "High school diploma",
+       "Some high school or less"
       )
     )
 }

@@ -76,6 +76,8 @@ wg_filtered <-
   filterHearing() %>% 
   getEthnicities() %>% 
   getMaternalEd() %>%
+  getCompletionInterval() %>% 
+  filter(completedBackgroundInfo == "TRUE") %>% #get rid of kids with demos
   filter_age_wg()
 
 ws_filtered <- 
@@ -87,6 +89,8 @@ ws_filtered <-
   filterHearing() %>% 
   getEthnicities() %>% 
   getMaternalEd() %>% 
+  getCompletionInterval() %>% 
+  filter(completedBackgroundInfo == "TRUE") %>% 
   filter_age_ws()
 
 
@@ -94,11 +98,141 @@ ws_filtered <-
 
 
 ```{r}
+#Comprehension and production measures
 ws_filtered %>% 
+  filter(`Total Produced` < 688 & !is.na(maternal_ed)) %>% 
   ggplot(aes(age, `Total Produced`, color = maternal_ed)) +
-  geom_point() +
-  geom_smooth(method = "lm")
+  ggthemes::theme_few() +
+  geom_jitter(alpha = 0.3, width = 0.225) +
+  coord_cartesian(ylim = c(0, 686)) +
+  geom_smooth(method = "lm") +
+  labs(
+    x = "Age in months", 
+    y = "Total words produced",
+    color = "Maternal education"
+  )
+
+wg_filtered %>% 
+  filter(!is.na(maternal_ed)) %>% 
+  ggplot(aes(age, `Words Understood`, color = maternal_ed)) +
+  ggthemes::theme_few() +
+  geom_jitter(alpha = 0.3, width = 0.225) +
+  geom_smooth(method = "lm") +
+  coord_cartesian(ylim = c(0, 390)) +
+  labs(
+    x = "Age in months", 
+    y = "Total words understood",
+    color = "Maternal education"
+  )
+```
 
 
+```{r}
+#Demographic analyses on the entire sample
+
+demographics_df <- 
+  bind_rows(
+    wg_filtered %>% 
+      select(
+        study_name,
+        subject_id,
+        age,
+        ethnicity, 
+        maternal_ed, 
+        words_produced = `Words Produced` 
+      ),
+    ws_filtered %>% 
+      select(
+        study_name,
+        subject_id,
+        age,
+        ethnicity,
+        maternal_ed,
+        words_produced = `Total Produced`
+      )
+  )
+
+ethnicity_plot_df <- 
+  demographics_df %>% 
+  getEthnicitySummary() %>% 
+  filter(!is.na(ethnicity)) %>% 
+  mutate(`Current study` = prop.table(n)) %>% 
+  left_join(old_ethnicity_numbers, by = "ethnicity") %>% 
+  select(-n) %>% 
+  pivot_longer(
+    cols = c(`Current study`, `2007 manual`),
+    names_to = "study",
+    values_to = "proportion"
+  )
+
+ethnicity_plot <-
+  ethnicity_plot_df %>% 
+  ggplot(aes(ethnicity, proportion, fill = study)) +
+  geom_col(position = "dodge") +
+  labs(
+    y = "Proportion of\nrespondents"
+  ) +
+  theme_few() +
+  theme(
+    legend.title = element_blank(),
+    axis.text = element_text(size = 14),
+    axis.title = element_text(size = 13),
+    legend.text = element_text(size = 13),
+    axis.title.x = element_blank(),
+    plot.title = element_text(size = 15),
+    plot.caption = element_text(hjust = 0)
+  )
+
+ethnicity_plot
+
+```
+
+
+```{r}
+#Maternal ed analysis on the full sample
+
+maternal_ed_plot_df <- 
+  demographics_df %>% 
+  count(maternal_ed) %>% 
+  mutate(`Current study` = prop.table(n)) %>% 
+  left_join(old_momed_numbers, by = "maternal_ed") %>% 
+  select(-n) %>% 
+  pivot_longer(
+    cols = c(`Current study`, `2007 manual`),
+    names_to = "study",
+    values_to = "proportion"
+  ) %>% 
+  mutate(
+    maternal_ed = fct_relevel(
+      maternal_ed,
+      "Some high school or less",
+      "High school diploma",
+      "Some college education",
+      "College diploma or more"
+    )
+  )
+
+x_axis_labs <- c(
+  "Some high school\n or less",
+  "High school\ndiploma",
+  "Some college\neducation",
+  "College diploma\nor more"
+)
+
+maternal_ed_plot <- 
+  maternal_ed_plot_df %>% 
+  ggplot(aes(maternal_ed, proportion, fill = study)) +
+  geom_col(position = "dodge") +
+  theme_few() +
+  theme(
+    legend.title = element_blank(),
+    axis.text.x = element_text(angle = 30, vjust = 0.9, hjust = 1, size = 13.5),
+    axis.title.x = element_blank(),
+    legend.text = element_text(size = 13),
+    plot.caption = element_text(hjust = 0)
+  ) +
+  scale_x_discrete(labels = x_axis_labs)
+
+maternal_ed_plot
 ```
 
