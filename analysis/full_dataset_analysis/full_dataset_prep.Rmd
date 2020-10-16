@@ -210,7 +210,8 @@ maternal_ed_plot_df <-
       "Some college education",
       "College diploma or more"
     )
-  )
+  ) %>% 
+  filter(!is.na(maternal_ed))
 
 x_axis_labs <- c(
   "Some high school\n or less",
