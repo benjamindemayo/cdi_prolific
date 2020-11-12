@@ -41,10 +41,10 @@ functions_script <-
 
 ##All data WS1
 all_data_ws1_path <- 
-  fs::path(project_root, "data/full_dataset/webcdi_ws1.csv")
+  fs::path(project_root, "data/full_dataset/webcdi_ws1_screened.csv")
 
 all_data_ws2_path <- 
-  fs::path(project_root, "data/full_dataset/webcdi_ws2.csv")
+  fs::path(project_root, "data/full_dataset/webcdi_ws2_screened.csv")
 
 all_data_wg_path <- 
-  fs::path(project_root, "data/full_dataset/webcdi_wg.csv")
+  fs::path(project_root, "data/full_dataset/webcdi_wg_screened.csv")
