@@ -148,31 +148,21 @@ getEthnicities <- function(data) {
     data %>% 
     mutate( #get rid of brackets in ethnicity column
       child_ethnicity = str_replace_all(child_ethnicity, "[^[:upper:]]", "")
-    ) %>% 
-    mutate(
-      ethnicity_white = str_detect(child_ethnicity, "W"),
-      ethnicity_black = str_detect(child_ethnicity, "B"),
-      ethnicity_asian = str_detect(child_ethnicity, "A"),
-      ethnicity_native = str_detect(child_ethnicity, "N"),
-      ethnicity_other = str_detect(child_ethnicity, "O"),
-      ethnicity_mixed = str_length(child_ethnicity) > 1
-    )
-  clean_data <- 
-    clean_data %>% 
-    mutate( #get rid of brackets in ethnicity column
-      child_ethnicity = str_replace_all(child_ethnicity, "[^[:upper:]]", "")
     ) %>%
     mutate(
       ethnicity = case_when(
         str_length(child_ethnicity) > 1 ~ "mixed",
         child_ethnicity != "A" & child_ethnicity != "B" & child_ethnicity != "W" ~ "other" ,
+        is.na(child_ethnicity) ~ "no_report",
         TRUE ~ child_ethnicity
-      ) %>% fct_recode(
+      ) %>% 
+      fct_recode(
         Asian = "A",
         Black = "B",
         `Mixed/other` = "mixed",
         White = "W",
-        `Mixed/other` = "other"
+        `Mixed/other` = "other",
+        `No ethnicity reported` = "no_report"
       )
     ) 
   return(clean_data)
@@ -190,11 +180,14 @@ getMaternalEd <- function(data) {
     data %>% 
     mutate(
       maternal_ed = case_when(
+        primary_caregiver_other == "Pre Form Filler Field" & 
+          mother_education == 0 ~ "Not reported",
         mother_education <= 11 ~ "Some high school or less",
         mother_education == 12 ~ "High school diploma",
         mother_education %in% seq.int(13, 15) ~ 
           "Some college education",
-        mother_education >= 16 ~ "College diploma or more"
+        mother_education >= 16 ~ "College diploma or more",
+        is.na(mother_education) ~ "Not reported"
       )
     ) %>% 
     mutate(
@@ -203,7 +196,8 @@ getMaternalEd <- function(data) {
        "College diploma or more",
        "Some college education",
        "High school diploma",
-       "Some high school or less"
+       "Some high school or less",
+       "Not reported"
       )
     )
 }

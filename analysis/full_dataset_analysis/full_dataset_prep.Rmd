@@ -60,6 +60,28 @@ all_ws_raw <-
   ))
 
 all_wg_raw <- readInWebCDI(all_data_wg_path)
+
+save(
+  all_ws_raw,
+  file = path(
+    project_root,
+    "data",
+    "full_dataset",
+    "unfiltered",
+    "ws_unfiltered.RData"
+  )
+)
+
+save(
+  all_wg_raw,
+  file = path(
+    project_root,
+    "data",
+    "full_dataset",
+    "unfiltered",
+    "wg_unfiltered.RData"
+  )
+)
 ```
 
 
@@ -77,8 +99,20 @@ wg_filtered <-
   getEthnicities() %>% 
   getMaternalEd() %>%
   getCompletionInterval() %>% 
-  filter(completedBackgroundInfo == "TRUE") %>% #get rid of kids with demos
+  filter(completion_time > min_completion_time) %>% 
+  filter(completedBackgroundInfo == "TRUE") %>% #get rid of kids without demo info
   filter_age_wg()
+
+save(
+  wg_filtered,
+  file = path(
+    project_root, 
+    "data", 
+    "full_dataset", 
+    "filtered", 
+    "wg_filtered.RData"
+  )
+)
 
 ws_filtered <- 
   all_ws_raw %>% 
@@ -90,8 +124,20 @@ ws_filtered <-
   getEthnicities() %>% 
   getMaternalEd() %>% 
   getCompletionInterval() %>% 
+  filter(completion_time > min_completion_time) %>% 
   filter(completedBackgroundInfo == "TRUE") %>% 
   filter_age_ws()
+
+save(
+  ws_filtered,
+  file = path(
+    project_root, 
+    "data", 
+    "full_dataset", 
+    "filtered", 
+    "ws_filtered.RData"
+  )
+)
 
 
 ```
@@ -235,5 +281,144 @@ maternal_ed_plot <-
   scale_x_discrete(labels = x_axis_labs)
 
 maternal_ed_plot
+```
+
+
+```{r wg_exclusions}
+
+#Trying to figure out exclusion numbers.
+
+wg_exclusions <- 
+  all_wg_raw %>% 
+  mutateBirthweight() %>% 
+  mutateMultilingual() %>% 
+  getCompletionInterval() %>% 
+  mutate(
+    exclusion_illness = case_when(illnesses_exclude == "1" ~ 1, TRUE ~ 0),
+    exclusion_birthweight = as.numeric(premature),
+    exclusion_multilingual = 
+      as.numeric(!(is.na(language_hours_per_week)) & 
+                   language_hours_per_week >= 16),
+    exclusion_vision = case_when(vision_exclude == "1" ~ 1, TRUE ~ 0),
+    exclusion_hearing = case_when(hearing_exclude == "1" ~ 1, TRUE ~ 0),
+    exclusion_demographics = case_when(
+      completedBackgroundInfo == "FALSE" ~ 1,
+      TRUE ~ 0
+    ),
+    exclusion_minimum_time = as.numeric(completion_time < min_completion_time),
+  ) %>% 
+  mutate(
+    quantity_exclusions = select(
+      ., 
+      exclusion_illness:exclusion_minimum_time
+    ) %>% 
+      rowSums()
+  ) %>% 
+  getEthnicities() %>% 
+  getMaternalEd() %>% 
+  select(study_name, subject_id, contains("exclusion"), ethnicity, maternal_ed)
+
+#Of the kids who only failed one exclusion criterion, what was their breakdown?
+wg_one_exclusion_count <- 
+  wg_exclusions %>% 
+  filter(quantity_exclusions == 1) %>% 
+  pivot_longer(
+    cols = starts_with("exclusion"),
+    names_to = "exclusion",
+    values_to = "exclude"
+  ) %>% 
+  filter(exclude == 1) %>% 
+  count(exclusion)
+
+#How many of each type of exclusion was there?
+wg_exclusions_count <- 
+  wg_exclusions %>% 
+  pivot_longer(
+    cols = starts_with("exclusion"),
+    names_to = "exclusion",
+    values_to = "exclude"
+  ) %>% 
+  filter(exclude == 1) %>% 
+  count(exclusion)
+
+total_n_wg_exclusions <- 
+  wg_exclusions %>% 
+  filter(quantity_exclusions > 0) %>% 
+  nrow()
+
+more_than_one_exclusion_wg <- 
+  wg_exclusions %>% 
+  filter(quantity_exclusions > 1) %>% 
+  nrow()
+  
+
+
+
+```
+
+```{r}
+
+ws_exclusions <- 
+  all_ws_raw %>% 
+  mutateBirthweight() %>% 
+  mutateMultilingual() %>% 
+  getCompletionInterval() %>% 
+  mutate(
+    exclusion_illness = case_when(illnesses_exclude == "1" ~ 1, TRUE ~ 0),
+    exclusion_birthweight = as.numeric(premature),
+    exclusion_multilingual = 
+      as.numeric(!(is.na(language_hours_per_week)) & 
+                   language_hours_per_week >= 16),
+    exclusion_vision = case_when(vision_exclude == "1" ~ 1, TRUE ~ 0),
+    exclusion_hearing = case_when(hearing_exclude == "1" ~ 1, TRUE ~ 0),
+    exclusion_demographics = case_when(
+      completedBackgroundInfo == "FALSE" ~ 1,
+      TRUE ~ 0
+    ),
+    exclusion_minimum_time = as.numeric(completion_time < min_completion_time),
+  ) %>% 
+  mutate(
+    quantity_exclusions = select(
+      ., 
+      exclusion_illness:exclusion_minimum_time
+    ) %>% 
+      rowSums()
+  ) %>% 
+  getEthnicities() %>% 
+  getMaternalEd() %>% 
+  select(study_name, subject_id, contains("exclusion"), ethnicity, maternal_ed)
+
+#Of the kids who only failed one exclusion criterion, what was their breakdown?
+ws_one_exclusion_count <- 
+  ws_exclusions %>% 
+  filter(quantity_exclusions == 1) %>% 
+  pivot_longer(
+    cols = starts_with("exclusion"),
+    names_to = "exclusion",
+    values_to = "exclude"
+  ) %>% 
+  filter(exclude == 1) %>% 
+  count(exclusion)
+
+#How many of each type of exclusion were there?
+ws_exclusions_count <- 
+  ws_exclusions %>% 
+  pivot_longer(
+    cols = starts_with("exclusion"),
+    names_to = "exclusion",
+    values_to = "exclude"
+  ) %>% 
+  filter(exclude == 1) %>% 
+  count(exclusion)
+
+total_n_ws_exclusions <- 
+  ws_exclusions %>% 
+  filter(quantity_exclusions > 0) %>% 
+  nrow()
+
+more_than_one_exclusion_ws <- 
+  ws_exclusions %>% 
+  filter(quantity_exclusions > 1) %>% 
+  nrow()
 ```
 

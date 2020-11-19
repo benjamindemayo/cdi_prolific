@@ -41,10 +41,48 @@ functions_script <-
 
 ##All data WS1
 all_data_ws1_path <- 
-  fs::path(project_root, "data/full_dataset/webcdi_ws1_screened.csv")
+  fs::path(project_root, "data/full_dataset/raw/webcdi_ws1_screened.csv")
 
 all_data_ws2_path <- 
-  fs::path(project_root, "data/full_dataset/webcdi_ws2_screened.csv")
+  fs::path(project_root, "data/full_dataset/raw/webcdi_ws2_screened.csv")
 
 all_data_wg_path <- 
-  fs::path(project_root, "data/full_dataset/webcdi_wg_screened.csv")
+  fs::path(project_root, "data/full_dataset/raw/webcdi_wg_screened.csv")
+
+##Unfiltered data
+wg_unfiltered_path <- 
+  fs::path(
+    project_root, 
+    "data", 
+    "full_dataset", 
+    "unfiltered", 
+    "wg_unfiltered.RData"
+  )
+
+ws_unfiltered_path <- 
+  fs::path(
+    project_root, 
+    "data", 
+    "full_dataset", 
+    "unfiltered", 
+    "ws_unfiltered.RData"
+  )
+
+wg_filtered_path <- 
+  fs::path(
+    project_root, 
+    "data", 
+    "full_dataset", 
+    "filtered", 
+    "wg_filtered.RData"
+  )
+
+ws_filtered_path <- 
+  fs::path(
+    project_root, 
+    "data", 
+    "full_dataset", 
+    "filtered", 
+    "ws_filtered.RData"
+  )
+

@@ -54,7 +54,7 @@ abstract: |
 keywords          : "keywords"
 wordcount         : "X"
 
-bibliography      : ["r-references.bib"]
+bibliography      : ["wordbank_cdi.bib"]
 
 floatsintext      : no
 figurelist        : no
@@ -71,8 +71,20 @@ output            : papaja::apa6_pdf
 
 ```{r setup, include = FALSE}
 library("papaja")
+library("tidyverse")
+library("fs")
 r_refs("r-references.bib")
+
+source(path(here::here(), "file_paths.R"))
+source(functions_script)
+
+#Read in (somewhat) preprocessed forms of the data
+load(wg_unfiltered_path)
+load(ws_unfiltered_path)
+load(wg_filtered_path)
+load(ws_filtered_path)
 ```
+
 
 ```{r analysis-preferences}
 # Seed for random number generation
@@ -82,8 +94,20 @@ knitr::opts_chunk$set(cache.extra = knitr::rand_seed)
 
 
 
-# Methods
-We report how we determined our sample size, all data exclusions (if any), all manipulations, and all measures in the study. <!-- 21-word solution (Simmons, Nelson & Simonsohn, 2012; retrieved from http://ssrn.com/abstract=2160588) -->
+# Current Usage of Web-CDI
+
+```{r}
+total_n <- nrow(wg_filtered) + nrow(ws_filtered)
+
+
+
+```
+
+
+We now turn to a discussion of the current usage of Web-CDI. We begin by giving an overview of all Web-CDI usage to date and show that data are consistent with prior data norming efforts (e.g., Fenson et al., 2007). We then focus on our recent data collection efforts that have aimed to increase representation of lower-SES participants.
+	Researchers from 15 universities in the United States have collected over 6,000 administrations of the Web-CDI since it was launched in late 2017. We report here on `r total_n` of these administrations which satisfy exclusion criteria derived from previous norming efforts of the paper-format MB-CDI.  
+
+
 
 ## Participants
 
