@@ -180,8 +180,8 @@ getMaternalEd <- function(data) {
     data %>% 
     mutate(
       maternal_ed = case_when(
-        primary_caregiver_other == "Pre Form Filler Field" & 
-          mother_education == 0 ~ "Not reported",
+        #primary_caregiver_other == "Pre Form Filler Field" & 
+          #mother_education == 0 ~ "Not reported",
         mother_education <= 11 ~ "Some high school or less",
         mother_education == 12 ~ "High school diploma",
         mother_education %in% seq.int(13, 15) ~ 

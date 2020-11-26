@@ -139,6 +139,10 @@ save(
   )
 )
 
+total_n <- nrow(all_ws_raw) + nrow(all_wg_raw)
+
+nrow(all_wg_raw)
+nrow(all_ws_raw)
 
 ```
 
@@ -174,7 +178,22 @@ wg_filtered %>%
 
 
 ```{r}
+#Counting hispanic and latino heritage
+wg_filtered %>% 
+  mutate(hispanic = !is.na(child_hispanic_latino) & child_hispanic_latino == TRUE) %>% 
+  count(hispanic) %>% 
+  mutate(prop = n / sum(n))
+
+ws_filtered %>% 
+  mutate(hispanic = !is.na(child_hispanic_latino) & child_hispanic_latino == TRUE) %>%
+  count(hispanic)%>% 
+  mutate(prop = n / sum(n))
+```
+
+
+```{r}
 #Demographic analyses on the entire sample
+
 
 demographics_df <- 
   bind_rows(
@@ -202,11 +221,12 @@ ethnicity_plot_df <-
   demographics_df %>% 
   getEthnicitySummary() %>% 
   filter(!is.na(ethnicity)) %>% 
-  mutate(`Current study` = prop.table(n)) %>% 
+  filter(ethnicity != "No ethnicity reported") %>% 
+  mutate(`Web-CDI sample` = prop.table(n)) %>% 
   left_join(old_ethnicity_numbers, by = "ethnicity") %>% 
   select(-n) %>% 
   pivot_longer(
-    cols = c(`Current study`, `2007 manual`),
+    cols = c(`Web-CDI sample`, `2007 manual`),
     names_to = "study",
     values_to = "proportion"
   )
@@ -240,11 +260,11 @@ ethnicity_plot
 maternal_ed_plot_df <- 
   demographics_df %>% 
   count(maternal_ed) %>% 
-  mutate(`Current study` = prop.table(n)) %>% 
+  mutate(`Full Web-CDI sample to date` = prop.table(n)) %>% 
   left_join(old_momed_numbers, by = "maternal_ed") %>% 
   select(-n) %>% 
   pivot_longer(
-    cols = c(`Current study`, `2007 manual`),
+    cols = c(`Full Web-CDI sample to date`, `2007 manual`),
     names_to = "study",
     values_to = "proportion"
   ) %>% 
@@ -268,12 +288,13 @@ x_axis_labs <- c(
 
 maternal_ed_plot <- 
   maternal_ed_plot_df %>% 
+  filter(maternal_ed != "Not reported") %>% 
   ggplot(aes(maternal_ed, proportion, fill = study)) +
   geom_col(position = "dodge") +
   theme_few() +
   theme(
     legend.title = element_blank(),
-    axis.text.x = element_text(angle = 30, vjust = 0.9, hjust = 1, size = 13.5),
+    axis.text.x = element_text(angle = 40, vjust = 0.9, hjust = 1, size = 13.5),
     axis.title.x = element_blank(),
     legend.text = element_text(size = 13),
     plot.caption = element_text(hjust = 0)
@@ -281,6 +302,16 @@ maternal_ed_plot <-
   scale_x_discrete(labels = x_axis_labs)
 
 maternal_ed_plot
+
+#this table can be printed out
+maternal_ed_table <- 
+  maternal_ed_plot_df %>% 
+  filter(maternal_ed != "Not reported") %>% 
+  pivot_wider(names_from = "study", values_from = "proportion") %>% 
+  mutate(
+    `Current study proportions` = round(`Full Web-CDI sample to date`, digits = 4)
+  ) %>% 
+  select(-`Full Web-CDI sample to date`)
 ```
 
 
@@ -358,17 +389,20 @@ more_than_one_exclusion_wg <-
 
 ```{r}
 
+#Words and sentences exclusions
+
 ws_exclusions <- 
   all_ws_raw %>% 
   mutateBirthweight() %>% 
   mutateMultilingual() %>% 
   getCompletionInterval() %>% 
   mutate(
-    exclusion_illness = case_when(illnesses_exclude == "1" ~ 1, TRUE ~ 0),
+    exclusion_not_first_admin = as.numeric(repeat_num != 1),
     exclusion_birthweight = as.numeric(premature),
     exclusion_multilingual = 
       as.numeric(!(is.na(language_hours_per_week)) & 
                    language_hours_per_week >= 16),
+    exclusion_illness = case_when(illnesses_exclude == "1" ~ 1, TRUE ~ 0),
     exclusion_vision = case_when(vision_exclude == "1" ~ 1, TRUE ~ 0),
     exclusion_hearing = case_when(hearing_exclude == "1" ~ 1, TRUE ~ 0),
     exclusion_demographics = case_when(
@@ -376,11 +410,15 @@ ws_exclusions <-
       TRUE ~ 0
     ),
     exclusion_minimum_time = as.numeric(completion_time < min_completion_time),
+    exclusion_age_range = case_when(
+      age >= 16 & age <= 30 ~ 0,
+      TRUE ~ 1
+    )
   ) %>% 
   mutate(
     quantity_exclusions = select(
       ., 
-      exclusion_illness:exclusion_minimum_time
+      exclusion_not_first_admin:exclusion_age_range
     ) %>% 
       rowSums()
   ) %>% 
@@ -388,17 +426,6 @@ ws_exclusions <-
   getMaternalEd() %>% 
   select(study_name, subject_id, contains("exclusion"), ethnicity, maternal_ed)
 
-#Of the kids who only failed one exclusion criterion, what was their breakdown?
-ws_one_exclusion_count <- 
-  ws_exclusions %>% 
-  filter(quantity_exclusions == 1) %>% 
-  pivot_longer(
-    cols = starts_with("exclusion"),
-    names_to = "exclusion",
-    values_to = "exclude"
-  ) %>% 
-  filter(exclude == 1) %>% 
-  count(exclusion)
 
 #How many of each type of exclusion were there?
 ws_exclusions_count <- 
@@ -411,14 +438,75 @@ ws_exclusions_count <-
   filter(exclude == 1) %>% 
   count(exclusion)
 
+#total amount of kids excluded from WS analyses
 total_n_ws_exclusions <- 
   ws_exclusions %>% 
   filter(quantity_exclusions > 0) %>% 
   nrow()
 
-more_than_one_exclusion_ws <- 
-  ws_exclusions %>% 
-  filter(quantity_exclusions > 1) %>% 
+counting_ws_exclusions_ <- 
+  ws_exclusions
+
+```
+
+
+```{r}
+
+
+wg_exclusions <- 
+  all_wg_raw %>% 
+  mutateBirthweight() %>% 
+  mutateMultilingual() %>% 
+  getCompletionInterval() %>% 
+  mutate(
+    exclusion_not_first_admin = as.numeric(repeat_num != 1),
+    exclusion_birthweight = as.numeric(premature),
+    exclusion_multilingual = 
+      as.numeric(!(is.na(language_hours_per_week)) & 
+                   language_hours_per_week >= 16),
+    exclusion_illness = case_when(illnesses_exclude == "1" ~ 1, TRUE ~ 0),
+    exclusion_vision = case_when(vision_exclude == "1" ~ 1, TRUE ~ 0),
+    exclusion_hearing = case_when(hearing_exclude == "1" ~ 1, TRUE ~ 0),
+    exclusion_demographics = case_when(
+      completedBackgroundInfo == "FALSE" ~ 1,
+      TRUE ~ 0
+    ),
+    exclusion_minimum_time = as.numeric(completion_time < min_completion_time),
+    exclusion_age_range = case_when(
+      age >= 8 & age <= 18 ~ 0,
+      TRUE ~ 1
+    )
+  ) %>% 
+  mutate(
+    quantity_exclusions = select(
+      ., 
+      exclusion_not_first_admin:exclusion_age_range
+    ) %>% 
+      rowSums()
+  ) %>% 
+  getEthnicities() %>% 
+  getMaternalEd() %>% 
+  select(study_name, subject_id, contains("exclusion"), ethnicity, maternal_ed)
+
+
+#How many of each type of exclusion were there?
+wg_exclusions_count <- 
+  wg_exclusions %>% 
+  pivot_longer(
+    cols = starts_with("exclusion"),
+    names_to = "exclusion",
+    values_to = "exclude"
+  ) %>% 
+  filter(exclude == 1) %>% 
+  count(exclusion)
+
+#total amount of kids excluded from WG analyses
+total_n_wg_exclusions <- 
+  wg_exclusions %>% 
+  filter(quantity_exclusions > 0) %>% 
   nrow()
+
+nrow(wg_exclusions %>% filter(quantity_exclusions == 0))
+
 ```
 

@@ -30,6 +30,9 @@ min_completion_time = 8.5
 ```
 
 ```{r}
+#first we read in the WG data that is just from the SES pilot projects
+all_wg_raw <- readInWebCDI(fb_wg_directory)
+
 facebook_ws_raw <- 
   readInWebCDI(fb_ws_directory) %>% 
   select( #drop a bunch of columns that were screwing up the merge with prolific data
@@ -40,8 +43,6 @@ facebook_ws_raw <-
     -sibling_count,
     -caregiver_other
   )
-
-all_wg_raw <- readInWebCDI(fb_wg_directory)
 
 prolific_raw <- 
   readInWebCDI(prolific_data_directory) %>% 
@@ -67,31 +68,73 @@ all_ws_raw <-
 ```
 
 ```{r}
+wg_exclusion_info <- 
+  read_csv(all_data_wg_path) %>% 
+  select(
+    study_name, 
+    subject_id,
+    hearing_exclude,
+    vision_exclude,
+    illnesses_exclude
+  ) %>% 
+  mutate(subject_id = as.character(subject_id))
+
 wg <- 
   all_wg_raw %>% 
+  filter(completed == TRUE) %>% #only take completed administrations
+  #join it with the exclusion data we have from the screened files
+  left_join(
+    wg_exclusion_info,
+    by = c("study_name", "subject_id")
+  ) %>% 
   filterBirthweight() %>% 
   filterMultilingual() %>% 
   filterVision() %>% 
   getCompletionInterval() %>% 
   getEthnicities() %>% 
   getMaternalEd() %>% 
-  filter(
-    completed == TRUE,
-    completion_time >= min_completion_time
-  )
+  filter(completion_time >= min_completion_time)
+
+ws1_exclusion_info <- 
+  read_csv(all_data_ws1_path) %>% 
+   select(
+    study_name, 
+    subject_id,
+    hearing_exclude,
+    vision_exclude,
+    illnesses_exclude
+  ) %>% 
+  mutate(subject_id = as.character(subject_id))
+
+ws2_exclusion_info <- 
+  read_csv(all_data_ws2_path) %>% 
+   select(
+    study_name, 
+    subject_id,
+    hearing_exclude,
+    vision_exclude,
+    illnesses_exclude
+  ) %>% 
+  mutate(subject_id = as.character(subject_id))
+
+ws_all_exclusion_info <- 
+  bind_rows(ws1_exclusion_info, ws2_exclusion_info)
 
 ws <- 
   all_ws_raw %>% 
+  filter(completed == TRUE) %>% 
+  #join it with the exclusion data we have from the screened files
+  left_join(
+    ws_all_exclusion_info,
+    by = c("study_name", "subject_id")
+  ) %>% 
   filterBirthweight() %>% 
   filterMultilingual() %>% 
   filterVision() %>% 
   getCompletionInterval() %>% 
   getEthnicities() %>% 
   getMaternalEd() %>% 
-  filter(
-    completed == TRUE,
-    completion_time >= min_completion_time
-  )
+  filter(completion_time >= min_completion_time)
 
 ```
 
@@ -102,6 +145,7 @@ completed_wg <-
   all_wg_raw %>% 
   filter(completed == TRUE) %>% 
   getCompletionInterval()
+  
 
 completed_ws <- 
   all_ws_raw %>% 
@@ -112,24 +156,10 @@ total_admin <-
   nrow(completed_wg) + nrow(completed_ws)
 
 wg_exclusions <- 
-  nrow(completed_wg) - 
-  nrow(
-    completed_wg %>% 
-      filterMultilingual() %>% 
-      filterBirthweight() %>% 
-      filterVision() %>% 
-      filter(completion_time >= min_completion_time)
-  )
+  nrow(completed_wg) - nrow(wg)
 
 ws_exclusions <- 
-  nrow(completed_ws) - 
-  nrow(
-    completed_ws %>% 
-      filterMultilingual() %>% 
-      filterBirthweight() %>% 
-      filterVision() %>% 
-      filter(completion_time >= min_completion_time)
-  )
+  nrow(completed_ws) - nrow(ws)
 
 total_exclusions <- ws_exclusions + wg_exclusions
 
@@ -161,9 +191,10 @@ demographics_df <-
   )
 
 total_n <- nrow(demographics_df)
-ethnicity_na_n <- nrow(demographics_df %>% filter(is.na(ethnicity)))
+ethnicity_na_n <- 
+  nrow(demographics_df %>% filter(ethnicity == "No ethnicity reported"))
 ethnicity_total_n <- total_n - ethnicity_na_n
-maternal_ed_na_n <- nrow(demographics_df %>% filter(is.na(maternal_ed)))
+maternal_ed_na_n <- nrow(demographics_df %>% filter(maternal_ed == "Not reported"))
 maternal_ed_total_n <- total_n - maternal_ed_na_n
 ```
 
@@ -173,7 +204,10 @@ maternal_ed_total_n <- total_n - maternal_ed_na_n
 ethnicity_plot_df <- 
   demographics_df %>% 
   getEthnicitySummary() %>% 
-  filter(!is.na(ethnicity)) %>% 
+  filter(
+    !is.na(ethnicity),
+    ethnicity != "No ethnicity reported"
+  ) %>% 
   mutate(`Current study` = prop.table(n)) %>% 
   left_join(old_ethnicity_numbers, by = "ethnicity") %>% 
   select(-n) %>% 
