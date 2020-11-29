@@ -87,7 +87,7 @@ save(
 
 Filter out: multilingual exposure, illnesses, vision and hearing problems.
 ```{r}
-
+#original sample size of 2868
 #WG
 wg_filtered <- 
   all_wg_raw %>% 
@@ -102,6 +102,8 @@ wg_filtered <-
   filter(completion_time > min_completion_time) %>% 
   filter(completedBackgroundInfo == "TRUE") %>% #get rid of kids without demo info
   filter_age_wg()
+
+wg_exclusion_n <- nrow(all_wg_raw) - nrow(wg_filtered)
 
 save(
   wg_filtered,
@@ -128,6 +130,8 @@ ws_filtered <-
   filter(completedBackgroundInfo == "TRUE") %>% 
   filter_age_ws()
 
+ws_exclusion_n <- nrow(all_ws_raw) - nrow(ws_filtered)
+
 save(
   ws_filtered,
   file = path(
@@ -141,6 +145,8 @@ save(
 
 total_n <- nrow(all_ws_raw) + nrow(all_wg_raw)
 
+filtered_n <- nrow(ws_filtered) + nrow(wg_filtered)
+
 nrow(all_wg_raw)
 nrow(all_ws_raw)
 
@@ -150,15 +156,15 @@ nrow(all_ws_raw)
 ```{r}
 #Comprehension and production measures
 ws_filtered %>% 
-  filter(`Total Produced` < 688 & !is.na(maternal_ed)) %>% 
+  filter(`Total Produced` < 688 & maternal_ed != "Not reported") %>% 
   ggplot(aes(age, `Total Produced`, color = maternal_ed)) +
   ggthemes::theme_few() +
   geom_jitter(alpha = 0.3, width = 0.225) +
   coord_cartesian(ylim = c(0, 686)) +
   geom_smooth(method = "lm") +
   labs(
-    x = "Age in months", 
-    y = "Total words produced",
+    x = "age in months", 
+    y = "total words produced",
     color = "Maternal education"
   )
 
@@ -174,6 +180,70 @@ wg_filtered %>%
     y = "Total words understood",
     color = "Maternal education"
   )
+
+wg_filtered %>% 
+  filter(!is.na(maternal_ed)) %>% 
+  ggplot(aes(age, `Words Produced`, color = maternal_ed)) +
+  ggthemes::theme_few() +
+  geom_jitter(alpha = 0.3, width = 0.225) +
+  geom_smooth(method = "lm") +
+  coord_cartesian(ylim = c(0, 390)) +
+  labs(
+    x = "Age in months", 
+    y = "Total words understood",
+    color = "Maternal education"
+  )
+
+wg_filtered %>% 
+  filter(!is.na(maternal_ed)) %>% 
+  select(age, `Words Produced`, `Words Understood`, maternal_ed) %>% 
+  pivot_longer(
+    cols = c("Words Produced", "Words Understood"),
+    names_to = "measure",
+    values_to = "words"
+  ) %>% 
+  ggplot(aes(age, words, color = maternal_ed)) +
+  facet_grid(~measure) +
+  geom_jitter(alpha = 0.3, width = 0.225) +
+  geom_smooth(method = "lm") +
+  coord_cartesian(ylim = c(0, 390)) +
+  ggthemes::theme_few() +
+  labs(
+    color = "Maternal education level",
+    x = "age in months",
+    y = "number of words"
+  ) +
+  scale_x_continuous(breaks = seq(from = 8, to = 18, by = 2))
+```
+
+
+Gender analyses
+```{r}
+
+wg_filtered_gender <- 
+  wg_filtered %>% 
+  select(age, production = `Words Produced`, sex)
+
+ws_filtered_gender <- 
+  ws_filtered %>% 
+  select(age, production = `Total Produced`, sex)
+
+all_d_gender <- 
+  bind_rows(ws_filtered_gender, wg_filtered_gender)
+
+all_d_gender %>% 
+  filter(sex != "Other") %>% 
+  ggplot(aes(age, production, color = sex)) +
+  ggthemes::theme_few() +
+  geom_jitter(alpha = 0.3, width = 0.225) +
+  geom_smooth(method = "lm") +
+  coord_cartesian(ylim = c(0, 686)) +
+  labs(
+    x = "Age in months", 
+    y = "Total words understood",
+    color = "Child gender"
+  )
+
 ```
 
 
