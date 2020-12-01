@@ -2,7 +2,9 @@
 title: "Norming WebCDI"
 author: "Benny deMayo"
 date: "6/15/2020"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -21,6 +23,7 @@ library(tidyboot)
 library(fs)
 library(ggmap)
 library(lubridate)
+library(scales)
 
 source(path(here::here(), "file_paths.R"))
 source(functions_script)
@@ -65,9 +68,11 @@ all_ws_raw <-
     stringr::str_to_lower(completed) == "false" ~ FALSE
   ))
 
+
 ```
 
 ```{r}
+#we have to read in the full dataset and select out the manually-coded columns
 wg_exclusion_info <- 
   read_csv(all_data_wg_path) %>% 
   select(
@@ -87,13 +92,17 @@ wg <-
     wg_exclusion_info,
     by = c("study_name", "subject_id")
   ) %>% 
-  filterBirthweight() %>% 
-  filterMultilingual() %>% 
+  filter(repeat_num == "1") %>% #done
+  filterBirthweight() %>% #done
+  filterMultilingual() %>% #done
+  filterIllnesses() %>% 
   filterVision() %>% 
+  filterHearing() %>% 
   getCompletionInterval() %>% 
   getEthnicities() %>% 
   getMaternalEd() %>% 
-  filter(completion_time >= min_completion_time)
+  filter(completion_time >= min_completion_time) %>% 
+  filter_age_wg()
 
 ws1_exclusion_info <- 
   read_csv(all_data_ws1_path) %>% 
@@ -128,13 +137,22 @@ ws <-
     ws_all_exclusion_info,
     by = c("study_name", "subject_id")
   ) %>% 
+  filter(repeat_num == "1") %>% 
   filterBirthweight() %>% 
   filterMultilingual() %>% 
+  filterIllnesses() %>% 
   filterVision() %>% 
+  filterHearing() %>% 
   getCompletionInterval() %>% 
   getEthnicities() %>% 
   getMaternalEd() %>% 
-  filter(completion_time >= min_completion_time)
+  filter(completion_time >= min_completion_time) %>% 
+  filter_age_ws()
+
+prolific_filtered_n <- 
+  ws %>% 
+  filter(str_detect(study_name, "prolific")) %>% 
+  nrow()
 
 ```
 
@@ -144,24 +162,246 @@ ws <-
 completed_wg <- 
   all_wg_raw %>% 
   filter(completed == TRUE) %>% 
+  left_join(
+    wg_exclusion_info,
+    by = c("study_name", "subject_id")
+  ) %>% 
   getCompletionInterval()
   
 
 completed_ws <- 
   all_ws_raw %>% 
   filter(completed == TRUE) %>% 
+  left_join(
+    ws_all_exclusion_info,
+    by = c("study_name", "subject_id")
+  ) %>% 
   getCompletionInterval()
 
-total_admin <- 
-  nrow(completed_wg) + nrow(completed_ws)
 
-wg_exclusions <- 
-  nrow(completed_wg) - nrow(wg)
 
-ws_exclusions <- 
-  nrow(completed_ws) - nrow(ws)
+```
 
-total_exclusions <- ws_exclusions + wg_exclusions
+
+More fine-grained exclusion information.
+
+```{r}
+
+#Disclaimer that this is some of the worst code I've ever written. Sorry everyone.
+
+n_total_wg <- nrow(completed_wg)
+n_total_ws <- nrow(completed_ws)
+
+excl_col_names <- 
+  c(
+    "Exclusion",
+    "WG exclusions",
+    "% of full WG sample excluded",
+    "WS exclusions",
+    "% of full WS sample excluded"
+  )
+
+
+#First take away kids who have done the survey more than once.
+wg_minus_repeats <- 
+  completed_wg %>% 
+  filter(repeat_num == "1")
+
+wg_repeats_n <- n_total_wg - nrow(wg_minus_repeats)
+
+ws_minus_repeats <- 
+  completed_ws %>% 
+  filter(repeat_num == "1")
+
+ws_repeats_n <- n_total_ws - nrow(ws_minus_repeats)
+
+repeat_admins <- 
+  c(
+    "Not first administration",
+    wg_repeats_n,
+    percent(wg_repeats_n / n_total_wg),
+    ws_repeats_n,
+    percent(ws_repeats_n / n_total_ws)
+  )
+
+names(repeat_admins) <- excl_col_names
+
+#Next take away kids born pre-term or with low birthweight.
+
+wg_minus_premie <- 
+  wg_minus_repeats %>% 
+  filterBirthweight()
+
+wg_premie_n <- nrow(wg_minus_repeats) - nrow(wg_minus_premie) 
+
+ws_minus_premie <- 
+  ws_minus_repeats %>% 
+  filterBirthweight()
+
+ws_premie_n <- nrow(ws_minus_repeats) - nrow(ws_minus_premie) 
+
+premies <- 
+  c(
+    "Premature or low birthweight",
+    wg_premie_n,
+    percent(wg_premie_n / n_total_wg),
+    ws_premie_n,
+    percent(ws_premie_n / n_total_ws)
+  )
+
+names(premies) <- excl_col_names
+
+#Next take away kids with multilingual exposure
+
+wg_minus_multiling <- 
+  wg_minus_premie %>% 
+  filterMultilingual()
+
+wg_multiling_n <- nrow(wg_minus_premie) - nrow(wg_minus_multiling)
+
+ws_minus_multiling <- 
+  ws_minus_premie %>% 
+  filterMultilingual()
+
+ws_multiling_n <- nrow(ws_minus_premie) - nrow(ws_minus_multiling)
+
+multiling <- 
+  c(
+    "Multilingual exposure",
+    wg_multiling_n,
+    percent(wg_multiling_n / n_total_wg),
+    ws_multiling_n,
+    percent(ws_multiling_n / n_total_ws)
+  )
+
+names(multiling) <- excl_col_names
+
+#Next exclude kids with problems of illness, vision, or hearing
+wg_minus_health <- 
+  wg_minus_multiling %>% 
+  filterIllnesses() %>% 
+  filterVision() %>% 
+  filterHearing()
+
+wg_health_n <- nrow(wg_minus_multiling) - nrow(wg_minus_health)
+
+ws_minus_health <- 
+  ws_minus_multiling %>% 
+  filterIllnesses() %>% 
+  filterVision() %>% 
+  filterHearing()
+
+ws_health_n <- nrow(ws_minus_multiling) - nrow(ws_minus_health)
+
+health <- 
+  c(
+    "Illnesses/Vision/Hearing",
+    wg_health_n,
+    percent(wg_health_n / n_total_wg),
+    ws_health_n,
+    percent(ws_health_n / n_total_ws)
+  )
+
+names(health) <- excl_col_names
+
+#Now filter out kids who are the wrong age
+wg_minus_age <- 
+  wg_minus_health %>% 
+  filter_age_wg()
+
+wg_age_n <- nrow(wg_minus_health) - nrow(wg_minus_age)
+
+ws_minus_age <- 
+  ws_minus_health %>% 
+  filter_age_ws()
+
+ws_age_n <- nrow(ws_minus_health) - nrow(ws_minus_age)
+
+age <- 
+  c(
+    "Out of age range",
+    wg_age_n,
+    percent(wg_age_n / n_total_wg),
+    ws_age_n,
+    percent(ws_age_n / n_total_ws)
+  )
+
+names(age) <- excl_col_names
+
+#Now we need to get rid of people who did the survey too fast
+
+wg_minus_fakes <- 
+  wg_minus_age %>% 
+  filter(completion_time >= min_completion_time)
+
+wg_fake_n <- nrow(wg_minus_age) - nrow(wg_minus_fakes)
+
+ws_minus_fakes <- 
+  ws_minus_age %>% 
+  filter(completion_time >= min_completion_time)
+
+ws_fake_n <- nrow(ws_minus_age) - nrow(ws_minus_fakes)
+
+fakes <- 
+  c(
+    "Completed survey too quickly",
+    wg_fake_n,
+    percent(wg_fake_n / n_total_wg),
+    ws_fake_n,
+    percent(ws_fake_n / n_total_ws)
+  )
+
+names(fakes) <- excl_col_names
+
+#calculate total amount of WG exclusions
+total_wg_exclusions <- 
+  wg_repeats_n +
+  wg_premie_n +
+  wg_multiling_n +
+  wg_health_n +
+  wg_age_n +
+  wg_fake_n
+
+#calculate total amount of WS exclusions
+total_ws_exclusions <- 
+  ws_repeats_n +
+  ws_premie_n +
+  ws_multiling_n +
+  ws_health_n +
+  ws_age_n +
+  ws_fake_n
+
+#make a row in the table for this
+totals <- 
+  c(
+    "Total exclusions",
+    total_wg_exclusions,
+    percent(total_wg_exclusions / n_total_wg),
+    total_ws_exclusions,
+    percent(total_ws_exclusions / n_total_ws)
+  )
+
+names(totals) <- excl_col_names
+
+#now make the table
+exclusion_tbl <- 
+  bind_rows(repeat_admins, premies, multiling, health, age, fakes, totals)
+
+knitr::kable(exclusion_tbl)
+
+total_admin <- nrow(ws) + nrow(wg)
+
+write_csv(
+  exclusion_tbl,
+  file = path(
+    project_root, 
+    "data", 
+    "exclusion_tables", 
+    "ses_norming_exclusions", 
+    ext = "csv"
+  )
+)
+
 
 ```
 
@@ -198,6 +438,8 @@ maternal_ed_na_n <- nrow(demographics_df %>% filter(maternal_ed == "Not reported
 maternal_ed_total_n <- total_n - maternal_ed_na_n
 ```
 
+
+
 ```{r}
 
 #Ethnicity plot creation
@@ -223,20 +465,20 @@ ethnicity_plot <-
   geom_col(position = "dodge") +
   labs(
     y = "Proportion of\nrespondents",
-    title = "Breakdown of participant ethnicity",
-    caption = str_c(
-      "A total of ",
-      total_admin,
-      " CDI's were collected. ",
-      total_exclusions,
-      " did not meet inclusion criteria\n(multilingual status, vision/hearing impairments, premature birth, completion\ntime under ",
-      min_completion_time,
-      " minutes); ",
-      ethnicity_na_n,
-      " did not report ethnicity, leaving a final N = ",
-      ethnicity_total_n,
-      "."
-    )
+    title = "Breakdown of participant ethnicity"
+    # caption = str_c(
+    #   "A total of ",
+    #   total_admin,
+    #   " CDI's were collected. ",
+    #   total_exclusions,
+    #   " did not meet inclusion criteria\n(multilingual status, vision/hearing impairments, premature birth, completion\ntime under ",
+    #   min_completion_time,
+    #   " minutes); ",
+    #   ethnicity_na_n,
+    #   " did not report ethnicity, leaving a final N = ",
+    #   ethnicity_total_n,
+    #   "."
+    # )
   ) +
   theme_few() +
   theme(
@@ -291,20 +533,20 @@ maternal_ed_plot <-
   geom_col(position = "dodge") +
   labs(
     x = "Education Level",
-    y = "Proportion of\nrespondents",
-    title = "Maternal education",
-    caption = str_c(
-      "A total of ",
-      total_admin,
-      " CDI's were collected. ",
-      total_exclusions,
-      " did not meet inclusion\ncriteria",
-      " (multilingual status, vision/hearing impairments, premature\nbirth, completion time under ",
-      min_completion_time,
-      " minutes); leaving a final N = ",
-      total_n,
-      "."
-    )
+    y = "Proportion of\nrespondents"
+    # title = "Maternal education",
+    # caption = str_c(
+    #   "A total of ",
+    #   total_admin,
+    #   " CDI's were collected. ",
+    #   total_exclusions,
+    #   " did not meet inclusion\ncriteria",
+    #   " (multilingual status, vision/hearing impairments, premature\nbirth, completion time under ",
+    #   min_completion_time,
+    #   " minutes); leaving a final N = ",
+    #   total_n,
+    #   "."
+    # )
   ) +
   theme_few() +
   theme(
