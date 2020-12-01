@@ -1,6 +1,8 @@
 ---
 title: "Full dataset analysis"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -18,6 +20,7 @@ library(tidyboot)
 library(fs)
 library(ggmap)
 library(lubridate)
+library(scales)
 
 source(path(here::here(), "file_paths.R"))
 source(functions_script)
@@ -91,16 +94,16 @@ Filter out: multilingual exposure, illnesses, vision and hearing problems.
 #WG
 wg_filtered <- 
   all_wg_raw %>% 
-  filterIllnesses() %>% 
+  filter(repeat_num == "1") %>% 
   filterBirthweight() %>% 
   filterMultilingual() %>% 
+  filterIllnesses() %>% 
   filterVision() %>% 
   filterHearing() %>% 
-  getEthnicities() %>% 
-  getMaternalEd() %>%
   getCompletionInterval() %>% 
-  filter(completion_time > min_completion_time) %>% 
-  filter(completedBackgroundInfo == "TRUE") %>% #get rid of kids without demo info
+  getEthnicities() %>% 
+  getMaternalEd() %>% 
+  filter(completion_time >= min_completion_time) %>% 
   filter_age_wg()
 
 wg_exclusion_n <- nrow(all_wg_raw) - nrow(wg_filtered)
@@ -118,16 +121,16 @@ save(
 
 ws_filtered <- 
   all_ws_raw %>% 
-  filterIllnesses() %>% 
+  filter(repeat_num == "1") %>% 
   filterBirthweight() %>% 
   filterMultilingual() %>% 
+  filterIllnesses() %>% 
   filterVision() %>% 
   filterHearing() %>% 
+  getCompletionInterval() %>% 
   getEthnicities() %>% 
   getMaternalEd() %>% 
-  getCompletionInterval() %>% 
-  filter(completion_time > min_completion_time) %>% 
-  filter(completedBackgroundInfo == "TRUE") %>% 
+  filter(completion_time >= min_completion_time) %>% 
   filter_age_ws()
 
 ws_exclusion_n <- nrow(all_ws_raw) - nrow(ws_filtered)
@@ -384,199 +387,225 @@ maternal_ed_table <-
   select(-`Full Web-CDI sample to date`)
 ```
 
-
-```{r wg_exclusions}
-
-#Trying to figure out exclusion numbers.
-
-wg_exclusions <- 
-  all_wg_raw %>% 
-  mutateBirthweight() %>% 
-  mutateMultilingual() %>% 
-  getCompletionInterval() %>% 
-  mutate(
-    exclusion_illness = case_when(illnesses_exclude == "1" ~ 1, TRUE ~ 0),
-    exclusion_birthweight = as.numeric(premature),
-    exclusion_multilingual = 
-      as.numeric(!(is.na(language_hours_per_week)) & 
-                   language_hours_per_week >= 16),
-    exclusion_vision = case_when(vision_exclude == "1" ~ 1, TRUE ~ 0),
-    exclusion_hearing = case_when(hearing_exclude == "1" ~ 1, TRUE ~ 0),
-    exclusion_demographics = case_when(
-      completedBackgroundInfo == "FALSE" ~ 1,
-      TRUE ~ 0
-    ),
-    exclusion_minimum_time = as.numeric(completion_time < min_completion_time),
-  ) %>% 
-  mutate(
-    quantity_exclusions = select(
-      ., 
-      exclusion_illness:exclusion_minimum_time
-    ) %>% 
-      rowSums()
-  ) %>% 
-  getEthnicities() %>% 
-  getMaternalEd() %>% 
-  select(study_name, subject_id, contains("exclusion"), ethnicity, maternal_ed)
-
-#Of the kids who only failed one exclusion criterion, what was their breakdown?
-wg_one_exclusion_count <- 
-  wg_exclusions %>% 
-  filter(quantity_exclusions == 1) %>% 
-  pivot_longer(
-    cols = starts_with("exclusion"),
-    names_to = "exclusion",
-    values_to = "exclude"
-  ) %>% 
-  filter(exclude == 1) %>% 
-  count(exclusion)
-
-#How many of each type of exclusion was there?
-wg_exclusions_count <- 
-  wg_exclusions %>% 
-  pivot_longer(
-    cols = starts_with("exclusion"),
-    names_to = "exclusion",
-    values_to = "exclude"
-  ) %>% 
-  filter(exclude == 1) %>% 
-  count(exclusion)
-
-total_n_wg_exclusions <- 
-  wg_exclusions %>% 
-  filter(quantity_exclusions > 0) %>% 
-  nrow()
-
-more_than_one_exclusion_wg <- 
-  wg_exclusions %>% 
-  filter(quantity_exclusions > 1) %>% 
-  nrow()
-  
-
-
-
-```
+`
 
 ```{r}
 
-#Words and sentences exclusions
+#More fine grained analyses of exclusions. Copied and pasted from all_norming_analysis.Rmd.
 
-ws_exclusions <- 
+n_total_wg <- nrow(all_wg_raw)
+n_total_ws <- nrow(all_ws_raw)
+
+excl_col_names <- 
+  c(
+    "Exclusion",
+    "WG exclusions",
+    "% of full WG sample excluded",
+    "WS exclusions",
+    "% of full WS sample excluded"
+  )
+
+
+#First take away kids who have done the survey more than once.
+wg_minus_repeats <- 
+  all_wg_raw %>% 
+  getCompletionInterval() %>% 
+  filter(repeat_num == "1")
+
+wg_repeats_n <- n_total_wg - nrow(wg_minus_repeats)
+
+ws_minus_repeats <- 
   all_ws_raw %>% 
-  mutateBirthweight() %>% 
-  mutateMultilingual() %>% 
   getCompletionInterval() %>% 
-  mutate(
-    exclusion_not_first_admin = as.numeric(repeat_num != 1),
-    exclusion_birthweight = as.numeric(premature),
-    exclusion_multilingual = 
-      as.numeric(!(is.na(language_hours_per_week)) & 
-                   language_hours_per_week >= 16),
-    exclusion_illness = case_when(illnesses_exclude == "1" ~ 1, TRUE ~ 0),
-    exclusion_vision = case_when(vision_exclude == "1" ~ 1, TRUE ~ 0),
-    exclusion_hearing = case_when(hearing_exclude == "1" ~ 1, TRUE ~ 0),
-    exclusion_demographics = case_when(
-      completedBackgroundInfo == "FALSE" ~ 1,
-      TRUE ~ 0
-    ),
-    exclusion_minimum_time = as.numeric(completion_time < min_completion_time),
-    exclusion_age_range = case_when(
-      age >= 16 & age <= 30 ~ 0,
-      TRUE ~ 1
-    )
-  ) %>% 
-  mutate(
-    quantity_exclusions = select(
-      ., 
-      exclusion_not_first_admin:exclusion_age_range
-    ) %>% 
-      rowSums()
-  ) %>% 
-  getEthnicities() %>% 
-  getMaternalEd() %>% 
-  select(study_name, subject_id, contains("exclusion"), ethnicity, maternal_ed)
+  filter(repeat_num == "1")
 
+ws_repeats_n <- n_total_ws - nrow(ws_minus_repeats)
 
-#How many of each type of exclusion were there?
-ws_exclusions_count <- 
-  ws_exclusions %>% 
-  pivot_longer(
-    cols = starts_with("exclusion"),
-    names_to = "exclusion",
-    values_to = "exclude"
-  ) %>% 
-  filter(exclude == 1) %>% 
-  count(exclusion)
+repeat_admins <- 
+  c(
+    "Not first administration",
+    wg_repeats_n,
+    percent(wg_repeats_n / n_total_wg),
+    ws_repeats_n,
+    percent(ws_repeats_n / n_total_ws)
+  )
 
-#total amount of kids excluded from WS analyses
-total_n_ws_exclusions <- 
-  ws_exclusions %>% 
-  filter(quantity_exclusions > 0) %>% 
-  nrow()
+names(repeat_admins) <- excl_col_names
 
-counting_ws_exclusions_ <- 
-  ws_exclusions
+#Next take away kids born pre-term or with low birthweight.
 
-```
+wg_minus_premie <- 
+  wg_minus_repeats %>% 
+  filterBirthweight()
 
+wg_premie_n <- nrow(wg_minus_repeats) - nrow(wg_minus_premie) 
 
-```{r}
+ws_minus_premie <- 
+  ws_minus_repeats %>% 
+  filterBirthweight()
 
+ws_premie_n <- nrow(ws_minus_repeats) - nrow(ws_minus_premie) 
 
-wg_exclusions <- 
-  all_wg_raw %>% 
-  mutateBirthweight() %>% 
-  mutateMultilingual() %>% 
-  getCompletionInterval() %>% 
-  mutate(
-    exclusion_not_first_admin = as.numeric(repeat_num != 1),
-    exclusion_birthweight = as.numeric(premature),
-    exclusion_multilingual = 
-      as.numeric(!(is.na(language_hours_per_week)) & 
-                   language_hours_per_week >= 16),
-    exclusion_illness = case_when(illnesses_exclude == "1" ~ 1, TRUE ~ 0),
-    exclusion_vision = case_when(vision_exclude == "1" ~ 1, TRUE ~ 0),
-    exclusion_hearing = case_when(hearing_exclude == "1" ~ 1, TRUE ~ 0),
-    exclusion_demographics = case_when(
-      completedBackgroundInfo == "FALSE" ~ 1,
-      TRUE ~ 0
-    ),
-    exclusion_minimum_time = as.numeric(completion_time < min_completion_time),
-    exclusion_age_range = case_when(
-      age >= 8 & age <= 18 ~ 0,
-      TRUE ~ 1
-    )
-  ) %>% 
-  mutate(
-    quantity_exclusions = select(
-      ., 
-      exclusion_not_first_admin:exclusion_age_range
-    ) %>% 
-      rowSums()
-  ) %>% 
-  getEthnicities() %>% 
-  getMaternalEd() %>% 
-  select(study_name, subject_id, contains("exclusion"), ethnicity, maternal_ed)
+premies <- 
+  c(
+    "Premature or low birthweight",
+    wg_premie_n,
+    percent(wg_premie_n / n_total_wg),
+    ws_premie_n,
+    percent(ws_premie_n / n_total_ws)
+  )
 
+names(premies) <- excl_col_names
 
-#How many of each type of exclusion were there?
-wg_exclusions_count <- 
-  wg_exclusions %>% 
-  pivot_longer(
-    cols = starts_with("exclusion"),
-    names_to = "exclusion",
-    values_to = "exclude"
-  ) %>% 
-  filter(exclude == 1) %>% 
-  count(exclusion)
+#Next take away kids with multilingual exposure
 
-#total amount of kids excluded from WG analyses
-total_n_wg_exclusions <- 
-  wg_exclusions %>% 
-  filter(quantity_exclusions > 0) %>% 
-  nrow()
+wg_minus_multiling <- 
+  wg_minus_premie %>% 
+  filterMultilingual()
 
-nrow(wg_exclusions %>% filter(quantity_exclusions == 0))
+wg_multiling_n <- nrow(wg_minus_premie) - nrow(wg_minus_multiling)
+
+ws_minus_multiling <- 
+  ws_minus_premie %>% 
+  filterMultilingual()
+
+ws_multiling_n <- nrow(ws_minus_premie) - nrow(ws_minus_multiling)
+
+multiling <- 
+  c(
+    "Multilingual exposure",
+    wg_multiling_n,
+    percent(wg_multiling_n / n_total_wg),
+    ws_multiling_n,
+    percent(ws_multiling_n / n_total_ws)
+  )
+
+names(multiling) <- excl_col_names
+
+#Next exclude kids with problems of illness, vision, or hearing
+wg_minus_health <- 
+  wg_minus_multiling %>% 
+  filterIllnesses() %>% 
+  filterVision() %>% 
+  filterHearing()
+
+wg_health_n <- nrow(wg_minus_multiling) - nrow(wg_minus_health)
+
+ws_minus_health <- 
+  ws_minus_multiling %>% 
+  filterIllnesses() %>% 
+  filterVision() %>% 
+  filterHearing()
+
+ws_health_n <- nrow(ws_minus_multiling) - nrow(ws_minus_health)
+
+health <- 
+  c(
+    "Illnesses/Vision/Hearing",
+    wg_health_n,
+    percent(wg_health_n / n_total_wg),
+    ws_health_n,
+    percent(ws_health_n / n_total_ws)
+  )
+
+names(health) <- excl_col_names
+
+#Now filter out kids who are the wrong age
+wg_minus_age <- 
+  wg_minus_health %>% 
+  filter_age_wg()
+
+wg_age_n <- nrow(wg_minus_health) - nrow(wg_minus_age)
+
+ws_minus_age <- 
+  ws_minus_health %>% 
+  filter_age_ws()
+
+ws_age_n <- nrow(ws_minus_health) - nrow(ws_minus_age)
+
+age <- 
+  c(
+    "Out of age range",
+    wg_age_n,
+    percent(wg_age_n / n_total_wg),
+    ws_age_n,
+    percent(ws_age_n / n_total_ws)
+  )
+
+names(age) <- excl_col_names
+
+#Now we need to get rid of people who did the survey too fast
+
+wg_minus_fakes <- 
+  wg_minus_age %>% 
+  filter(completion_time >= min_completion_time)
+
+wg_fake_n <- nrow(wg_minus_age) - nrow(wg_minus_fakes)
+
+ws_minus_fakes <- 
+  ws_minus_age %>% 
+  filter(completion_time >= min_completion_time)
+
+ws_fake_n <- nrow(ws_minus_age) - nrow(ws_minus_fakes)
+
+fakes <- 
+  c(
+    "Completed survey too quickly",
+    wg_fake_n,
+    percent(wg_fake_n / n_total_wg),
+    ws_fake_n,
+    percent(ws_fake_n / n_total_ws)
+  )
+
+names(fakes) <- excl_col_names
+
+#calculate total amount of WG exclusions
+total_wg_exclusions <- 
+  wg_repeats_n +
+  wg_premie_n +
+  wg_multiling_n +
+  wg_health_n +
+  wg_age_n +
+  wg_fake_n
+
+#calculate total amount of WS exclusions
+total_ws_exclusions <- 
+  ws_repeats_n +
+  ws_premie_n +
+  ws_multiling_n +
+  ws_health_n +
+  ws_age_n +
+  ws_fake_n
+
+#make a row in the table for this
+totals <- 
+  c(
+    "Total exclusions",
+    total_wg_exclusions,
+    percent(total_wg_exclusions / n_total_wg),
+    total_ws_exclusions,
+    percent(total_ws_exclusions / n_total_ws)
+  )
+
+names(totals) <- excl_col_names
+
+#now make the table
+exclusion_tbl <- 
+  bind_rows(repeat_admins, premies, multiling, health, age, fakes, totals)
+
+knitr::kable(exclusion_tbl)
+
+write_csv(
+  exclusion_tbl,
+  file = path(
+    project_root, 
+    "data", 
+    "exclusion_tables", 
+    "full_sample_norming_exclusions", 
+    ext = "csv"
+  )
+)
+
 
 ```
 
