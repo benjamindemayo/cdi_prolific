@@ -24,6 +24,7 @@ library(fs)
 library(ggmap)
 library(lubridate)
 library(scales)
+library(cowplot)
 
 source(path(here::here(), "file_paths.R"))
 source(functions_script)
@@ -405,6 +406,102 @@ write_csv(
 
 ```
 
+Looking at people who did and didn't take enough time to finish
+```{r}
+#All data, incomplete and complete
+all_d <- 
+  bind_rows(
+    all_wg_raw %>% 
+      getCompletionInterval() %>% 
+      getMaternalEd() %>% 
+      getEthnicities() %>% 
+      select(
+        study_name,
+        subject_id,
+        link,
+        completed,
+        completedBackgroundInfo,
+        sex,
+        age,
+        ethnicity, 
+        maternal_ed, 
+        words_produced = `Words Produced`,
+        completion_time,
+        maternal_ed,
+        ethnicity
+      ) %>% 
+      mutate(completed = as.character(completed)),
+    all_ws_raw %>% 
+      getCompletionInterval() %>% 
+      getMaternalEd() %>% 
+      getEthnicities() %>% 
+      select(
+        study_name,
+        subject_id,
+        link,
+        completed,
+        completedBackgroundInfo,
+        sex,
+        age,
+        ethnicity, 
+        maternal_ed, 
+        words_produced = `Total Produced`,
+        completion_time,
+        maternal_ed,
+        ethnicity
+      ) %>% 
+      mutate(completed = as.character(completed))
+  )
+
+incomplete <- all_d %>% filter(completed == "FALSE")
+
+complete_bg <- incomplete %>% filter(completedBackgroundInfo == "TRUE")
+
+incomplete_ethnicity <- 
+  incomplete %>% 
+  count(ethnicity)
+
+complete_bg_ethnicity <- 
+  complete_bg %>% 
+  count(ethnicity)
+
+incomplete_momed <- 
+  incomplete %>% 
+  count(maternal_ed)
+
+complete_bg_momed <- 
+  complete_bg %>% 
+  count(maternal_ed)
+
+incomplete_vocab <- 
+  incomplete %>% 
+  filter(!is.na(words_produced))
+
+complete_bg_vocab <- 
+  complete_bg %>% 
+  filter(!is.na(words_produced))
+
+incomplete_vocab %>% 
+  ggplot(aes(age, words_produced)) +
+  geom_point() + 
+  geom_smooth(method = "lm")
+
+complete_bg %>% 
+  filter(completion_time > min_completion_time) %>% 
+  ggplot(aes(age, words_produced)) +
+  geom_point() + 
+  geom_smooth(method = "lm")
+
+complete_bg %>% 
+  filter(completion_time > min_completion_time) %>% 
+  count(ethnicity)
+
+
+
+
+
+```
+
 
 ```{r}
 #combine relevant demographic information from both WS and WG
@@ -414,6 +511,7 @@ demographics_df <-
       select(
         study_name,
         subject_id,
+        sex,
         age,
         ethnicity, 
         maternal_ed, 
@@ -423,6 +521,7 @@ demographics_df <-
       select(
         study_name,
         subject_id,
+        sex,
         age,
         ethnicity,
         maternal_ed,
@@ -464,8 +563,7 @@ ethnicity_plot <-
   ggplot(aes(ethnicity, proportion, fill = study)) +
   geom_col(position = "dodge") +
   labs(
-    y = "Proportion of\nrespondents",
-    title = "Breakdown of participant ethnicity"
+    y = "Proportion of\nrespondents"
     # caption = str_c(
     #   "A total of ",
     #   total_admin,
@@ -562,23 +660,168 @@ maternal_ed_plot
   
 ```
 
+
+Joint plot of maternal ed and ethnicity
+```{r fig.width=12, fig.height=5}
+#tweak the ethnicity plot
+ethnicity_grid_plot <- 
+  ethnicity_plot_df %>% 
+  ggplot(aes(ethnicity, proportion, fill = study)) +
+  geom_col(position = "dodge") +
+  labs(
+    y = "Proportion of\nrespondents"
+  ) +
+  theme_few() +
+  theme(
+    legend.title = element_blank(), 
+    axis.text.x = element_text(
+       angle = 25, 
+       vjust = 0.9, 
+       hjust = 1
+     )
+  ) +
+  labs(x = "Ethnicity")
+
+#tweak the maternal ed plot
+maternal_ed_grid_plot <- 
+  maternal_ed_plot_df %>% 
+  filter(maternal_ed != "Not reported") %>% 
+  ggplot(aes(maternal_ed, proportion, fill = study)) +
+  geom_col(position = "dodge") +
+  labs(x = "Primary caregiver education") +
+  theme_few() +
+  theme(
+    legend.title = element_blank(),
+    axis.text.x = element_text(angle = 25, vjust = 0.9, hjust = 1)
+  ) + 
+  scale_x_discrete(labels = x_axis_labs)
+
+prow <- cowplot::plot_grid(
+  ethnicity_grid_plot + 
+    theme(
+      legend.position = "none", 
+      plot.margin = (margin(r = 2, l = 0)),
+      axis.text = element_text(size = 12)
+    ),
+  maternal_ed_grid_plot + 
+    ylab(NULL) + 
+    theme(
+      legend.position = "none", 
+      plot.margin = (margin(r = 2, l = 2)),
+      axis.text = element_text(size = 12)
+    ),
+  align = "vh",
+  labels = c("A", "B")
+)
+
+legend <- 
+  get_legend(
+    ethnicity_grid_plot + 
+      # guides(color = guide_legend(nrow = 1)) + 
+      # theme(legend.position = "bottom")
+      theme(
+        legend.box.margin = margin(0, 0, 0, 15),
+        legend.text = element_text(size = 12)
+      )
+  )
+
+plot_grid(prow, legend, rel_widths = c(3, .5))
+
+```
+
+
 ```{r}
 momed_ses_df <- 
   demographics_df %>% 
   mutate(highschool = case_when(
-    maternal_ed == "Some high school or less" ~ "high_school",
-    maternal_ed == "High school diploma" ~ "high_school",
-    maternal_ed == "Some college education" ~ "college",
-    maternal_ed == "College diploma or more" ~ "college"
+    maternal_ed == "Some high school or less" ~ "High school",
+    maternal_ed == "High school diploma" ~ "High school",
+    maternal_ed == "Some college education" ~ "College",
+    maternal_ed == "College diploma or more" ~ "College"
   ))
+
+
 
 momed_ses_df %>% 
   filter(
     age <= 30
   ) %>% 
   ggplot(aes(age, words_produced, color = highschool)) +
-  geom_point() +
-  geom_smooth(method = "lm")
+  geom_jitter(alpha = 0.3, width = 0.225) +
+  geom_smooth(method = "lm") +
+  labs(
+    x = "age in months",
+    y = "words produced"
+  ) +
+  ggthemes::theme_few() +
+  theme(legend.title = element_blank())
+
+demographics_df %>% 
+  filter(
+    age <= 30
+  ) %>% 
+  ggplot(aes(age, words_produced, color = maternal_ed)) +
+  geom_jitter(alpha = 0.3, width = 0.225) +
+  geom_smooth(method = "lm") +
+  labs(
+    x = "age in months",
+    y = "words produced"
+  ) +
+  ggthemes::theme_few() +
+  theme(legend.title = element_blank())
+
+demographics_df %>% 
+  filter(
+    age <= 30,
+    sex != "Other"
+  ) %>% 
+  ggplot(aes(age, words_produced, color = sex)) +
+  geom_jitter(alpha = 0.3, width = 0.225) +
+  geom_smooth(method = "lm") +
+  labs(
+    x = "age in months",
+    y = "words produced"
+  ) +
+  ggthemes::theme_few() +
+  theme(legend.title = element_blank())
+
+demographics_df %>% 
+  filter(
+    age <= 30,
+    ethnicity != "No ethnicity reported"
+  ) %>% 
+  ggplot(aes(age, words_produced, color = ethnicity)) +
+  geom_jitter(alpha = 0.3, width = 0.225) +
+  geom_smooth(method = "lm", alpha = 0.5) +
+  labs(
+    x = "age in months",
+    y = "words produced"
+  ) +
+  ggthemes::theme_few() +
+  theme(legend.title = element_blank())
+
+```
+
+
+```{r}
+#Ethnicities on the people who completed too fast (if they even are people).
+
+eth_fake_wg <- 
+  completed_wg %>% 
+  getEthnicities() %>% 
+  filter(completion_time <= min_completion_time) %>% 
+  count(ethnicity) %>% 
+  mutate(prop = n / sum(n))
+
+eth_fake_ws <- 
+  completed_ws %>% 
+  getEthnicities() %>% 
+  filter(completion_time <= min_completion_time) %>% 
+  count(ethnicity) %>% 
+  mutate(prop = n / sum(n))
+
+
+
 ```
 
 

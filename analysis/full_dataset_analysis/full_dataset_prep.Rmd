@@ -21,6 +21,8 @@ library(fs)
 library(ggmap)
 library(lubridate)
 library(scales)
+library(estimatr)
+library(cowplot)
 
 source(path(here::here(), "file_paths.R"))
 source(functions_script)
@@ -158,13 +160,34 @@ nrow(all_ws_raw)
 
 ```{r}
 #Comprehension and production measures
+medians <- 
+  ws_filtered %>%
+  mutate(
+    maternal_ed = fct_recode(
+      maternal_ed,
+      "High school diploma or less" = "High school diploma",
+      "High school diploma or less" = "Some high school or less"
+    )
+  ) %>% 
+  filter(`Total Produced` < 688 & maternal_ed != "Not reported") %>% 
+  group_by(maternal_ed, age) %>% 
+  summarize(median = median(`Total Produced`))
+
 ws_filtered %>% 
+  mutate(
+    maternal_ed = fct_recode(
+      maternal_ed,
+      "High school diploma or less" = "High school diploma",
+      "High school diploma or less" = "Some high school or less"
+    )
+  ) %>% 
   filter(`Total Produced` < 688 & maternal_ed != "Not reported") %>% 
   ggplot(aes(age, `Total Produced`, color = maternal_ed)) +
   ggthemes::theme_few() +
   geom_jitter(alpha = 0.3, width = 0.225) +
   coord_cartesian(ylim = c(0, 686)) +
-  geom_smooth(method = "lm") +
+  geom_quantile(quantiles = .5, method = "rqss", lambda = 5, size = 1) +
+  #geom_line(data = medians, aes(age, median, color = maternal_ed)) +
   labs(
     x = "age in months", 
     y = "total words produced",
@@ -193,11 +216,18 @@ wg_filtered %>%
   coord_cartesian(ylim = c(0, 390)) +
   labs(
     x = "Age in months", 
-    y = "Total words understood",
+    y = "Total words produced",
     color = "Maternal education"
   )
 
 wg_filtered %>% 
+  mutate(
+    maternal_ed = fct_recode(
+      maternal_ed,
+      "High school diploma or less" = "High school diploma",
+      "High school diploma or less" = "Some high school or less"
+    )
+  ) %>% 
   filter(!is.na(maternal_ed)) %>% 
   select(age, `Words Produced`, `Words Understood`, maternal_ed) %>% 
   pivot_longer(
@@ -207,8 +237,8 @@ wg_filtered %>%
   ) %>% 
   ggplot(aes(age, words, color = maternal_ed)) +
   facet_grid(~measure) +
-  geom_jitter(alpha = 0.3, width = 0.225) +
-  geom_smooth(method = "lm") +
+  geom_jitter(alpha = 0.2, width = 0.225) +
+  geom_quantile(quantiles = .5, method = "rqss", lambda = 3, size = 1) +
   coord_cartesian(ylim = c(0, 390)) +
   ggthemes::theme_few() +
   labs(
@@ -217,6 +247,57 @@ wg_filtered %>%
     y = "number of words"
   ) +
   scale_x_continuous(breaks = seq(from = 8, to = 18, by = 2))
+```
+
+Inferential statistics on SES and gender
+```{r}
+
+wg_lm_df <- 
+  wg_filtered %>% 
+  mutate(
+    age_c = age - mean(age, na.rm = TRUE),
+    maternal_ed_c = mother_education - mean(mother_education, na.rm = TRUE),
+    maternal_ed = fct_recode(
+      maternal_ed,
+      "High school diploma or less" = "High school diploma",
+      "High school diploma or less" = "Some high school or less"
+    )
+  ) %>% 
+  rename(produced = `Words Produced`, understood = `Words Understood`)
+
+ses_wg_lm_prod <- 
+  lm_robust(formula = produced ~ age_c * maternal_ed, data = wg_lm_df)
+
+ses_wg_lm_comp <- 
+  lm_robust(formula = understood ~ age_c * maternal_ed, data = wg_lm_df)
+
+summary(ses_wg_lm_prod)
+summary(ses_wg_lm_comp)
+
+ws_lm_df <- 
+  ws_filtered %>% 
+  filter(`Total Produced` < 688 & maternal_ed != "Not reported") %>% 
+  mutate(
+    age_c = age - mean(age, na.rm = TRUE),
+    maternal_ed_c = mother_education - mean(mother_education, na.rm = TRUE),
+    maternal_ed = fct_recode(
+      maternal_ed,
+      "High school diploma or less" = "High school diploma",
+      "High school diploma or less" = "Some high school or less"
+    )
+  ) %>% 
+  rename(produced = `Total Produced`) %>% 
+  filter(maternal_ed_c > -10)
+
+ses_ws_lm <- 
+  lm(formula = produced ~ age_c * maternal_ed, data = ws_lm_df)
+
+summary(ses_ws_lm)
+
+gender_ws_lm <- 
+  lm(formula = produced ~ age_c * sex, data = ws_lm_df)
+
+summary(gender_ws_lm)
 ```
 
 
@@ -231,15 +312,18 @@ ws_filtered_gender <-
   ws_filtered %>% 
   select(age, production = `Total Produced`, sex)
 
+#filter out kids without a binary gender listed
 all_d_gender <- 
-  bind_rows(ws_filtered_gender, wg_filtered_gender)
+  bind_rows(ws_filtered_gender, wg_filtered_gender) %>% 
+  filter(sex != "Other")
+
+all_gender_n <- nrow(all_d_gender)
 
 all_d_gender %>% 
-  filter(sex != "Other") %>% 
   ggplot(aes(age, production, color = sex)) +
   ggthemes::theme_few() +
   geom_jitter(alpha = 0.3, width = 0.225) +
-  geom_smooth(method = "lm") +
+  geom_smooth(method = "loess") +
   coord_cartesian(ylim = c(0, 686)) +
   labs(
     x = "Age in months", 
@@ -313,21 +397,32 @@ ethnicity_plot <-
   ) +
   theme_few() +
   theme(
-    legend.title = element_blank(),
-    axis.text = element_text(size = 14),
-    axis.title = element_text(size = 13),
-    legend.text = element_text(size = 13),
-    axis.title.x = element_blank(),
-    plot.title = element_text(size = 15),
-    plot.caption = element_text(hjust = 0)
-  )
+    legend.title = element_blank(), 
+    axis.text.x = element_text(
+       angle = 25, 
+       vjust = 0.9, 
+       hjust = 1
+     )
+  ) +
+  labs(x = "Ethnicity")
+
+# +
+#   theme(
+#     legend.title = element_blank(),
+#     axis.text = element_text(size = 14),
+#     axis.title = element_text(size = 13),
+#     legend.text = element_text(size = 13),
+#     axis.title.x = element_blank(),
+#     plot.title = element_text(size = 15),
+#     plot.caption = element_text(hjust = 0)
+#   )
 
 ethnicity_plot
 
 ```
 
 
-```{r}
+```{r fig.width=12, fig.height=5}
 #Maternal ed analysis on the full sample
 
 maternal_ed_plot_df <- 
@@ -364,14 +459,12 @@ maternal_ed_plot <-
   filter(maternal_ed != "Not reported") %>% 
   ggplot(aes(maternal_ed, proportion, fill = study)) +
   geom_col(position = "dodge") +
+  labs(x = "Primary caregiver education") +
   theme_few() +
   theme(
     legend.title = element_blank(),
-    axis.text.x = element_text(angle = 40, vjust = 0.9, hjust = 1, size = 13.5),
-    axis.title.x = element_blank(),
-    legend.text = element_text(size = 13),
-    plot.caption = element_text(hjust = 0)
-  ) +
+    axis.text.x = element_text(angle = 25, vjust = 0.9, hjust = 1)
+  ) + 
   scale_x_discrete(labels = x_axis_labs)
 
 maternal_ed_plot
@@ -385,6 +478,38 @@ maternal_ed_table <-
     `Current study proportions` = round(`Full Web-CDI sample to date`, digits = 4)
   ) %>% 
   select(-`Full Web-CDI sample to date`)
+
+prow <- cowplot::plot_grid(
+  ethnicity_plot + 
+    theme(
+      legend.position = "none", 
+      plot.margin = (margin(r = 2, l = 0)),
+      axis.text = element_text(size = 12)
+    ),
+  maternal_ed_plot + 
+    ylab(NULL) + 
+    theme(
+      legend.position = "none", 
+      plot.margin = (margin(r = 2, l = 2)),
+      axis.text = element_text(size = 12)
+    ),
+  align = "vh",
+  labels = c("A", "B")
+)
+prow
+
+legend <- 
+  get_legend(
+    ethnicity_plot + 
+      # guides(color = guide_legend(nrow = 1)) + 
+      # theme(legend.position = "bottom")
+      theme(
+        legend.box.margin = margin(0, 0, 0, 15),
+        legend.text = element_text(size = 12)
+      )
+  )
+
+plot_grid(prow, legend, rel_widths = c(3, .5))
 ```
 
 `
