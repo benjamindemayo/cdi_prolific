@@ -1,0 +1,7 @@
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+\centering
+\includegraphics{webcdi_paper_files/figure-latex/pictorial-1.pdf}
+\caption{\label{fig:pictorial}Pictorial instructions in the Web-CDI Words and Sentences instrument.}
+\end{figure*}

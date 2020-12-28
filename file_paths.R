@@ -86,3 +86,12 @@ ws_filtered_path <-
     "ws_filtered.RData"
   )
 
+##figures
+
+fig_directory <- 
+  fs::path(
+    project_root,
+    "paper",
+    "figs"
+  )
+

@@ -187,7 +187,6 @@ ws_filtered %>%
   geom_jitter(alpha = 0.3, width = 0.225) +
   coord_cartesian(ylim = c(0, 686)) +
   geom_quantile(quantiles = .5, method = "rqss", lambda = 5, size = 1) +
-  #geom_line(data = medians, aes(age, median, color = maternal_ed)) +
   labs(
     x = "age in months", 
     y = "total words produced",
@@ -327,7 +326,7 @@ all_d_gender %>%
   coord_cartesian(ylim = c(0, 686)) +
   labs(
     x = "Age in months", 
-    y = "Total words understood",
+    y = "Total words produced",
     color = "Child gender"
   )
 
@@ -361,7 +360,8 @@ demographics_df <-
         age,
         ethnicity, 
         maternal_ed, 
-        words_produced = `Words Produced` 
+        words_produced = `Words Produced`,
+        sex
       ),
     ws_filtered %>% 
       select(
@@ -370,7 +370,8 @@ demographics_df <-
         age,
         ethnicity,
         maternal_ed,
-        words_produced = `Total Produced`
+        words_produced = `Total Produced`,
+        sex
       )
   )
 
@@ -732,5 +733,24 @@ write_csv(
 )
 
 
+```
+
+Options table
+```{r}
+options_table <- 
+  read_csv(
+    path(
+      project_root,
+      "paper",
+      "options_table",
+      ext = "csv"
+    )
+  ) %>% 
+  filter(!is.na(`Study setting`)) %>% 
+  knitr::kable()
+
+options_table
+
+knitr::kable(options_table)
 ```
 
