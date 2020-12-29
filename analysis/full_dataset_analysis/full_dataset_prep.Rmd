@@ -497,7 +497,6 @@ prow <- cowplot::plot_grid(
   align = "vh",
   labels = c("A", "B")
 )
-prow
 
 legend <- 
   get_legend(

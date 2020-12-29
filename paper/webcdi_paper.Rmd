@@ -64,6 +64,7 @@ library(tidyverse)
 library(fs)
 library(xtable)
 library(kableExtra)
+library(cowplot)
 
 source(path(here::here(), "file_paths.R"))
 source(functions_script)
@@ -226,17 +227,180 @@ exclusion_tbl_full %>%
   column_spec(1, width = "2.2in") %>% 
   column_spec(2:5, width = "1in") %>% 
   row_spec(0, bold = TRUE)
-  
-  
-  
-  
 
 ```
 
 
 One of the key benefits of Web-CDI use is that the system in effect becomes a centralized repository for standardized administrations of the CDI, contributing anonymized data (again, on an opt-out basis) to future research and norming efforts. In this section, we provide some preliminary analyses of the American English Web-CDI, demonstrating the potential of the Web-CDI system to provide a distributed platform for gathering large CDI datasets. 
 
-At time of writing, researchers from 15 universities in the United States have collected over 5,000 administrations of the American English CDI using Web-CDI since it was launched in late 2017, with `r unfiltered_n_wg` administrations of the WG form and `r unfiltered_n_ws` administrations of the WS form. We excluded participants from the subsequent analyses based on a set of stringent criteria intended for the creation of future normative datasets. We excluded participants if it was not their first administration of the survey; if they were born prematurely or had a birthweight under 5.5 lbs (< 2.5 kg); reported more than 16 hours of exposure to a language other than English per week on average (amounting to >10% exposure to English); had serious vision impairments, hearing deficits or other developmental disorders or medical issues; completed the survey unrealistically quickly (defined here as in fewer than 8.5 minutes); or were outside of the correct age range for the survey. The exclusion criteria we used differed from the most recent norming study of the WG measure in the United Kingdom [@Alcock2020] in order to comply more closely with the criteria used in @fenson2007, who used more stringent criteria to establish vocabulary norms that reflect typically developing children’s vocabulary trajectories. A complete breakdown of the number of participants excluded on each criterion is in Table 2. Of the completed WG forms, `r exclusions_n_wg` were excluded, leading to a final WG sample size of `r filtered_n_wg` administrations, and `r exclusions_n_ws` WS administrations were excluded, leading to a final WS sample size of `r filtered_n_ws`. 
+At time of writing, researchers from 15 universities in the United States have collected over 5,000 administrations of the American English CDI using Web-CDI since it was launched in late 2017, with `r unfiltered_n_wg` administrations of the WG form and `r unfiltered_n_ws` administrations of the WS form. We excluded participants from the subsequent analyses based on a set of stringent criteria intended for the creation of future normative datasets. We excluded participants if it was not their first administration of the survey; if they were born prematurely or had a birthweight under 5.5 lbs (< 2.5 kg); reported more than 16 hours of exposure to a language other than English per week on average (amounting to >10% exposure to English); had serious vision impairments, hearing deficits or other developmental disorders or medical issues^[Exclusions on the basis of child health were decided on a case-by-case basis by author V.M. in consultation with Philip Dale, Donna Thal and Larry Fenson.]; completed the survey unrealistically quickly (defined here as in fewer than 8.5 minutes); or were outside of the correct age range for the survey. The exclusion criteria we used differed from the most recent norming study of the WG measure in the United Kingdom [@Alcock2020] in order to comply more closely with the criteria used in @fenson2007, who used more stringent criteria to establish vocabulary norms that reflect typically developing children’s vocabulary trajectories. A complete breakdown of the number of participants excluded on each criterion is in Table 2. Of the completed WG forms, `r exclusions_n_wg` were excluded, leading to a final WG sample size of `r filtered_n_wg` administrations, and `r exclusions_n_ws` WS administrations were excluded, leading to a final WS sample size of `r filtered_n_ws`. 
+
+```{r}
+
+#demographic information of the entire sample
+demographics_df <- 
+  bind_rows(
+    wg_filtered %>% 
+      select(
+        study_name,
+        subject_id,
+        age,
+        ethnicity, 
+        maternal_ed, 
+        words_produced = `Words Produced`,
+        sex
+      ),
+    ws_filtered %>% 
+      select(
+        study_name,
+        subject_id,
+        age,
+        ethnicity,
+        maternal_ed,
+        words_produced = `Total Produced`,
+        sex
+      )
+  )
+
+#tibble for ethnicity plot
+ethnicity_plot_df <- 
+  demographics_df %>% 
+  getEthnicitySummary() %>% 
+  mutate(`Web-CDI sample` = prop.table(n)) %>% 
+  filter(ethnicity != "No ethnicity reported") %>% 
+  left_join(old_ethnicity_numbers, by = "ethnicity") %>% 
+  left_join(census_ethnicity_numbers, by = "ethnicity") %>% 
+  select(-n) %>% 
+  pivot_longer(
+    cols = c(`Web-CDI sample`, `2007 manual`, `U.S. Census Estimates`),
+    names_to = "study",
+    values_to = "proportion"
+  )
+
+#ethnicity plot
+ethnicity_plot <-
+  ethnicity_plot_df %>% 
+  ggplot(aes(ethnicity, proportion, fill = study)) +
+  geom_col(position = "dodge") +
+  labs(
+    y = "Proportion of\nrespondents"
+  ) +
+  ggthemes::theme_few() +
+  theme(
+    legend.title = element_blank(), 
+    axis.text.x = element_text(
+       angle = 25, 
+       vjust = 0.9, 
+       hjust = 1
+     )
+  ) +
+  labs(x = "Ethnicity") +
+  scale_fill_viridis_d() +
+  coord_cartesian(ylim = c(0, .81))
+
+maternal_ed_plot_df <- 
+  demographics_df %>% 
+  count(maternal_ed) %>% 
+  mutate(`Web-CDI sample` = prop.table(n)) %>% 
+  left_join(old_momed_numbers, by = "maternal_ed") %>% 
+  left_join(census_momed_numbers, by = "maternal_ed") %>% 
+  select(-n) %>% 
+  pivot_longer(
+    cols = c(`Web-CDI sample`, `2007 manual`, `U.S. Census Estimates`),
+    names_to = "study",
+    values_to = "proportion"
+  ) %>% 
+  mutate(
+    maternal_ed = fct_relevel(
+      maternal_ed,
+      "Some high school or less",
+      "High school diploma",
+      "Some college education",
+      "College diploma or more"
+    )
+  )
+
+x_axis_labs <- c(
+  "Some high school\n or less",
+  "High school\ndiploma",
+  "Some college\neducation",
+  "College diploma\nor more"
+)
+
+maternal_ed_plot <- 
+  maternal_ed_plot_df %>% 
+  filter(maternal_ed != "Not reported") %>% 
+  ggplot(aes(maternal_ed, proportion, fill = study)) +
+  geom_col(position = "dodge") +
+  labs(x = "Primary caregiver education") +
+  ggthemes::theme_few() +
+  theme(
+    legend.title = element_blank(),
+    axis.text.x = element_text(angle = 25, vjust = 0.9, hjust = 1)
+  ) + 
+  scale_x_discrete(labels = x_axis_labs) +
+  scale_fill_viridis_d() +
+  coord_cartesian(ylim = c(0, .81))
+
+prow <- cowplot::plot_grid(
+  ethnicity_plot + 
+    theme(
+      legend.position = "none", 
+      plot.margin = (margin(r = 2, l = 0)),
+      axis.text = element_text(size = 21),
+      axis.title = element_text(size = 21)
+    ),
+  maternal_ed_plot + 
+    ylab(NULL) + 
+    theme(
+      legend.position = "none", 
+      plot.margin = (margin(r = 2, l = 2)),
+      axis.text = element_text(size = 21),
+      axis.title = element_text(size = 21)
+    ),
+  align = "hv",
+  labels = c("A", "B")
+)
+
+legend <- 
+  get_legend(
+    ethnicity_plot + 
+      # guides(color = guide_legend(nrow = 1)) + 
+      # theme(legend.position = "bottom")
+      theme(
+        legend.box.margin = margin(0, 0, 0, 15),
+        legend.text = element_text(size = 18)
+      )
+  )
+
+demo_barplot <- plot_grid(prow, legend, rel_widths = c(3, .5))
+
+ggsave(
+  "demo_barplot.png", 
+  plot = demo_barplot,
+  path = fig_directory,
+  width = 20,
+  height = 8
+)
+
+demo_barplot_caption <- 
+  str_c(
+    "Proportion of respondents plotted by child race (A) and educational level of primary caregiver (B) from full Web-CDI sample to date (N = ", 
+    formatC(filtered_n_total, big.mark = ",", big.interval = 3),
+    "), compared with norming sample demographics from Fenson (2007). Latinx participants can be of any race."
+  )
+
+
+```
+
+
+```{r demobarfig, fig.cap=demo_barplot_caption}
+
+img_2 <- png::readPNG(path(fig_directory, "demo_barplot.png"))
+
+grid::grid.raster(img_2)
+
+```
 
 
 

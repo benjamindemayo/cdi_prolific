@@ -141,6 +141,12 @@ old_ethnicity_numbers <-
     `2007 manual` = c(.069, .105, .063, .733)
   )
 
+census_ethnicity_numbers <- 
+  tibble(
+    ethnicity = c("Asian", "Black", "Mixed/other", "White"),
+    `U.S. Census Estimates` = c(.059, .134, .102, .763)
+  )
+
 #Add a boolean column for each ethnicity, 
 #and mutate the ethnicity column into desired categories
 getEthnicities <- function(data) {
@@ -211,6 +217,17 @@ old_momed_numbers <-
       "College diploma or more"
     ),
     `2007 manual` = c(.075, .2385, .248, .4385)
+  )
+
+census_momed_numbers <- 
+  tibble(
+    maternal_ed = c(
+      "Some high school or less",
+      "High school diploma",
+      "Some college education",
+      "College diploma or more"
+    ),
+    `U.S. Census Estimates` = c(.120, .271, .289, .320)
   )
 
 get_narrative_responses <- function(data) {

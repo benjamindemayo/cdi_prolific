@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.12.26)  28 DEC 2020 19:11
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.12.26)  29 DEC 2020 01:50
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1280,21 +1280,29 @@ Overfull \hbox (38.31871pt too wide) in paragraph at lines 264--277
  []
 
 [17]
+<webcdi_paper_files/figure-latex/demobarfig-1.pdf, id=179, 469.755pt x 325.215p
+t>
+File: webcdi_paper_files/figure-latex/demobarfig-1.pdf Graphic file (type pdf)
+<use webcdi_paper_files/figure-latex/demobarfig-1.pdf>
+Package pdftex.def Info: webcdi_paper_files/figure-latex/demobarfig-1.pdf  used
+ on input line 285.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[18] [19] [20] AED endfloat: Processing end Figures and Tables [21] (./webcdi_p
-aper.aux)
+[18] [19 <./webcdi_paper_files/figure-latex/demobarfig-1.pdf>] [20] AED endfloa
+t: Processing end Figures and Tables [21] (./webcdi_paper.aux)
 Package rerunfilecheck Info: File `webcdi_paper.out' has not changed.
-(rerunfilecheck)             Checksum: F8EE1E1CBC66E5CACC0612FDDBDF951C;2683.
+(rerunfilecheck)             Checksum: CCDB96904C242D37A0BA9545FDC7FD4A;2683.
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 25281 strings out of 481330
- 459501 string characters out of 5915179
- 749545 words of memory out of 5000000
- 41542 multiletter control sequences out of 15000+600000
+ 25290 strings out of 481330
+ 459844 string characters out of 5915179
+ 749823 words of memory out of 5000000
+ 41548 multiletter control sequences out of 15000+600000
  480946 words of font info for 93 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  94i,11n,98p,1910b,533s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1311,10 +1319,10 @@ yTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb><c:/Users/bdemayo.PRINCETON/AppD
 ata/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri12.pfb><c:/Users/bdema
 yo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmss8.pfb
 >
-Output written on webcdi_paper.pdf (21 pages, 354535 bytes).
+Output written on webcdi_paper.pdf (21 pages, 573590 bytes).
 PDF statistics:
- 262 PDF objects out of 1000 (max. 8388607)
- 224 compressed objects within 3 object streams
- 69 named destinations out of 1000 (max. 500000)
- 146 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 270 PDF objects out of 1000 (max. 8388607)
+ 229 compressed objects within 3 object streams
+ 71 named destinations out of 1000 (max. 500000)
+ 151 words of extra memory for PDF output out of 10000 (max. 10000000)
 
