@@ -77,6 +77,7 @@ wg_filtered_path <-
     "wg_filtered.RData"
   )
 
+##Filtered data
 ws_filtered_path <- 
   fs::path(
     project_root, 
@@ -93,5 +94,25 @@ fig_directory <-
     project_root,
     "paper",
     "figs"
+  )
+
+##exclusion tables
+
+full_sample_exclusions <- 
+  fs::path(
+    project_root,
+    "data",
+    "exclusion_tables",
+    "full_sample_norming_exclusions",
+    ext = "RData"
+  )
+
+ses_sample_exclusions <- 
+  fs::path(
+    project_root,
+    "data",
+    "exclusion_tables",
+    "ses_norming_exclusions",
+    ext = "RData"
   )
 

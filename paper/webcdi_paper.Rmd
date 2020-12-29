@@ -38,7 +38,7 @@ affiliation:
     institution   : "Stanford University"
 
 abstract: |
-  Understanding the mechanisms which drive variation in children’s language acquisition requires large, population-representative datasets of children’s word learning across development. Parent report measures such as the MacArthur-Bates Communicative Development Inventories (CDI) are commonly used to accrue such data, but the traditional paper-based forms make the curation of large datasets logistically challenging, and tend to rely on convenience samples located close in proximity to major research institutions. Here, we introduce Web-CDI, a web-based tool which allows researchers to collect CDI data online. Web-CDI contains functionality to collect and manage longitudinal data, share links, and download standardized vocabulary scores. To date, over 3,529 valid Web-CDI administrations have been completed. General trends found in past norming studies of the CDI are present in data collected from Web-CDI: scores of children’s productive vocabulary grow with age, female children show a slightly faster rate of vocabulary growth in early childhood, and participants with higher levels of education attainment report slightly higher vocabulary production scores. We also report results from an effort to oversample non-white, lower-SES participants (N = 241), which showed similar demographic trends to the full sample but which had a high exclusion rate. Implications and challenges for the collection of large, population-representative datasets using Web-CDI in future research are discussed. 
+  Understanding the mechanisms which drive variation in children’s language acquisition requires large, population-representative datasets of children’s word learning across development. Parent report measures such as the MacArthur-Bates Communicative Development Inventories (CDI) are commonly used to accrue such data, but the traditional paper-based forms make the curation of large datasets logistically challenging, and tend to rely on convenience samples located close in proximity to major research institutions. Here, we introduce Web-CDI, a web-based tool which allows researchers to collect CDI data online. Web-CDI contains functionality to collect and manage longitudinal data, share links, and download standardized vocabulary scores. To date, over 3,500 valid Web-CDI administrations have been completed. General trends found in past norming studies of the CDI are present in data collected from Web-CDI: scores of children’s productive vocabulary grow with age, female children show a slightly faster rate of vocabulary growth in early childhood, and participants with higher levels of education attainment report slightly higher vocabulary production scores. We also report results from an effort to oversample non-white, lower-SES participants (N = 241), which showed similar demographic trends to the full sample but which had a high exclusion rate. Implications and challenges for the collection of large, population-representative datasets using Web-CDI in future research are discussed. 
   
 keywords          : "vocabulary development, parent report, socioeconomic status"
 wordcount         : "X"
@@ -59,10 +59,11 @@ output            : papaja::apa6_pdf
 ---
 
 ```{r setup, include = FALSE}
-library("papaja")
-library("tidyverse")
-library("fs")
+library(papaja)
+library(tidyverse)
+library(fs)
 library(xtable)
+library(kableExtra)
 
 source(path(here::here(), "file_paths.R"))
 source(functions_script)
@@ -70,8 +71,8 @@ source(functions_script)
 #Read in (somewhat) preprocessed forms of the data
 load(wg_unfiltered_path)
 load(ws_unfiltered_path)
-read_csv(wg_filtered_path)
-read_csv(ws_filtered_path)
+load(wg_filtered_path)
+load(ws_filtered_path)
 ```
 
 
@@ -124,7 +125,7 @@ At the completion of the form, a graph is displayed illustrating the proportion 
 
 ### Researcher Interface
 
-```{r optionstable}
+```{r}
 options_table <- 
   read_csv(
     path(
@@ -136,8 +137,21 @@ options_table <-
   ) %>% 
   filter(!is.na(`Study setting`)) 
 
-apa_table(options_table)
-
+options_table %>% 
+  kbl(
+    booktabs = TRUE, 
+    longtable = TRUE,
+    linesep = "", 
+    caption = "Settings customizable by researchers when creating new studies to be run on the Web-CDI platform."
+  ) %>% 
+  kable_styling(
+    position = "center",
+    latex_options = "repeat_header"
+  ) %>% 
+  column_spec(c(1, 3), width = "2.2in") %>% 
+  column_spec(2, width = "1in") %>% 
+  row_spec(0, bold = TRUE)
+  
 
 ```
 
@@ -178,25 +192,51 @@ In the European Union (EU), research data collection and storage is governed by 
 
 ## Current Usage and Data
 
+```{r total_n}
+#number of administrations before exclusions
+unfiltered_n_wg <- nrow(all_wg_raw)
+unfiltered_n_ws <- nrow(all_wg_raw)
+unfiltered_n_total <- unfiltered_n_ws + unfiltered_n_wg
 
+#number of administrations after exclusions
+filtered_n_wg <- nrow(wg_filtered)
+filtered_n_ws <- nrow(ws_filtered)
+filtered_n_total <- filtered_n_wg + filtered_n_ws
 
-
-
-
-
-
-
-
-
-
-
-
-```{r}
-
-
+#number of exclusions_
+exclusions_n_wg <- unfiltered_n_wg - filtered_n_wg
+exclusions_n_ws <- unfiltered_n_ws - filtered_n_ws
+exclusions_n_total <- unfiltered_n_total - filtered_n_total
 
 ```
 
+```{r}
+
+load(full_sample_exclusions)
+
+exclusion_tbl_full %>% 
+  kbl(
+    booktabs = TRUE, 
+    linesep = "", 
+    caption = "Exclusions from full WebCDI sample"
+  ) %>% 
+  kable_styling(
+    position = "center"
+  ) %>% 
+  column_spec(1, width = "2.2in") %>% 
+  column_spec(2:5, width = "1in") %>% 
+  row_spec(0, bold = TRUE)
+  
+  
+  
+  
+
+```
+
+
+One of the key benefits of Web-CDI use is that the system in effect becomes a centralized repository for standardized administrations of the CDI, contributing anonymized data (again, on an opt-out basis) to future research and norming efforts. In this section, we provide some preliminary analyses of the American English Web-CDI, demonstrating the potential of the Web-CDI system to provide a distributed platform for gathering large CDI datasets. 
+
+At time of writing, researchers from 15 universities in the United States have collected over 5,000 administrations of the American English CDI using Web-CDI since it was launched in late 2017, with `r unfiltered_n_wg` administrations of the WG form and `r unfiltered_n_ws` administrations of the WS form. We excluded participants from the subsequent analyses based on a set of stringent criteria intended for the creation of future normative datasets. We excluded participants if it was not their first administration of the survey; if they were born prematurely or had a birthweight under 5.5 lbs (< 2.5 kg); reported more than 16 hours of exposure to a language other than English per week on average (amounting to >10% exposure to English); had serious vision impairments, hearing deficits or other developmental disorders or medical issues; completed the survey unrealistically quickly (defined here as in fewer than 8.5 minutes); or were outside of the correct age range for the survey. The exclusion criteria we used differed from the most recent norming study of the WG measure in the United Kingdom [@Alcock2020] in order to comply more closely with the criteria used in @fenson2007, who used more stringent criteria to establish vocabulary norms that reflect typically developing children’s vocabulary trajectories. A complete breakdown of the number of participants excluded on each criterion is in Table 2. Of the completed WG forms, `r exclusions_n_wg` were excluded, leading to a final WG sample size of `r filtered_n_wg` administrations, and `r exclusions_n_ws` WS administrations were excluded, leading to a final WS sample size of `r filtered_n_ws`. 
 
 
 

@@ -200,7 +200,7 @@ excl_col_names <-
     "% of full WG sample excluded",
     "WS exclusions",
     "% of full WS sample excluded"
-  )
+  ) 
 
 
 #First take away kids who have done the survey more than once.
@@ -385,21 +385,21 @@ totals <-
 names(totals) <- excl_col_names
 
 #now make the table
-exclusion_tbl <- 
+exclusion_tbl_ses <- 
   bind_rows(repeat_admins, premies, multiling, health, age, fakes, totals)
 
-knitr::kable(exclusion_tbl)
+knitr::kable(exclusion_tbl_ses)
 
 total_admin <- nrow(ws) + nrow(wg)
 
-write_csv(
-  exclusion_tbl,
+save(
+  exclusion_tbl_ses,
   file = path(
     project_root, 
     "data", 
     "exclusion_tables", 
     "ses_norming_exclusions", 
-    ext = "csv"
+    ext = "RData"
   )
 )
 

@@ -133,7 +133,7 @@
 \affiliation{\vspace{0.5cm}\textsuperscript{1} Princeton University\\\textsuperscript{2} University of Pennsylvania\\\textsuperscript{3} Massachussetts Institute of Technology\\\textsuperscript{4} Max Planck Institute for Psycholinguistics\\\textsuperscript{5} Stanford University}
 
 \abstract{
-Understanding the mechanisms which drive variation in children's language acquisition requires large, population-representative datasets of children's word learning across development. Parent report measures such as the MacArthur-Bates Communicative Development Inventories (CDI) are commonly used to accrue such data, but the traditional paper-based forms make the curation of large datasets logistically challenging, and tend to rely on convenience samples located close in proximity to major research institutions. Here, we introduce Web-CDI, a web-based tool which allows researchers to collect CDI data online. Web-CDI contains functionality to collect and manage longitudinal data, share links, and download standardized vocabulary scores. To date, over 3,529 valid Web-CDI administrations have been completed. General trends found in past norming studies of the CDI are present in data collected from Web-CDI: scores of children's productive vocabulary grow with age, female children show a slightly faster rate of vocabulary growth in early childhood, and participants with higher levels of education attainment report slightly higher vocabulary production scores. We also report results from an effort to oversample non-white, lower-SES participants (N = 241), which showed similar demographic trends to the full sample but which had a high exclusion rate. Implications and challenges for the collection of large, population-representative datasets using Web-CDI in future research are discussed.
+Understanding the mechanisms which drive variation in children's language acquisition requires large, population-representative datasets of children's word learning across development. Parent report measures such as the MacArthur-Bates Communicative Development Inventories (CDI) are commonly used to accrue such data, but the traditional paper-based forms make the curation of large datasets logistically challenging, and tend to rely on convenience samples located close in proximity to major research institutions. Here, we introduce Web-CDI, a web-based tool which allows researchers to collect CDI data online. Web-CDI contains functionality to collect and manage longitudinal data, share links, and download standardized vocabulary scores. To date, over 3,500 valid Web-CDI administrations have been completed. General trends found in past norming studies of the CDI are present in data collected from Web-CDI: scores of children's productive vocabulary grow with age, female children show a slightly faster rate of vocabulary growth in early childhood, and participants with higher levels of education attainment report slightly higher vocabulary production scores. We also report results from an effort to oversample non-white, lower-SES participants (N = 241), which showed similar demographic trends to the full sample but which had a high exclusion rate. Implications and challenges for the collection of large, population-representative datasets using Web-CDI in future research are discussed.
 }
 
 
@@ -189,17 +189,21 @@ At the completion of the form, a graph is displayed illustrating the proportion 
 \hypertarget{researcher-interface}{%
 \subsubsection{Researcher Interface}\label{researcher-interface}}
 
-\begin{table}[tbp]
-
-\begin{center}
-\begin{threeparttable}
-
-\caption{\label{tab:optionstable}}
-
-\begin{tabular}{lll}
+\begin{longtable}[t]{>{\raggedright\arraybackslash}p{2.2in}>{\raggedright\arraybackslash}p{1in}>{\raggedright\arraybackslash}p{2.2in}}
+\caption{\label{tab:unnamed-chunk-1}Settings customizable by researchers when creating new studies to be run on the Web-CDI platform.}\\
 \toprule
-Study setting & \multicolumn{1}{c}{Default value } & \multicolumn{1}{c}{Notes}\\
+\textbf{Study setting} & \textbf{Default value } & \textbf{Notes}\\
 \midrule
+\endfirsthead
+\caption[]{\label{tab:unnamed-chunk-1}Settings customizable by researchers when creating new studies to be run on the Web-CDI platform. \textit{(continued)}}\\
+\toprule
+\textbf{Study setting} & \textbf{Default value } & \textbf{Notes}\\
+\midrule
+\endhead
+
+\endfoot
+\bottomrule
+\endlastfoot
 Study name & none & NA\\
 Instrument & none & NA\\
 Number of days before study expiration & 14 & Must be between 1 and 28 days.\\
@@ -210,14 +214,8 @@ Pre-fill data for longitudinal participants? & “No, do not populate any part o
 Would you like to pay subjects in the form of Amazon gift cards? & No & If checked, researchers can enter gift codes to distribute to participants once they have completed the survey.\\
 Do you plan on collecting only anonymous data in this study? (e.g., posting ads on social media, mass emails, etc) & No & If checked, researchers can set a limit for the maximum number of participants, as well as select an option that asks participants to verify that the information entered is accurate.\\
 Would you like to show participants graphs of their data after completion? & Yes & NA\\
-Would you like participants to be able to share their Web-CDI results via Facebook? & No & NA\\
-\bottomrule
-\end{tabular}
-
-\end{threeparttable}
-\end{center}
-
-\end{table}
+Would you like participants to be able to share their Web-CDI results via Facebook? & No & NA\\*
+\end{longtable}
 
 One of the main goals of Web-CDI is to facilitate wide distribution of the platform to the child language research community. To that end, researchers are required to contact a member of the CDI Advisory Board to register an account on Web-CDI, from which they can create studies to distribute to participants. Note that we ask that researchers allow fully anonymised data to be shared with us, so that it can be added to Wordbank (\url{http://wordbank.stanford.edu/}). However, there is an opt-out option if researchers do not wish to share their data.
 
@@ -259,6 +257,29 @@ In the European Union (EU), research data collection and storage is governed by 
 \hypertarget{current-usage-and-data}{%
 \subsection{Current Usage and Data}\label{current-usage-and-data}}
 
+\begin{table}
+
+\caption{\label{tab:unnamed-chunk-2}Exclusions from full WebCDI sample}
+\centering
+\begin{tabular}[t]{>{\raggedright\arraybackslash}p{2.2in}>{\raggedright\arraybackslash}p{1in}>{\raggedright\arraybackslash}p{1in}>{\raggedright\arraybackslash}p{1in}>{\raggedright\arraybackslash}p{1in}}
+\toprule
+\textbf{Exclusion} & \textbf{WG exclusions} & \textbf{\% of full WG sample excluded} & \textbf{WS exclusions} & \textbf{\% of full WS sample excluded}\\
+\midrule
+Not first administration & 163 & 6\% & 444 & 12\%\\
+Premature or low birthweight & 37 & 1\% & 67 & 2\%\\
+Multilingual exposure & 449 & 16\% & 492 & 14\%\\
+Illnesses/Vision/Hearing & 191 & 7\% & 203 & 6\%\\
+Out of age range & 88 & 3\% & 200 & 6\%\\
+Completed survey too quickly & 363 & 13\% & 236 & 7\%\\
+Total exclusions & 1291 & 45\% & 1642 & 46\%\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+One of the key benefits of Web-CDI use is that the system in effect becomes a centralized repository for standardized administrations of the CDI, contributing anonymized data (again, on an opt-out basis) to future research and norming efforts. In this section, we provide some preliminary analyses of the American English Web-CDI, demonstrating the potential of the Web-CDI system to provide a distributed platform for gathering large CDI datasets.
+
+At time of writing, researchers from 15 universities in the United States have collected over 5,000 administrations of the American English CDI using Web-CDI since it was launched in late 2017, with 2868 administrations of the WG form and 2868 administrations of the WS form. We excluded participants from the subsequent analyses based on a set of stringent criteria intended for the creation of future normative datasets. We excluded participants if it was not their first administration of the survey; if they were born prematurely or had a birthweight under 5.5 lbs (\textless{} 2.5 kg); reported more than 16 hours of exposure to a language other than English per week on average (amounting to \textgreater10\% exposure to English); had serious vision impairments, hearing deficits or other developmental disorders or medical issues; completed the survey unrealistically quickly (defined here as in fewer than 8.5 minutes); or were outside of the correct age range for the survey. The exclusion criteria we used differed from the most recent norming study of the WG measure in the United Kingdom (Alcock, Meints, Rowland, \& others, 2020) in order to comply more closely with the criteria used in Fenson et al. (2007), who used more stringent criteria to establish vocabulary norms that reflect typically developing children's vocabulary trajectories. A complete breakdown of the number of participants excluded on each criterion is in Table 2. Of the completed WG forms, 1291 were excluded, leading to a final WG sample size of 1577 administrations, and 916 WS administrations were excluded, leading to a final WS sample size of 1952.
+
 \hypertarget{participants}{%
 \subsection{Participants}\label{participants}}
 
@@ -284,6 +305,9 @@ In the European Union (EU), research data collection and storage is governed by 
 \setlength{\leftskip}{0.5in}
 
 \hypertarget{refs}{}
+\leavevmode\hypertarget{ref-Alcock2020}{}%
+Alcock, K., Meints, K., Rowland, C., \& others. (2020). \emph{The uk communicative development inventories: Words and gestures}. J\&R Press.
+
 \leavevmode\hypertarget{ref-Bates2001}{}%
 Bates, E., \& Goodman, J. C. (2001). On the inseparability of grammar and the lexicon: Evidence from acquisition.
 

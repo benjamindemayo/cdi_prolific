@@ -716,19 +716,19 @@ totals <-
 names(totals) <- excl_col_names
 
 #now make the table
-exclusion_tbl <- 
+exclusion_tbl_full <- 
   bind_rows(repeat_admins, premies, multiling, health, age, fakes, totals)
 
-knitr::kable(exclusion_tbl)
+knitr::kable(exclusion_tbl_full)
 
-write_csv(
-  exclusion_tbl,
+save(
+  exclusion_tbl_full,
   file = path(
     project_root, 
     "data", 
     "exclusion_tables", 
     "full_sample_norming_exclusions", 
-    ext = "csv"
+    ext = "RData"
   )
 )
 
