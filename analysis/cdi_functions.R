@@ -2,6 +2,9 @@ library(tidyverse)
 library(here)
 library(fs)
 
+wg_total_words <- 396
+ws_total_words <- 680
+
 #accepts: path to directory of CDI data, either all WS or WG
 #returns: df of CDI data from every file in the directory
 readInWebCDI <- function(directory) {
@@ -264,6 +267,25 @@ filter_age_wg <- function(data) {
   clean_data <- 
     data %>% 
     filter(age >= 8 & age <= 18)
+  return(clean_data)
+}
+
+filter_nwords_wg <- function(data) {
+  clean_data <- 
+    data %>% 
+    rename(understood = `Words Understood`, produced = `Words Produced`) %>% 
+    filter(
+      is.na(understood) | understood <= wg_total_words,
+      is.na(produced) | produced <= wg_total_words
+    )
+  return(clean_data)
+}
+
+filter_nwords_ws <- function(data) {
+  clean_data <- 
+    data %>% 
+    rename(produced = `Total Produced`) %>% 
+    filter(is.na(produced) | produced <= ws_total_words)
   return(clean_data)
 }
 

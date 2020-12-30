@@ -65,6 +65,7 @@ library(fs)
 library(xtable)
 library(kableExtra)
 library(cowplot)
+library(scales)
 
 source(path(here::here(), "file_paths.R"))
 source(functions_script)
@@ -80,7 +81,7 @@ load(ws_filtered_path)
 ```{r analysis-preferences}
 # Seed for random number generation
 set.seed(42)
-knitr::opts_chunk$set(cache.extra = knitr::rand_seed)
+knitr::opts_chunk$set(cache.extra = knitr::rand_seed, warning = FALSE, message = FALSE)
 ```
 
 Children vary tremendously in their vocabulary development [@Frank2021]. Characterizing this variability is central to understanding the mechanisms that drive early language acquisition, yet capturing this variation in broad, diverse samples of children has been a significant challenge for cognitive scientists for decades. The MacArthur-Bates Communicative Development Inventory (MB-CDI, or CDI for short) is a commonly-used parent report instrument for assessing vocabulary development in early childhood [@fenson2007] that was introduced in part to create a cost-effective method for measuring variability across individuals. 
@@ -247,7 +248,7 @@ demographics_df <-
         age,
         ethnicity, 
         maternal_ed, 
-        words_produced = `Words Produced`,
+        produced,
         sex
       ),
     ws_filtered %>% 
@@ -257,7 +258,7 @@ demographics_df <-
         age,
         ethnicity,
         maternal_ed,
-        words_produced = `Total Produced`,
+        produced,
         sex
       )
   )
@@ -402,13 +403,103 @@ grid::grid.raster(img_2)
 
 ```
 
+```{r message=FALSE}
+#Hispanic proportions
+
+wg_hispanic <- 
+  wg_filtered %>% 
+  mutate(
+    hispanic = !is.na(child_hispanic_latino) & child_hispanic_latino == TRUE
+  ) %>% 
+  count(hispanic) %>% 
+  mutate(prop = n / sum(n))
+
+ws_hispanic <-  
+  ws_filtered %>% 
+  mutate(
+    hispanic = !is.na(child_hispanic_latino) & child_hispanic_latino == TRUE
+  ) %>%
+  count(hispanic)%>% 
+  mutate(prop = n / sum(n))
+
+wg_hispanic_percent <- 
+  wg_hispanic %>% 
+  slice(2) %>% 
+  pull(prop) %>% 
+  round(digits = 3) %>% 
+  percent(accuracy = .1)
+
+ws_hispanic_percent <- 
+  ws_hispanic %>% 
+  slice(2) %>% 
+  pull(prop) %>% 
+  round(digits = 3) %>% 
+  percent(accuracy = .1)
+
+```
+
+### Demographic distribution and exclusions
+
+Figure \ref{fig:demobarfig} shows the distribution of participant ethnicities as compared with previously reported numbers in a large scale norming study of the paper-based CDI form by @fenson2007. White participants still comprised nearly three quarters of the Web-CDI sample, while a higher proportion of participants report mixed ethnic identification as compared to the 2007 norms. Few participants identified as Hispanic/Latino: `r wg_hispanic_percent` of WG participants and `r ws_hispanic_percent` of WS participants reported Hispanic of Latino heritage. The low percentage of Hispanic/Latino participants was due in part to our exclusion of children with substantial exposure to languages other than English. Participants’ educational attainment level was similarly skewed. Over 80% of children in the Web-CDI sample came from families with college-educated mothers compared to 43% from the same group in the 2007 norms (Figure 3). Furthermore, less than 1 percent of participants in our families report a maternal education level less than a high school degree, compared to 7% from the same group in the 2007 norms. The overrepresentation of white Americans with high levels of education attainment in this sample points to a general challenge encountered in vocabulary development research, which we return to when we detail our efforts to recruit more diverse participants.
+
+### Results to date
+
+```{r message=FALSE}
+
+#creating dfs for the gender plot
+wg_filtered_gender <- 
+  wg_filtered %>% 
+  select(age, produced, sex)
+
+ws_filtered_gender <- 
+  ws_filtered %>% 
+  select(age, produced, sex)
+
+#filter out kids without a binary gender listed
+all_d_gender <- 
+  bind_rows(ws_filtered_gender, wg_filtered_gender) 
+
+all_d_gender_count <- all_d_gender %>% count(sex)
+
+n_females <- all_d_gender_count$n[1] #total number of females
+n_males <- all_d_gender_count$n[2] #total number of males
+n_other <- all_d_gender_count$n[3] #other participants
+
+#count the amount of participants
+all_gender_n <- sum(all_d_gender_count$n)
+
+gender_caption <- str_c(
+  "Individual children’s vocabulary production scores from the entire Web-CDI sample plotted by children’s age and gender (both WG and WS, N = ",
+  formatC(all_gender_n - n_other, big.mark = ",", big.interval = 3),
+  ", with ",
+  formatC(n_females, big.mark = ",", big.interval = 3),
+  " girls). Line is a locally weighted regression with associated 95% confidence interval. Children with a different or no reported gender (N = ",
+  n_other,
+  ") are omitted here."
+)
+
+```
+
+```{r genderfig, fig.cap=gender_caption}
+
+all_d_gender %>% 
+  filter(sex != "Other") %>% 
+  ggplot(aes(age, produced, color = sex)) +
+  ggthemes::theme_few() +
+  geom_jitter(alpha = 0.3, width = 0.225) +
+  geom_smooth(method = "loess") +
+  coord_cartesian(ylim = c(0, 686)) +
+  labs(
+    x = "Age in months", 
+    y = "Total words produced",
+    color = "Child gender"
+  ) 
+```
 
 
-## Participants
+Although the CDI instruments include survey items intended to measure constructs other than vocabulary size, such as gesture, sentence production and grammar, we focus exclusively on the vocabulary measures here. Across both the WG and WS measures, our current Web-CDI sample shows greater reported vocabulary comprehension and production for older children. Moreover, data from both measures replicate a subtle but reliable pattern found in @fenson1994, -@fenson2007 and @feldman2000 such that female children tend to have slightly larger vocabulary scores than male children across the period of childhood assessed in the CDI forms, though this difference does not appear until the second year of life (Figure 4). 
 
-## Material
 
-## Procedure
 
 
 # Results
