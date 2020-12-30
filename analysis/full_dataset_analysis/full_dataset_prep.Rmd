@@ -106,7 +106,9 @@ wg_filtered <-
   getEthnicities() %>% 
   getMaternalEd() %>% 
   filter(completion_time >= min_completion_time) %>% 
-  filter_age_wg()
+  filter_age_wg() %>% 
+  filter_nwords_wg() #changes Words Understood to "understood" and likewise with Total Produced
+
 
 wg_exclusion_n <- nrow(all_wg_raw) - nrow(wg_filtered)
 
@@ -133,7 +135,8 @@ ws_filtered <-
   getEthnicities() %>% 
   getMaternalEd() %>% 
   filter(completion_time >= min_completion_time) %>% 
-  filter_age_ws()
+  filter_age_ws() %>% 
+  filter_nwords_ws() #changes Words Understood to "understood" and likewise with Total Produced
 
 ws_exclusion_n <- nrow(all_ws_raw) - nrow(ws_filtered)
 
@@ -169,9 +172,9 @@ medians <-
       "High school diploma or less" = "Some high school or less"
     )
   ) %>% 
-  filter(`Total Produced` < 688 & maternal_ed != "Not reported") %>% 
+  filter(produced < ws_total_words & maternal_ed != "Not reported") %>% 
   group_by(maternal_ed, age) %>% 
-  summarize(median = median(`Total Produced`))
+  summarize(median = median(produced))
 
 ws_filtered %>% 
   mutate(
@@ -181,8 +184,8 @@ ws_filtered %>%
       "High school diploma or less" = "Some high school or less"
     )
   ) %>% 
-  filter(`Total Produced` < 688 & maternal_ed != "Not reported") %>% 
-  ggplot(aes(age, `Total Produced`, color = maternal_ed)) +
+  filter(produced < ws_total_words & maternal_ed != "Not reported") %>% 
+  ggplot(aes(age, produced, color = maternal_ed)) +
   ggthemes::theme_few() +
   geom_jitter(alpha = 0.3, width = 0.225) +
   coord_cartesian(ylim = c(0, 686)) +
@@ -195,7 +198,7 @@ ws_filtered %>%
 
 wg_filtered %>% 
   filter(!is.na(maternal_ed)) %>% 
-  ggplot(aes(age, `Words Understood`, color = maternal_ed)) +
+  ggplot(aes(age, understood, color = maternal_ed)) +
   ggthemes::theme_few() +
   geom_jitter(alpha = 0.3, width = 0.225) +
   geom_smooth(method = "lm") +
@@ -208,7 +211,7 @@ wg_filtered %>%
 
 wg_filtered %>% 
   filter(!is.na(maternal_ed)) %>% 
-  ggplot(aes(age, `Words Produced`, color = maternal_ed)) +
+  ggplot(aes(age, produced, color = maternal_ed)) +
   ggthemes::theme_few() +
   geom_jitter(alpha = 0.3, width = 0.225) +
   geom_smooth(method = "lm") +
@@ -228,9 +231,9 @@ wg_filtered %>%
     )
   ) %>% 
   filter(!is.na(maternal_ed)) %>% 
-  select(age, `Words Produced`, `Words Understood`, maternal_ed) %>% 
+  select(age, produced, understood, maternal_ed) %>% 
   pivot_longer(
-    cols = c("Words Produced", "Words Understood"),
+    cols = c("produced", "understood"),
     names_to = "measure",
     values_to = "words"
   ) %>% 
@@ -261,8 +264,7 @@ wg_lm_df <-
       "High school diploma or less" = "High school diploma",
       "High school diploma or less" = "Some high school or less"
     )
-  ) %>% 
-  rename(produced = `Words Produced`, understood = `Words Understood`)
+  ) 
 
 ses_wg_lm_prod <- 
   lm_robust(formula = produced ~ age_c * maternal_ed, data = wg_lm_df)
@@ -275,7 +277,7 @@ summary(ses_wg_lm_comp)
 
 ws_lm_df <- 
   ws_filtered %>% 
-  filter(`Total Produced` < 688 & maternal_ed != "Not reported") %>% 
+  filter(maternal_ed != "Not reported") %>% 
   mutate(
     age_c = age - mean(age, na.rm = TRUE),
     maternal_ed_c = mother_education - mean(mother_education, na.rm = TRUE),
@@ -285,7 +287,6 @@ ws_lm_df <-
       "High school diploma or less" = "Some high school or less"
     )
   ) %>% 
-  rename(produced = `Total Produced`) %>% 
   filter(maternal_ed_c > -10)
 
 ses_ws_lm <- 
@@ -305,11 +306,11 @@ Gender analyses
 
 wg_filtered_gender <- 
   wg_filtered %>% 
-  select(age, production = `Words Produced`, sex)
+  select(age, produced, sex)
 
 ws_filtered_gender <- 
   ws_filtered %>% 
-  select(age, production = `Total Produced`, sex)
+  select(age, produced, sex)
 
 #filter out kids without a binary gender listed
 all_d_gender <- 
@@ -319,7 +320,7 @@ all_d_gender <-
 all_gender_n <- nrow(all_d_gender)
 
 all_d_gender %>% 
-  ggplot(aes(age, production, color = sex)) +
+  ggplot(aes(age, produced, color = sex)) +
   ggthemes::theme_few() +
   geom_jitter(alpha = 0.3, width = 0.225) +
   geom_smooth(method = "loess") +
@@ -360,7 +361,7 @@ demographics_df <-
         age,
         ethnicity, 
         maternal_ed, 
-        words_produced = `Words Produced`,
+        produced,
         sex
       ),
     ws_filtered %>% 
@@ -370,7 +371,7 @@ demographics_df <-
         age,
         ethnicity,
         maternal_ed,
-        words_produced = `Total Produced`,
+        produced,
         sex
       )
   )
@@ -550,9 +551,9 @@ repeat_admins <-
   c(
     "Not first administration",
     wg_repeats_n,
-    percent(wg_repeats_n / n_total_wg),
+    percent(wg_repeats_n / n_total_wg, accuracy = 0.01),
     ws_repeats_n,
-    percent(ws_repeats_n / n_total_ws)
+    percent(ws_repeats_n / n_total_ws, accuracy = 0.01)
   )
 
 names(repeat_admins) <- excl_col_names
@@ -575,9 +576,9 @@ premies <-
   c(
     "Premature or low birthweight",
     wg_premie_n,
-    percent(wg_premie_n / n_total_wg),
+    percent(wg_premie_n / n_total_wg, accuracy = 0.01),
     ws_premie_n,
-    percent(ws_premie_n / n_total_ws)
+    percent(ws_premie_n / n_total_ws, accuracy = 0.01)
   )
 
 names(premies) <- excl_col_names
@@ -600,9 +601,9 @@ multiling <-
   c(
     "Multilingual exposure",
     wg_multiling_n,
-    percent(wg_multiling_n / n_total_wg),
+    percent(wg_multiling_n / n_total_wg, accuracy = 0.01),
     ws_multiling_n,
-    percent(ws_multiling_n / n_total_ws)
+    percent(ws_multiling_n / n_total_ws, accuracy = 0.01)
   )
 
 names(multiling) <- excl_col_names
@@ -628,9 +629,9 @@ health <-
   c(
     "Illnesses/Vision/Hearing",
     wg_health_n,
-    percent(wg_health_n / n_total_wg),
+    percent(wg_health_n / n_total_wg, accuracy = 0.01),
     ws_health_n,
-    percent(ws_health_n / n_total_ws)
+    percent(ws_health_n / n_total_ws, accuracy = 0.01)
   )
 
 names(health) <- excl_col_names
@@ -652,9 +653,9 @@ age <-
   c(
     "Out of age range",
     wg_age_n,
-    percent(wg_age_n / n_total_wg),
+    percent(wg_age_n / n_total_wg, accuracy = 0.01),
     ws_age_n,
-    percent(ws_age_n / n_total_ws)
+    percent(ws_age_n / n_total_ws, accuracy = 0.01)
   )
 
 names(age) <- excl_col_names
@@ -677,12 +678,37 @@ fakes <-
   c(
     "Completed survey too quickly",
     wg_fake_n,
-    percent(wg_fake_n / n_total_wg),
+    percent(wg_fake_n / n_total_wg, accuracy = 0.01),
     ws_fake_n,
-    percent(ws_fake_n / n_total_ws)
+    percent(ws_fake_n / n_total_ws, accuracy = 0.01)
   )
 
 names(fakes) <- excl_col_names
+
+#lastly filter out kids who have buggy word totals (more than possible)
+
+wg_minus_wordbugs <- 
+  wg_minus_fakes %>% 
+  filter_nwords_wg()
+
+wg_wordbugs_n <- nrow(wg_minus_fakes) - nrow(wg_minus_wordbugs)
+
+ws_minus_wordbugs <- 
+  ws_minus_fakes %>% 
+  filter_nwords_ws()
+
+ws_wordbugs_n <- nrow(ws_minus_fakes) - nrow(ws_minus_wordbugs)
+
+wordbugs <- 
+  c(
+    "System error in word tabulation",
+    wg_wordbugs_n,
+    percent(wg_wordbugs_n / n_total_wg, accuracy = .01),
+    ws_wordbugs_n,
+    percent(ws_wordbugs_n / n_total_ws, accuracy = .01)
+  )
+
+names(wordbugs) <- excl_col_names
 
 #calculate total amount of WG exclusions
 total_wg_exclusions <- 
@@ -691,7 +717,8 @@ total_wg_exclusions <-
   wg_multiling_n +
   wg_health_n +
   wg_age_n +
-  wg_fake_n
+  wg_fake_n +
+  wg_wordbugs_n
 
 #calculate total amount of WS exclusions
 total_ws_exclusions <- 
@@ -700,7 +727,8 @@ total_ws_exclusions <-
   ws_multiling_n +
   ws_health_n +
   ws_age_n +
-  ws_fake_n
+  ws_fake_n +
+  ws_wordbugs_n
 
 #make a row in the table for this
 totals <- 
@@ -716,7 +744,7 @@ names(totals) <- excl_col_names
 
 #now make the table
 exclusion_tbl_full <- 
-  bind_rows(repeat_admins, premies, multiling, health, age, fakes, totals)
+  bind_rows(repeat_admins, premies, multiling, health, age, fakes, wordbugs, totals)
 
 knitr::kable(exclusion_tbl_full)
 
