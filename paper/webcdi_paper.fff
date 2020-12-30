@@ -5,3 +5,48 @@
 \includegraphics{webcdi_paper_files/figure-latex/pictorial-1.pdf}
 \caption{\label{fig:pictorial}Pictorial instructions in the Web-CDI Words and Sentences instrument.}
 \end{figure*}
+\efloatseparator
+ 
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+\centering
+\includegraphics{webcdi_paper_files/figure-latex/demobarfig-1.pdf}
+\caption{\label{fig:demobarfig}Proportion of respondents plotted by child race (A) and educational level of primary caregiver (B) from full Web-CDI sample to date (N = 3,524), compared with norming sample demographics from Fenson (2007). Latinx participants can be of any race.}
+\end{figure*}
+\efloatseparator
+ 
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+\centering
+\includegraphics{webcdi_paper_files/figure-latex/genderfig-1.pdf}
+\caption{\label{fig:genderfig}Individual children's vocabulary production scores from the entire Web-CDI sample plotted by children's age and gender (both WG and WS, N = 3,513, with 1,674 girls). Line is a locally weighted regression with associated 95\% confidence interval. Children with a different or no reported gender (N = 11) are omitted here.}
+\end{figure*}
+\efloatseparator
+ 
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+\centering
+\includegraphics{webcdi_paper_files/figure-latex/wgglm-1.pdf}
+\caption{\label{fig:wgglm} Individual children's word production (left panel) and comprehension (right panel) scores plotted by age and primary caregiver's level of education (binned into \enquote{High school diploma or less}, \enquote{Some college education}, and \enquote{College diploma or more}) as reported in the sample of Words and Gestures Web-CDI administrations collected as of November 2020 (N = 1,576). Curves show generalized linear models fits.}
+\end{figure*}
+\efloatseparator
+ 
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+\centering
+\includegraphics{webcdi_paper_files/figure-latex/wgmedfig-1.pdf}
+\caption{\label{fig:wgmedfig}Median vocabulary production (left) and comprehension (right) scores by age on the WG form. Lines indicate span between first and third quartiles for each age.}
+\end{figure*}
+\efloatseparator
+ 
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+\centering
+\includegraphics{webcdi_paper_files/figure-latex/wsglm-1.pdf}
+\caption{\label{fig:wsglm}Individual children's vocabulary production scores plotted by children's age and maternal education level of primary caregiver education as reported in the sample of Words and Sentences Web-CDI administrations collected as of November 2020 (N = 1,948). Lines are smoothed quantile regressions showing the estimated median vocabulary score within each education group at each age.}
+\end{figure*}

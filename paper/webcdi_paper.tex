@@ -4,7 +4,7 @@
 %
 \documentclass[
   english,
-  man,floatsintext]{apa7}
+  man]{apa7}
 \usepackage{lmodern}
 \usepackage{amssymb,amsmath}
 \usepackage{ifxetex,ifluatex}
@@ -113,6 +113,12 @@
 \makeatother
 \shorttitle{Web-CDI}
 \keywords{vocabulary development, parent report, socioeconomic status\newline\indent Word count: X}
+\DeclareDelayedFloatFlavor{ThreePartTable}{table}
+\DeclareDelayedFloatFlavor{lltable}{table}
+\DeclareDelayedFloatFlavor*{longtable}{table}
+\makeatletter
+\renewcommand{\efloat@iwrite}[1]{\immediate\expandafter\protected@write\csname efloat@post#1\endcsname{}}
+\makeatother
 \usepackage{lineno}
 
 \linenumbers
@@ -279,7 +285,7 @@ Total exclusions & 1292 & 45\% & 1646 & 46\%\\
 
 One of the key benefits of Web-CDI use is that the system in effect becomes a centralized repository for standardized administrations of the CDI, contributing anonymized data (again, on an opt-out basis) to future research and norming efforts. In this section, we provide some preliminary analyses of the American English Web-CDI, demonstrating the potential of the Web-CDI system to provide a distributed platform for gathering large CDI datasets.
 
-At time of writing, researchers from 15 universities in the United States have collected over 5,000 administrations of the American English CDI using Web-CDI since it was launched in late 2017, with 2868 administrations of the WG form and 2868 administrations of the WS form. We excluded participants from the subsequent analyses based on a set of stringent criteria intended for the creation of future normative datasets. We excluded participants if it was not their first administration of the survey; if they were born prematurely or had a birthweight under 5.5 lbs (\textless{} 2.5 kg); reported more than 16 hours of exposure to a language other than English per week on average (amounting to \textgreater10\% exposure to English); had serious vision impairments, hearing deficits or other developmental disorders or medical issues\footnote{Exclusions on the basis of child health were decided on a case-by-case basis by author V.M. in consultation with Philip Dale, Donna Thal and Larry Fenson.}; completed the survey unrealistically quickly (defined here as in fewer than 8.5 minutes); or were outside of the correct age range for the survey. The exclusion criteria we used differed from the most recent norming study of the WG measure in the United Kingdom (Alcock, Meints, Rowland, \& others, 2020) in order to comply more closely with the criteria used in Fenson et al. (2007), who used more stringent criteria to establish vocabulary norms that reflect typically developing children's vocabulary trajectories. A complete breakdown of the number of participants excluded on each criterion is in Table 2. Of the completed WG forms, 1292 were excluded, leading to a final WG sample size of 1576 administrations, and 920 WS administrations were excluded, leading to a final WS sample size of 1948.
+At time of writing, researchers from 15 universities in the United States have collected over 5,000 administrations of the American English CDI using Web-CDI since it was launched in late 2017, with 2,868 administrations of the WG form and 2,868 administrations of the WS form. We excluded participants from the subsequent analyses based on a set of stringent criteria intended for the creation of future normative datasets. We excluded participants if it was not their first administration of the survey; if they were born prematurely or had a birthweight under 5.5 lbs (\textless{} 2.5 kg); reported more than 16 hours of exposure to a language other than English per week on average (amounting to \textgreater10\% exposure to English); had serious vision impairments, hearing deficits or other developmental disorders or medical issues\footnote{Exclusions on the basis of child health were decided on a case-by-case basis by author V.M. in consultation with Philip Dale, Donna Thal and Larry Fenson.}; completed the survey unrealistically quickly (defined here as in fewer than 8.5 minutes); or were outside of the correct age range for the survey. The exclusion criteria we used differed from the most recent norming study of the WG measure in the United Kingdom (Alcock, Meints, Rowland, \& others, 2020) in order to comply more closely with the criteria used in Fenson et al. (2007), who used more stringent criteria to establish vocabulary norms that reflect typically developing children's vocabulary trajectories. A complete breakdown of the number of participants excluded on each criterion is in Table 2. Of the completed WG forms, 1,292 were excluded, leading to a final WG sample size of 1,576 administrations, and 920 WS administrations were excluded, leading to a final WS sample size of 1,948.
 
 \begin{figure}
 \centering
@@ -301,7 +307,33 @@ Figure \ref{fig:demobarfig} shows the distribution of participant ethnicities as
 \caption{\label{fig:genderfig}Individual children's vocabulary production scores from the entire Web-CDI sample plotted by children's age and gender (both WG and WS, N = 3,513, with 1,674 girls). Line is a locally weighted regression with associated 95\% confidence interval. Children with a different or no reported gender (N = 11) are omitted here.}
 \end{figure}
 
-Although the CDI instruments include survey items intended to measure constructs other than vocabulary size, such as gesture, sentence production and grammar, we focus exclusively on the vocabulary measures here. Across both the WG and WS measures, our current Web-CDI sample shows greater reported vocabulary comprehension and production for older children. Moreover, data from both measures replicate a subtle but reliable pattern found in Fenson et al. (1994), (2007) and Feldman et al. (2000) such that female children tend to have slightly larger vocabulary scores than male children across the period of childhood assessed in the CDI forms, though this difference does not appear until the second year of life (Figure 4).
+Although the CDI instruments include survey items intended to measure constructs other than vocabulary size, such as gesture, sentence production and grammar, we focus exclusively on the vocabulary measures here. Across both the WG and WS measures, our current Web-CDI sample shows greater reported vocabulary comprehension and production for older children. Moreover, data from both measures replicate a subtle but reliable pattern found in Fenson et al. (1994), (2007) and Feldman et al. (2000) such that female children tend to have slightly larger vocabulary scores than male children across the period of childhood assessed in the CDI forms, though this difference does not appear until the second year of life (Figure \ref{fig:genderfig}).
+
+\begin{figure}
+\centering
+\includegraphics{webcdi_paper_files/figure-latex/wgglm-1.pdf}
+\caption{\label{fig:wgglm} Individual children's word production (left panel) and comprehension (right panel) scores plotted by age and primary caregiver's level of education (binned into \enquote{High school diploma or less}, \enquote{Some college education}, and \enquote{College diploma or more}) as reported in the sample of Words and Gestures Web-CDI administrations collected as of November 2020 (N = 1,576). Curves show generalized linear models fits.}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics{webcdi_paper_files/figure-latex/wgmedfig-1.pdf}
+\caption{\label{fig:wgmedfig}Median vocabulary production (left) and comprehension (right) scores by age on the WG form. Lines indicate span between first and third quartiles for each age.}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics{webcdi_paper_files/figure-latex/wsglm-1.pdf}
+\caption{\label{fig:wsglm}Individual children's vocabulary production scores plotted by children's age and maternal education level of primary caregiver education as reported in the sample of Words and Sentences Web-CDI administrations collected as of November 2020 (N = 1,948). Lines are smoothed quantile regressions showing the estimated median vocabulary score within each education group at each age.}
+\end{figure}
+
+On the WG form, respondents' reports of children's vocabulary comprehension and production both increased with children's age (Figure \ref{fig:wgglm}). We replicate overall patterns found by Feldman et al. (2000) in that, on both the \enquote{Words Understood} and \enquote{Words Produced} measures, vocabulary scores were slightly negatively correlated with primary caregivers' education level, such that those parents without any college education reported higher vocabulary scores on both scales. A linear regression model with robust standard errors predicting comprehension scores with children's age and primary caregivers' education level (binned into categories of \enquote{High school diploma or less}, \enquote{Some college education} and \enquote{College diploma or more\footnote{``High school diploma'' or less corresponds to 12 or fewer years of education; ``Some college'' corresponds to 13 - 15 years of education; ``College diploma or more'' refers to 16 or more years of education.}}) as predictors shows main effects of both age (\(\beta\) = 19.89, \(p\) \textless{} 0.001) and caregiver primary education (\(\beta_{high school}\) = 29.59, \(p\) = 0.01). Similarly, a linear regression model with robust standard errors predicting production scores by children's age and primary caregivers' education level shows main effects of age (\(\beta\) = 7.82, \(p\) \textless{} 0.001) and caregiver primary education (\(\beta_{high school}\) = 28.86, \(p\) = 0.002).
+
+The pattern of results seen in the WG sample is consistent with prior findings indicating that respondents with lower levels of education attainment report higher vocabulary comprehension and production on the CDI-WG form (Feldman et al., 2000; Fenson et al., 1994). Although caregivers with lower levels of education attainment report higher mean levels of vocabulary production and comprehension, median vocabulary scores show no clear pattern of difference across primary caregiver education levels (Figure \ref{fig:wgmedfig}). This discrepancy between the regression effects and a group-median analysis suggests that the regression effects described previously are driven in part by differential interpretation of the survey items, such that a few lower-SES caregivers are more liberal in reporting their children's productive and comprehensive vocabularies, especially for the youngest children, driving up the mean scores for this demographic group.
+
+Vocabulary production scores on the WS form show the expected pattern of increase with children's age in months; in addition, scores replicate the trend reported in Feldman et al. (2000) such that maternal education is positively associated with children's reported vocabulary size (Figure \ref{fig:wsglm}). Because representation of caregivers without a high school diploma is scarce (N = 18 out of a sample of 1,948), interpretation of the data from this group is constrained. Nevertheless, as shown in Figure \ref{fig:wsglm}, a small but clear positive association between maternal education and vocabulary score exists such that college-educated caregivers report higher vocabulary scores than those of any other education level. The implications from these data converge with previous findings which indicate that parental education levels, often used as a metric of a family's socioeconomic status, are correlated with children's vocabulary size through early childhood.
+
+The data discussed above have stemmed from efforts by many researchers across the United States whose motivations for using the Web-CDI vary. As a result, they reproduce many of the biases of standard US convenience samples. In the next section, we describe in more detail our recent efforts to use the Web-CDI to collect vocabulary development data from traditionally underrepresented participant populations in the United States, attempting to counteract these trends.
 
 \hypertarget{results}{%
 \section{Results}\label{results}}

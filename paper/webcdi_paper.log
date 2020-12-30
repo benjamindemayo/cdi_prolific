@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.12.26)  29 DEC 2020 17:13
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.12.26)  30 DEC 2020 00:47
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -767,15 +767,6 @@ d (jdm)
 \c@postfigure=\count302
 \efloat@postfff=\write5
 \@ef@fffopen=\count303
-)
-(c:/Users/bdemayo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/float/
-float.sty
-Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count304
-\float@exts=\toks29
-\float@box=\box60
-\@float@everytoks=\toks30
-\@floatcapt=\box61
 ))
 (c:/Users/bdemayo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfon
 ts/amssymb.sty
@@ -784,7 +775,7 @@ Package: amssymb 2013/01/14 v3.01 AMS font symbols
 (c:/Users/bdemayo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfon
 ts/amsfonts.sty
 Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
-\@emptytoks=\toks31
+\@emptytoks=\toks29
 \symAMSa=\mathgroup7
 \symAMSb=\mathgroup8
 LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
@@ -804,7 +795,7 @@ Package: amstext 2000/06/29 v2.01 AMS text
 (c:/Users/bdemayo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmat
 h/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
-\@emptytoks=\toks32
+\@emptytoks=\toks30
 \ex@=\dimen285
 ))
 (c:/Users/bdemayo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmat
@@ -817,41 +808,41 @@ LaTeX Info: Redefining \boldsymbol on input line 28.
 h/amsopn.sty
 Package: amsopn 2016/03/08 v2.02 operator names
 )
-\inf@bad=\count305
+\inf@bad=\count304
 LaTeX Info: Redefining \frac on input line 234.
-\uproot@=\count306
-\leftroot@=\count307
+\uproot@=\count305
+\leftroot@=\count306
 LaTeX Info: Redefining \overline on input line 399.
-\classnum@=\count308
-\DOTSCASE@=\count309
+\classnum@=\count307
+\DOTSCASE@=\count308
 LaTeX Info: Redefining \ldots on input line 496.
 LaTeX Info: Redefining \dots on input line 499.
 LaTeX Info: Redefining \cdots on input line 620.
-\Mathstrutbox@=\box62
-\strutbox@=\box63
+\Mathstrutbox@=\box60
+\strutbox@=\box61
 \big@size=\dimen287
 LaTeX Font Info:    Redeclaring font encoding OML on input line 743.
 LaTeX Font Info:    Redeclaring font encoding OMS on input line 744.
-\macc@depth=\count310
-\c@MaxMatrixCols=\count311
+\macc@depth=\count309
+\c@MaxMatrixCols=\count310
 \dotsspace@=\muskip17
-\c@parentequation=\count312
-\dspbrk@lvl=\count313
-\tag@help=\toks33
-\row@=\count314
-\column@=\count315
-\maxfields@=\count316
-\andhelp@=\toks34
+\c@parentequation=\count311
+\dspbrk@lvl=\count312
+\tag@help=\toks31
+\row@=\count313
+\column@=\count314
+\maxfields@=\count315
+\andhelp@=\toks32
 \eqnshift@=\dimen288
 \alignsep@=\dimen289
 \tagshift@=\dimen290
 \tagwidth@=\dimen291
 \totwidth@=\dimen292
 \lineht@=\dimen293
-\@envbody=\toks35
+\@envbody=\toks33
 \multlinegap=\skip83
 \multlinetaggap=\skip84
-\mathdisplay@stack=\toks36
+\mathdisplay@stack=\toks34
 LaTeX Info: Redefining \[ on input line 2923.
 LaTeX Info: Redefining \] on input line 2924.
 )
@@ -870,8 +861,8 @@ Package: fontenc 2020/08/10 v2.0s Standard LaTeX package
 (c:/Users/bdemayo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/i
 nputenc.sty
 Package: inputenc 2020/08/01 v1.3d Input encoding file
-\inpenc@prehook=\toks37
-\inpenc@posthook=\toks38
+\inpenc@prehook=\toks35
+\inpenc@posthook=\toks36
 )
 (c:/Users/bdemayo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/t
 extcomp.sty
@@ -899,17 +890,17 @@ Package: longtable 2020/01/07 v4.13 Multi-page Table package (DPC)
 \LTright=\skip86
 \LTpre=\skip87
 \LTpost=\skip88
-\LTchunksize=\count317
+\LTchunksize=\count316
 \LTcapwidth=\dimen294
-\LT@head=\box64
-\LT@firsthead=\box65
-\LT@foot=\box66
-\LT@lastfoot=\box67
-\LT@cols=\count318
-\LT@rows=\count319
-\c@LT@tables=\count320
-\c@LT@chunks=\count321
-\LT@p@ftn=\toks39
+\LT@head=\box62
+\LT@firsthead=\box63
+\LT@foot=\box64
+\LT@lastfoot=\box65
+\LT@cols=\count317
+\LT@rows=\count318
+\c@LT@tables=\count319
+\c@LT@chunks=\count320
+\LT@p@ftn=\toks37
 )
 (c:/Users/bdemayo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphi
 cs/lscape.sty
@@ -919,7 +910,7 @@ Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
 ow/multirow.sty
 Package: multirow 2019/05/31 v2.5 Span multiple rows of a table
 \multirow@colwidth=\skip89
-\multirow@cntb=\count322
+\multirow@cntb=\count321
 \multirow@dima=\skip90
 \bigstrutjot=\dimen295
 )
@@ -931,20 +922,20 @@ Package: tabularx 2020/01/15 v2.11c `tabularx' package (DPC)
 array.sty
 Package: array 2020/10/01 v2.5c Tabular extension package (FMi)
 \col@sep=\dimen296
-\ar@mcellbox=\box68
+\ar@mcellbox=\box66
 \extrarowheight=\dimen297
-\NC@list=\toks40
+\NC@list=\toks38
 \extratabsurround=\skip91
 \backup@length=\skip92
-\ar@cellbox=\box69
+\ar@cellbox=\box67
 )
 \TX@col@width=\dimen298
 \TX@old@table=\dimen299
 \TX@old@col=\dimen300
 \TX@target=\dimen301
 \TX@delta=\dimen302
-\TX@cols=\count323
-\TX@ftn=\toks41
+\TX@cols=\count322
+\TX@ftn=\toks39
 )
 (c:/Users/bdemayo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/threep
 arttablex/threeparttablex.sty
@@ -967,32 +958,32 @@ Failed to patch title.
 (c:/Users/bdemayo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lineno
 /lineno.sty
 Package: lineno 2005/11/02 line numbers on paragraphs v4.41
-\linenopenalty=\count324
-\output=\toks42
-\linenoprevgraf=\count325
+\linenopenalty=\count323
+\output=\toks40
+\linenoprevgraf=\count324
 \linenumbersep=\dimen303
 \linenumberwidth=\dimen304
-\c@linenumber=\count326
-\c@pagewiselinenumber=\count327
-\c@LN@truepage=\count328
-\c@internallinenumber=\count329
-\c@internallinenumbers=\count330
+\c@linenumber=\count325
+\c@pagewiselinenumber=\count326
+\c@LN@truepage=\count327
+\c@internallinenumber=\count328
+\c@internallinenumbers=\count329
 \quotelinenumbersep=\dimen305
 \bframerule=\dimen306
 \bframesep=\dimen307
-\bframebox=\box70
+\bframebox=\box68
 LaTeX Info: Redefining \\ on input line 3056.
 )
 (c:/Users/bdemayo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/csquot
 es/csquotes.sty
 Package: csquotes 2019-12-06 v5.2j context-sensitive quotations (JAW)
-\csq@reset=\count331
-\csq@gtype=\count332
-\csq@glevel=\count333
-\csq@qlevel=\count334
-\csq@maxlvl=\count335
-\csq@tshold=\count336
-\csq@ltx@everypar=\toks43
+\csq@reset=\count330
+\csq@gtype=\count331
+\csq@glevel=\count332
+\csq@qlevel=\count333
+\csq@maxlvl=\count334
+\csq@tshold=\count335
+\csq@ltx@everypar=\toks41
 
 (c:/Users/bdemayo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/csquot
 es/csquotes.def
@@ -1012,7 +1003,7 @@ Package: babel 2020/12/16 3.52 The Babel package
 (c:/Users/bdemayo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/babe
 l/babel.def
 File: babel.def 2020/12/16 3.52 Babel common definitions
-\babel@savecnt=\count337
+\babel@savecnt=\count336
 \U@D=\dimen308
 \l@babelnohyphens=\language3
 
@@ -1020,7 +1011,7 @@ File: babel.def 2020/12/16 3.52 Babel common definitions
 l/txtbabel.def)
 \bbl@readstream=\read3
 )
-\bbl@dirlevel=\count338
+\bbl@dirlevel=\count337
 
 (c:/Users/bdemayo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/babe
 l-english/english.ldf
@@ -1040,13 +1031,13 @@ Package babel Info: \l@newzealand = using hyphenrules for english
 l-english/english.ldf
 Language: english 2017/06/06 v3.3r English support from the babel system
 ))
-\c@NumberOfAuthors=\count339
-\c@NumberOfSuperscripts=\count340
+\c@NumberOfAuthors=\count338
+\c@NumberOfSuperscripts=\count339
 
 Class apa7 Warning: Deprecated: see documentation for \authorsaffiliations on i
-nput line 133.
+nput line 139.
 
-\c@NumberOfAffiliations=\count341
+\c@NumberOfAffiliations=\count340
 Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... found 'babel' package.
 Package csquotes Info: Adjusting default style.
@@ -1055,8 +1046,8 @@ Package csquotes Info: Redefining alias 'default' -> 'english'.
 (c:/Users/bdemayo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3back
 end/l3backend-pdftex.def
 File: l3backend-pdftex.def 2020-09-24 L3 backend support: PDF output (pdfTeX)
-\l__kernel_color_stack_int=\count342
-\l__pdf_internal_box=\box71
+\l__kernel_color_stack_int=\count341
+\l__pdf_internal_box=\box69
 ) (./webcdi_paper.aux
 
 LaTeX Warning: Label `tab:unnamed-chunk-1' multiply defined.
@@ -1064,24 +1055,24 @@ LaTeX Warning: Label `tab:unnamed-chunk-1' multiply defined.
 )
 \openout1 = `webcdi_paper.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 141.
-LaTeX Font Info:    ... okay on input line 141.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 141.
-LaTeX Font Info:    ... okay on input line 141.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 141.
-LaTeX Font Info:    ... okay on input line 141.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 141.
-LaTeX Font Info:    ... okay on input line 141.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 141.
-LaTeX Font Info:    ... okay on input line 141.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 141.
-LaTeX Font Info:    ... okay on input line 141.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 141.
-LaTeX Font Info:    ... okay on input line 141.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 141.
-LaTeX Font Info:    ... okay on input line 141.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 141.
-LaTeX Font Info:    ... okay on input line 141.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 147.
+LaTeX Font Info:    ... okay on input line 147.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 147.
+LaTeX Font Info:    ... okay on input line 147.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 147.
+LaTeX Font Info:    ... okay on input line 147.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 147.
+LaTeX Font Info:    ... okay on input line 147.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 147.
+LaTeX Font Info:    ... okay on input line 147.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 147.
+LaTeX Font Info:    ... okay on input line 147.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 147.
+LaTeX Font Info:    ... okay on input line 147.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 147.
+LaTeX Font Info:    ... okay on input line 147.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 147.
+LaTeX Font Info:    ... okay on input line 147.
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
@@ -1137,7 +1128,7 @@ onfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-Package hyperref Info: Link coloring OFF on input line 141.
+Package hyperref Info: Link coloring OFF on input line 147.
 
 (c:/Users/bdemayo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperr
 ef/nameref.sty
@@ -1151,11 +1142,11 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 itlestring/gettitlestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count343
+\c@section@level=\count342
 )
-LaTeX Info: Redefining \ref on input line 141.
-LaTeX Info: Redefining \pageref on input line 141.
-LaTeX Info: Redefining \nameref on input line 141.
+LaTeX Info: Redefining \ref on input line 147.
+LaTeX Info: Redefining \pageref on input line 147.
+LaTeX Info: Redefining \nameref on input line 147.
 (./webcdi_paper.out) (./webcdi_paper.out)
 \@outlinefile=\write6
 \openout6 = `webcdi_paper.out'.
@@ -1167,7 +1158,6 @@ File: APA7english.txt 2020/12/02 v1.02 apa7 configuration for non-American Engl
 ish
 )
 Package caption Info: Begin \AtBeginDocument code.
-Package caption Info: float package is loaded.
 Package caption Info: longtable package is loaded.
 
 (c:/Users/bdemayo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/captio
@@ -1176,54 +1166,54 @@ Package: ltcaption 2020/05/30 v1.4b longtable captions (AR)
 )
 Package caption Info: End \AtBeginDocument code.
 LaTeX Font Info:    Trying to load font information for T1+lmss on input line 1
-42.
+48.
 
 (c:/Users/bdemayo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/t1l
 mss.fd
 File: t1lmss.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 1
-42.
+48.
 
 (c:/Users/bdemayo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/ot1
 lmr.fd
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OML+lmm on input line 1
-42.
+48.
 
 (c:/Users/bdemayo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/oml
 lmm.fd
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-142.
+148.
 
 (c:/Users/bdemayo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/oms
 lmsy.fd
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-142.
+148.
 
 (c:/Users/bdemayo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/omx
 lmex.fd
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 142.
+(Font)              <12> on input line 148.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 142.
+(Font)              <8> on input line 148.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 142.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 142
+(Font)              <6> on input line 148.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 148
 .
 
 (c:/Users/bdemayo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfon
 ts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 142
+LaTeX Font Info:    Trying to load font information for U+msb on input line 148
 .
 
 (c:/Users/bdemayo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfon
@@ -1234,7 +1224,7 @@ tex/updmap/pdftex.map}
 
 ] [2] [3]
 LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 1
-53.
+59.
 
 (c:/Users/bdemayo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/ts1
 lmr.fd
@@ -1247,90 +1237,126 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [6]
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 175.
+(Font)              <10> on input line 181.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 175.
+(Font)              <7> on input line 181.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 175.
-<webcdi_paper_files/figure-latex/pictorial-1.pdf, id=102, 469.755pt x 325.215pt
+(Font)              <5> on input line 181.
+\openout5 = `webcdi_paper.fff'.
+
+(webcdi_paper.fff) [7]
+Underfull \vbox (badness 7649) has occurred while \output is active []
+
+[8]
+\openout4 = `webcdi_paper.ttt'.
+
+(webcdi_paper.ttt) [9] [10] [11]
+Underfull \vbox (badness 5519) has occurred while \output is active []
+
+[12] [13] [14] [15] [16] [17] [18] [19] AED endfloat: Processing end Figures an
+d Tables [20] (./webcdi_paper.ttt [21
+
+
+] [22]
+Overfull \hbox (38.31871pt too wide) in paragraph at lines 36--50
+ [][] 
+ []
+
+) [23
+
+] (./webcdi_paper.fff
+<webcdi_paper_files/figure-latex/pictorial-1.pdf, id=228, 469.755pt x 325.215pt
 >
 File: webcdi_paper_files/figure-latex/pictorial-1.pdf Graphic file (type pdf)
 <use webcdi_paper_files/figure-latex/pictorial-1.pdf>
 Package pdftex.def Info: webcdi_paper_files/figure-latex/pictorial-1.pdf  used 
-on input line 179.
+on input line 5.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[7] [8 <./webcdi_paper_files/figure-latex/pictorial-1.pdf>]
-Underfull \vbox (badness 10000) has occurred while \output is active []
+[24
 
-[9] [10]
-Underfull \vbox (badness 2591) has occurred while \output is active []
-
-[11] [12]
-Underfull \vbox (badness 3977) has occurred while \output is active []
-
-[13]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[14] [15]
-Underfull \vbox (badness 1910) has occurred while \output is active []
-
-[16]
-Overfull \hbox (38.31871pt too wide) in paragraph at lines 264--278
- [][] 
- []
-
-[17]
-<webcdi_paper_files/figure-latex/demobarfig-1.pdf, id=175, 469.755pt x 325.215p
+ <./webcdi_paper_files/figure-latex/pictorial-1.pdf>]
+<webcdi_paper_files/figure-latex/demobarfig-1.pdf, id=239, 469.755pt x 325.215p
 t>
 File: webcdi_paper_files/figure-latex/demobarfig-1.pdf Graphic file (type pdf)
 <use webcdi_paper_files/figure-latex/demobarfig-1.pdf>
 Package pdftex.def Info: webcdi_paper_files/figure-latex/demobarfig-1.pdf  used
- on input line 286.
+ on input line 14.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+[25
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[18] [19 <./webcdi_paper_files/figure-latex/demobarfig-1.pdf>]
-<webcdi_paper_files/figure-latex/genderfig-1.pdf, id=193, 469.755pt x 325.215pt
+ <./webcdi_paper_files/figure-latex/demobarfig-1.pdf>]
+<webcdi_paper_files/figure-latex/genderfig-1.pdf, id=249, 469.755pt x 325.215pt
 >
 File: webcdi_paper_files/figure-latex/genderfig-1.pdf Graphic file (type pdf)
 <use webcdi_paper_files/figure-latex/genderfig-1.pdf>
 Package pdftex.def Info: webcdi_paper_files/figure-latex/genderfig-1.pdf  used 
-on input line 300.
+on input line 23.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[20] [21 <./webcdi_paper_files/figure-latex/genderfig-1.pdf>] [22] AED endfloat
-: Processing end Figures and Tables [23] (./webcdi_paper.aux)
+[26
+
+ <./webcdi_paper_files/figure-latex/genderfig-1.pdf>]
+<webcdi_paper_files/figure-latex/wgglm-1.pdf, id=264, 469.755pt x 325.215pt>
+File: webcdi_paper_files/figure-latex/wgglm-1.pdf Graphic file (type pdf)
+<use webcdi_paper_files/figure-latex/wgglm-1.pdf>
+Package pdftex.def Info: webcdi_paper_files/figure-latex/wgglm-1.pdf  used on i
+nput line 32.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+[27
+
+ <./webcdi_paper_files/figure-latex/wgglm-1.pdf>]
+<webcdi_paper_files/figure-latex/wgmedfig-1.pdf, id=279, 469.755pt x 325.215pt>
+
+File: webcdi_paper_files/figure-latex/wgmedfig-1.pdf Graphic file (type pdf)
+<use webcdi_paper_files/figure-latex/wgmedfig-1.pdf>
+Package pdftex.def Info: webcdi_paper_files/figure-latex/wgmedfig-1.pdf  used o
+n input line 41.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+[28
+
+ <./webcdi_paper_files/figure-latex/wgmedfig-1.pdf>]
+<webcdi_paper_files/figure-latex/wsglm-1.pdf, id=288, 469.755pt x 325.215pt>
+File: webcdi_paper_files/figure-latex/wsglm-1.pdf Graphic file (type pdf)
+<use webcdi_paper_files/figure-latex/wsglm-1.pdf>
+Package pdftex.def Info: webcdi_paper_files/figure-latex/wsglm-1.pdf  used on i
+nput line 50.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+) [29
+
+ <./webcdi_paper_files/figure-latex/wsglm-1.pdf>] (./webcdi_paper.aux)
 Package rerunfilecheck Info: File `webcdi_paper.out' has not changed.
-(rerunfilecheck)             Checksum: 7CC8D8DFBCC3F4044D9E396324FC52A2;2769.
+(rerunfilecheck)             Checksum: 40D8BEA0D132DEA133AE93D575B59C87;2768.
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 25297 strings out of 481330
- 460222 string characters out of 5915179
- 751179 words of memory out of 5000000
- 41552 multiletter control sequences out of 15000+600000
+ 25294 strings out of 481330
+ 460655 string characters out of 5915179
+ 748252 words of memory out of 5000000
+ 41536 multiletter control sequences out of 15000+600000
  480946 words of font info for 93 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 94i,11n,98p,1910b,533s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 94i,11n,98p,1910b,591s stack positions out of 5000i,500n,10000p,200000b,80000s
 {c:/Users/bdemayo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvip
-s/lm/lm-ec.enc}{c:/Users/bdemayo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dist/f
-onts/enc/dvips/lm/lm-ts1.enc}<c:/Users/bdemayo.PRINCETON/AppData/Roaming/TinyTe
-X/texmf-dist/fonts/type1/public/lm/lmbx12.pfb><c:/Users/bdemayo.PRINCETON/AppDa
-ta/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbxi10.pfb><c:/Users/bdema
-yo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb
-><c:/Users/bdemayo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/pub
-lic/lm/lmr12.pfb><c:/Users/bdemayo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dist
-/fonts/type1/public/lm/lmr7.pfb><c:/Users/bdemayo.PRINCETON/AppData/Roaming/Tin
-yTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb><c:/Users/bdemayo.PRINCETON/AppD
-ata/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri12.pfb><c:/Users/bdema
-yo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmss8.pfb
->
-Output written on webcdi_paper.pdf (23 pages, 774280 bytes).
+s/lm/lm-mathit.enc}{c:/Users/bdemayo.PRINCETON/AppData/Roaming/TinyTeX/texmf-di
+st/fonts/enc/dvips/lm/lm-ec.enc}{c:/Users/bdemayo.PRINCETON/AppData/Roaming/Tin
+yTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}<c:/Users/bdemayo.PRINCETON/AppDa
+ta/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb><c:/Users/bdemay
+o.PRINCETON/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbxi10.pf
+b><c:/Users/bdemayo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/pu
+blic/lm/lmmi12.pfb><c:/Users/bdemayo.PRINCETON/AppData/Roaming/TinyTeX/texmf-di
+st/fonts/type1/public/lm/lmmi8.pfb><c:/Users/bdemayo.PRINCETON/AppData/Roaming/
+TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb><c:/Users/bdemayo.PRINCETON/
+AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb><c:/Users/bd
+emayo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.p
+fb><c:/Users/bdemayo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/p
+ublic/lm/lmr8.pfb><c:/Users/bdemayo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dis
+t/fonts/type1/public/lm/lmri12.pfb><c:/Users/bdemayo.PRINCETON/AppData/Roaming/
+TinyTeX/texmf-dist/fonts/type1/public/lm/lmss8.pfb>
+Output written on webcdi_paper.pdf (29 pages, 1113936 bytes).
 PDF statistics:
- 289 PDF objects out of 1000 (max. 8388607)
- 244 compressed objects within 3 object streams
- 73 named destinations out of 1000 (max. 500000)
- 148 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 359 PDF objects out of 1000 (max. 8388607)
+ 299 compressed objects within 3 object streams
+ 83 named destinations out of 1000 (max. 500000)
+ 163 words of extra memory for PDF output out of 10000 (max. 10000000)
 

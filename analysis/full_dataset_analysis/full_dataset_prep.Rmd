@@ -223,6 +223,56 @@ wg_filtered %>%
   )
 
 wg_filtered %>% 
+   mutate(
+    maternal_ed = fct_recode(
+      maternal_ed,
+      "High school diploma or less" = "High school diploma",
+      "High school diploma or less" = "Some high school or less"
+    )
+  ) %>% 
+  filter(!is.na(maternal_ed)) %>% 
+  select(
+    age, 
+    `Words Understood` = understood, 
+    `Words Produced` = produced, 
+    maternal_ed
+  ) %>% 
+  pivot_longer(
+    cols = c("Words Understood", "Words Produced"),
+    names_to = "measure",
+    values_to = "words"
+  ) %>% 
+  group_by(age, maternal_ed, measure) %>% 
+  summarize(
+    median = median(words, na.rm = TRUE),
+    first_quartile = quantile(words, probs = 0.25, na.rm = TRUE),
+    third_quartile = quantile(words, probs = 0.75, na.rm = TRUE)
+  ) %>% 
+  ggplot(aes(age, median, color = maternal_ed)) +
+  facet_grid(~measure) +
+  geom_point(position = position_dodge(width = 0.5)) +
+  geom_linerange(
+    aes(ymin = first_quartile, ymax = third_quartile),
+    position = position_dodge(width = 0.5)
+  ) +
+  scale_x_continuous(breaks = seq(from = 8, to = 18, by = 2)) +
+  coord_cartesian(ylim = c(0, 390)) +
+  ggthemes::theme_few() +
+  labs(
+    color = "Maternal education level",
+    x = "age in months",
+    y = "number of words"
+  ) 
+
+ggsave(
+  "median_plot.png", 
+  plot = last_plot(),
+  path = fig_directory,
+  width = 9,
+  height = 4.5
+)
+
+wg_filtered %>% 
   mutate(
     maternal_ed = fct_recode(
       maternal_ed,
