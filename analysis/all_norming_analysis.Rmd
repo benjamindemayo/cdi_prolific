@@ -35,9 +35,20 @@ min_completion_time = 8.5
 
 ```{r}
 #first we read in the WG data that is just from the SES pilot projects
-all_wg_raw <- readInWebCDI(fb_wg_directory)
+all_wg_raw_ses <- readInWebCDI(fb_wg_directory)
 
-facebook_ws_raw <- 
+save(
+  all_wg_raw_ses,
+  file = fs::path(
+    project_root, 
+    "data", 
+    "ses_norming", 
+    "unfiltered", 
+    "wg_unfiltered_ses.RData"
+  )
+)
+
+facebook_ws_raw_ses <- 
   readInWebCDI(fb_ws_directory) %>% 
   select( #drop a bunch of columns that were screwing up the merge with prolific data
     -opt_out,
@@ -48,10 +59,10 @@ facebook_ws_raw <-
     -caregiver_other
   )
 
-prolific_raw <- 
+prolific_raw_ses <- 
   readInWebCDI(prolific_data_directory) %>% 
   select(
-    colnames(facebook_ws_raw), #drop columns that are prolific specific
+    colnames(facebook_ws_raw_ses), #drop columns that are prolific specific
     -opt_out, #drop a bunch of columns that were screwing up the merge with facebook data
     -country,
     -sibling_boolean,
@@ -61,13 +72,24 @@ prolific_raw <-
   ) 
 
 #all of the ws data collected
-all_ws_raw <- 
-  facebook_ws_raw %>% 
-  bind_rows(prolific_raw) %>% 
+all_ws_raw_ses <- 
+  facebook_ws_raw_ses %>% 
+  bind_rows(prolific_raw_ses) %>% 
   mutate(completed = case_when(
     stringr::str_to_lower(completed) == "true" ~ TRUE,
     stringr::str_to_lower(completed) == "false" ~ FALSE
   ))
+
+save(
+  all_ws_raw_ses,
+  file = fs::path(
+    project_root, 
+    "data", 
+    "ses_norming", 
+    "unfiltered", 
+    "ws_unfiltered_ses.RData"
+  )
+)
 
 
 ```
@@ -85,8 +107,8 @@ wg_exclusion_info <-
   ) %>% 
   mutate(subject_id = as.character(subject_id))
 
-wg <- 
-  all_wg_raw %>% 
+wg_ses <- 
+  all_wg_raw_ses %>% 
   filter(completed == TRUE) %>% #only take completed administrations
   #join it with the exclusion data we have from the screened files
   left_join(
@@ -103,7 +125,19 @@ wg <-
   getEthnicities() %>% 
   getMaternalEd() %>% 
   filter(completion_time >= min_completion_time) %>% 
-  filter_age_wg()
+  filter_age_wg() %>% 
+  filter_nwords_wg()
+
+save(
+  wg_ses,
+  file = fs::path(
+    project_root, 
+    "data", 
+    "ses_norming", 
+    "filtered", 
+    "wg_filtered_ses.RData"
+  )
+)
 
 ws1_exclusion_info <- 
   read_csv(all_data_ws1_path) %>% 
@@ -130,8 +164,8 @@ ws2_exclusion_info <-
 ws_all_exclusion_info <- 
   bind_rows(ws1_exclusion_info, ws2_exclusion_info)
 
-ws <- 
-  all_ws_raw %>% 
+ws_ses <- 
+  all_ws_raw_ses %>% 
   filter(completed == TRUE) %>% 
   #join it with the exclusion data we have from the screened files
   left_join(
@@ -148,10 +182,22 @@ ws <-
   getEthnicities() %>% 
   getMaternalEd() %>% 
   filter(completion_time >= min_completion_time) %>% 
-  filter_age_ws()
+  filter_age_ws() %>% 
+  filter_nwords_ws()
+
+save(
+  ws_ses,
+  file = fs::path(
+    project_root, 
+    "data", 
+    "ses_norming", 
+    "filtered", 
+    "ws_filtered_ses.RData"
+  )
+)
 
 prolific_filtered_n <- 
-  ws %>% 
+  ws_ses %>% 
   filter(str_detect(study_name, "prolific")) %>% 
   nrow()
 
@@ -160,8 +206,8 @@ prolific_filtered_n <-
 ```{r}
 #Calculating exclusions
 
-completed_wg <- 
-  all_wg_raw %>% 
+completed_wg_ses <- 
+  all_wg_raw_ses %>% 
   filter(completed == TRUE) %>% 
   left_join(
     wg_exclusion_info,
@@ -170,8 +216,8 @@ completed_wg <-
   getCompletionInterval()
   
 
-completed_ws <- 
-  all_ws_raw %>% 
+completed_ws_ses <- 
+  all_ws_raw_ses %>% 
   filter(completed == TRUE) %>% 
   left_join(
     ws_all_exclusion_info,
@@ -190,8 +236,8 @@ More fine-grained exclusion information.
 
 #Disclaimer that this is some of the worst code I've ever written. Sorry everyone.
 
-n_total_wg <- nrow(completed_wg)
-n_total_ws <- nrow(completed_ws)
+n_total_wg_ses <- nrow(completed_wg_ses)
+n_total_ws_ses <- nrow(completed_ws_ses)
 
 excl_col_names <- 
   c(
@@ -200,29 +246,29 @@ excl_col_names <-
     "% of full WG sample excluded",
     "WS exclusions",
     "% of full WS sample excluded"
-  ) 
+  )
 
 
 #First take away kids who have done the survey more than once.
 wg_minus_repeats <- 
-  completed_wg %>% 
+  completed_wg_ses %>% 
   filter(repeat_num == "1")
 
-wg_repeats_n <- n_total_wg - nrow(wg_minus_repeats)
+wg_repeats_n <- n_total_wg_ses - nrow(wg_minus_repeats)
 
 ws_minus_repeats <- 
-  completed_ws %>% 
+  completed_ws_ses %>% 
   filter(repeat_num == "1")
 
-ws_repeats_n <- n_total_ws - nrow(ws_minus_repeats)
+ws_repeats_n <- n_total_ws_ses - nrow(ws_minus_repeats)
 
 repeat_admins <- 
   c(
     "Not first administration",
     wg_repeats_n,
-    percent(wg_repeats_n / n_total_wg),
+    percent(wg_repeats_n / n_total_wg_ses, accuracy = 0.01),
     ws_repeats_n,
-    percent(ws_repeats_n / n_total_ws)
+    percent(ws_repeats_n / n_total_ws_ses, accuracy = 0.01)
   )
 
 names(repeat_admins) <- excl_col_names
@@ -245,9 +291,9 @@ premies <-
   c(
     "Premature or low birthweight",
     wg_premie_n,
-    percent(wg_premie_n / n_total_wg),
+    percent(wg_premie_n / n_total_wg_ses, accuracy = 0.01),
     ws_premie_n,
-    percent(ws_premie_n / n_total_ws)
+    percent(ws_premie_n / n_total_ws_ses, accuracy = 0.01)
   )
 
 names(premies) <- excl_col_names
@@ -270,9 +316,9 @@ multiling <-
   c(
     "Multilingual exposure",
     wg_multiling_n,
-    percent(wg_multiling_n / n_total_wg),
+    percent(wg_multiling_n / n_total_wg_ses, accuracy = 0.01),
     ws_multiling_n,
-    percent(ws_multiling_n / n_total_ws)
+    percent(ws_multiling_n / n_total_ws_ses, accuracy = 0.01)
   )
 
 names(multiling) <- excl_col_names
@@ -298,9 +344,9 @@ health <-
   c(
     "Illnesses/Vision/Hearing",
     wg_health_n,
-    percent(wg_health_n / n_total_wg),
+    percent(wg_health_n / n_total_wg_ses, accuracy = 0.01),
     ws_health_n,
-    percent(ws_health_n / n_total_ws)
+    percent(ws_health_n / n_total_ws_ses, accuracy = 0.01)
   )
 
 names(health) <- excl_col_names
@@ -322,9 +368,9 @@ age <-
   c(
     "Out of age range",
     wg_age_n,
-    percent(wg_age_n / n_total_wg),
+    percent(wg_age_n / n_total_wg_ses, accuracy = 0.01),
     ws_age_n,
-    percent(ws_age_n / n_total_ws)
+    percent(ws_age_n / n_total_ws_ses, accuracy = 0.01)
   )
 
 names(age) <- excl_col_names
@@ -347,50 +393,87 @@ fakes <-
   c(
     "Completed survey too quickly",
     wg_fake_n,
-    percent(wg_fake_n / n_total_wg),
+    percent(wg_fake_n / n_total_wg_ses, accuracy = 0.01),
     ws_fake_n,
-    percent(ws_fake_n / n_total_ws)
+    percent(ws_fake_n / n_total_ws_ses, accuracy = 0.01)
   )
 
 names(fakes) <- excl_col_names
 
+#lastly filter out kids who have buggy word totals (more than possible)
+
+wg_minus_wordbugs <- 
+  wg_minus_fakes %>% 
+  filter_nwords_wg()
+
+wg_wordbugs_n <- nrow(wg_minus_fakes) - nrow(wg_minus_wordbugs)
+
+ws_minus_wordbugs <- 
+  ws_minus_fakes %>% 
+  filter_nwords_ws()
+
+ws_wordbugs_n <- nrow(ws_minus_fakes) - nrow(ws_minus_wordbugs)
+
+wordbugs <- 
+  c(
+    "System error in word tabulation",
+    wg_wordbugs_n,
+    percent(wg_wordbugs_n / n_total_wg_ses, accuracy = .01),
+    ws_wordbugs_n,
+    percent(ws_wordbugs_n / n_total_ws_ses, accuracy = .01)
+  )
+
+names(wordbugs) <- excl_col_names
+
+
 #calculate total amount of WG exclusions
-total_wg_exclusions <- 
+total_wg_exclusions_ses <- 
   wg_repeats_n +
   wg_premie_n +
   wg_multiling_n +
   wg_health_n +
   wg_age_n +
-  wg_fake_n
+  wg_fake_n +
+  wg_wordbugs_n
 
 #calculate total amount of WS exclusions
-total_ws_exclusions <- 
+total_ws_exclusions_ses <- 
   ws_repeats_n +
   ws_premie_n +
   ws_multiling_n +
   ws_health_n +
   ws_age_n +
-  ws_fake_n
+  ws_fake_n +
+  ws_wordbugs_n
 
 #make a row in the table for this
 totals <- 
   c(
     "Total exclusions",
-    total_wg_exclusions,
-    percent(total_wg_exclusions / n_total_wg),
-    total_ws_exclusions,
-    percent(total_ws_exclusions / n_total_ws)
+    total_wg_exclusions_ses,
+    percent(total_wg_exclusions_ses / n_total_wg_ses),
+    total_ws_exclusions_ses,
+    percent(total_ws_exclusions_ses / n_total_ws_ses)
   )
 
 names(totals) <- excl_col_names
 
 #now make the table
 exclusion_tbl_ses <- 
-  bind_rows(repeat_admins, premies, multiling, health, age, fakes, totals)
+  bind_rows(
+    repeat_admins, 
+    premies, 
+    multiling, 
+    health, 
+    age, 
+    fakes, 
+    wordbugs, 
+    totals
+  )
 
 knitr::kable(exclusion_tbl_ses)
 
-total_admin <- nrow(ws) + nrow(wg)
+total_admin <- nrow(ws_ses) + nrow(wg_ses)
 
 save(
   exclusion_tbl_ses,
@@ -505,9 +588,9 @@ complete_bg %>%
 
 ```{r}
 #combine relevant demographic information from both WS and WG
-demographics_df <- 
+demographics_df_ses <- 
   bind_rows(
-    wg %>% 
+    wg_ses %>% 
       select(
         study_name,
         subject_id,
@@ -515,9 +598,9 @@ demographics_df <-
         age,
         ethnicity, 
         maternal_ed, 
-        words_produced = `Words Produced` 
+        produced
       ),
-    ws %>% 
+    ws_ses %>% 
       select(
         study_name,
         subject_id,
@@ -525,16 +608,16 @@ demographics_df <-
         age,
         ethnicity,
         maternal_ed,
-        words_produced = `Total Produced`
+        produced
       )
   )
 
-total_n <- nrow(demographics_df)
-ethnicity_na_n <- 
-  nrow(demographics_df %>% filter(ethnicity == "No ethnicity reported"))
-ethnicity_total_n <- total_n - ethnicity_na_n
-maternal_ed_na_n <- nrow(demographics_df %>% filter(maternal_ed == "Not reported"))
-maternal_ed_total_n <- total_n - maternal_ed_na_n
+total_n_ses <- nrow(demographics_df_ses)
+ethnicity_na_n_ses <- 
+  nrow(demographics_df_ses %>% filter(ethnicity == "No ethnicity reported"))
+ethnicity_total_n_ses <- total_n_ses - ethnicity_na_n_ses
+maternal_ed_na_n_ses <- nrow(demographics_df_ses %>% filter(maternal_ed == "Not reported"))
+maternal_ed_total_n_ses <- total_n_ses - maternal_ed_na_n_ses
 ```
 
 
@@ -542,8 +625,8 @@ maternal_ed_total_n <- total_n - maternal_ed_na_n
 ```{r}
 
 #Ethnicity plot creation
-ethnicity_plot_df <- 
-  demographics_df %>% 
+ethnicity_plot_df_ses <- 
+  demographics_df_ses %>% 
   getEthnicitySummary() %>% 
   filter(
     !is.na(ethnicity),
@@ -558,8 +641,8 @@ ethnicity_plot_df <-
     values_to = "proportion"
   )
 
-ethnicity_plot <-
-  ethnicity_plot_df %>% 
+ethnicity_plot_ses <-
+  ethnicity_plot_df_ses %>% 
   ggplot(aes(ethnicity, proportion, fill = study)) +
   geom_col(position = "dodge") +
   labs(
@@ -589,7 +672,7 @@ ethnicity_plot <-
     plot.caption = element_text(hjust = 0)
   )
 
-ethnicity_plot
+ethnicity_plot_ses
 
 ```
 
