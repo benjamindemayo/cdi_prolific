@@ -76,6 +76,12 @@ load(wg_unfiltered_path)
 load(ws_unfiltered_path)
 load(wg_filtered_path)
 load(ws_filtered_path)
+load(wg_unfiltered_ses_path)
+load(ws_unfiltered_ses_path)
+load(wg_filtered_ses_path)
+load(ws_filtered_ses_path)
+
+
 ```
 
 
@@ -759,14 +765,401 @@ Vocabulary production scores on the WS form show the expected pattern of increas
 
 The data discussed above have stemmed from efforts by many researchers across the United States whose motivations for using the Web-CDI vary. As a result, they reproduce many of the biases of standard US convenience samples. In the next section, we describe in more detail our recent efforts to use the Web-CDI to collect vocabulary development data from traditionally underrepresented participant populations in the United States, attempting to counteract these trends. 
 
+## Using Web-CDI to Collect Data from Diverse U.S.-based Communities
+
+As discussed above, much past research on children’s language development in the US has tended to draw upon convenience samples of participants located near major U.S. universities. Despite the large sample sizes we collected in the previous section, our current dataset from Web-CDI is, if anything, even more biased towards highly-educated White families than previous datasets.  How can we recruit more diverse samples to remedy this issue? Here we discuss some potential routes forward. Importantly, we focus on collecting data from monolingual English-speaking families. While understanding the performance of standard measurement tools like the CDI among multilinguals is of immense import to the field of vocabulary development research [Gonzalez et al., in prep; @floccia2018; @DeHouwer2019], we focused here only on monolingual development, because collecting data from multilingual populations introduces additional methodological considerations (e.g. how to measure exposures in each language) which we do not address here.
+
+### Online Data Collection
+
+Online recruitment methods, such as finding participants on platforms such as Amazon Mechanical Turk, Facebook and Prolific, represent one possible route towards assembling a large, diverse sample to take the Web-CDI. However, these recruitment methods are largely untested with parent report measures of child language development. In a series of data collection efforts, we used Web-CDI as a tool to explore these different channels of recruitment. 
+
+```{r facebookad, fig.cap="Example Facebook advertisement in Phase 1 of recent data collection."}
+
+img_4 <- png::readPNG(path(fig_directory, "facebook_ad.png"))
+
+grid::grid.raster(img_4)
+
+```
+
+```{r}
+load(ses_sample_exclusions)
+
+exclusion_tbl_ses %>% 
+  kbl(
+    booktabs = TRUE, 
+    linesep = "", 
+    caption = "Exclusions from recent data collection using Facebook and Prolific."
+  ) %>% 
+  kable_styling(
+    position = "center"
+  ) %>% 
+  column_spec(1, width = "2.2in") %>% 
+  column_spec(2:5, width = "1in") %>% 
+  row_spec(0, bold = TRUE)
+
+```
 
 
+In our first phase of data collection, we ran advertisements on Facebook which were aimed at non-white families based on users’ geographic locations (e.g., targeting cities which have a higher than average representation of African Americans) or other profile features (e.g., ethnic identification, interest in parenthood-related topics). Advertisements consisted of an image of a child and a caption informing Facebook users of an opportunity to fill out a survey on their child’s language development and receive an Amazon gift card (Figure \ref{fig:facebookad}). Upon clicking the advertisement, participants were redirected to a unique administration of the Web-CDI, and they received $5 upon completing the survey. This open-ended approach to recruitment offered several advantages, namely that a wide variety of potential participants from specific demographic backgrounds can be reached on Facebook. However, we also received many incomplete or otherwise unusable survey administrations, either from Facebook users who click the link and decide not to participate, or those who completed the survey in an unrealistically short period of time (over half of all completed administrations, Table 3). 
+
+```{r}
+prolific_filtered_n <- 
+  ws_ses %>% 
+  filter(str_detect(study_name, "prolific")) %>% 
+  nrow()
+```
 
 
+In the second phase of our data collection efforts, we used the crowdsourcing survey vendor Prolific (http://prolific.co) in the hopes that some of the challenges encountered with Facebook recruitment would be addressed. Prolific allows researchers to create studies and post them to individuals who are in the platform’s participant database, each of whom is assigned a unique alphanumeric “Prolific ID”. Importantly, Prolific maintains detailed demographic information about participants, allowing researchers to specify whom they would like to complete their studies. Prolific further has a built-in compensation infrastructure that handles monetary payments to participants, eliminating the need to disburse gift cards through Web-CDI. In the particular case of Web-CDI, the demographic information needed to determine whether an individual is eligible to complete the survey (e.g., has a child in the correct age range, lives in a monolingual household, etc.) is more specific than the information that Prolific collects about their participant base. We therefore used a brief pre-screening questionnaire to generate a list of participants who were eligible to participate, and subsequently advertised the Web-CDI survey to those participants. Given that we were interested only in reaching participants in the United States who were not white or who did not have a college diploma, our data collection efforts only yielded a sample that was small (N = `r prolific_filtered_n`) but much more thoroughly screened than that which we could obtain on Facebook. 
 
-# Results
+```{r}
 
-# Discussion
+#Looking at just the folks who completed the survey but went too fast
+
+completed_wg_ses <- 
+  all_wg_raw_ses %>% 
+  filter(completed == TRUE)
+
+completed_ws_ses <- 
+  all_ws_raw_ses %>% 
+  filter(completed == TRUE)
+
+completed_hasty_wg_ses <- 
+  all_wg_raw_ses %>% 
+  filter(completed == TRUE) %>% 
+  getCompletionInterval() %>% 
+  getEthnicities() %>% 
+  getMaternalEd() %>% 
+  getCompletionInterval() %>% 
+  filter(completion_time < 8.5)
+  
+
+completed_hasty_ws_ses <- 
+  all_ws_raw_ses %>% 
+  filter(completed == TRUE) %>% 
+  getCompletionInterval() %>% 
+  getEthnicities() %>% 
+  getMaternalEd() %>% 
+  getCompletionInterval() %>% 
+  filter(completion_time < 8.5)
+
+percent_no_eth_wg <- 
+  completed_hasty_wg_ses %>% 
+  count(ethnicity) %>% 
+  mutate(prop = n / sum(n)) %>% 
+  slice(4) %>% 
+  pull(3) %>% 
+  percent()
+
+percent_no_eth_ws <- 
+  completed_hasty_ws_ses %>% 
+  count(ethnicity) %>% 
+  mutate(prop = n / sum(n)) %>% 
+  slice(4) %>% 
+  pull(3) %>% 
+  percent()
+
+n_total_wg_ses <- nrow(completed_wg_ses)
+n_total_ws_ses <- nrow(completed_ws_ses)
+
+n_exclusions_wg_ses <- 
+  exclusion_tbl_ses %>% slice(8) %>% pull(2) %>% as.numeric()
+
+n_exclusions_ws_ses <- 
+  exclusion_tbl_ses %>% slice(8) %>% pull(4) %>% as.numeric()
+
+percent_excluded <- 
+  ((n_exclusions_wg_ses + n_exclusions_ws_ses) / 
+     (n_total_wg_ses + n_total_ws_ses)) %>% 
+  percent()
+
+```
+
+
+Across both phases, we used the same exclusion criteria as in the full Web-CDI sample to screen participants. A complete tally of all excluded participants is shown in Table 3. In both the WG and WS surveys, exclusions rates were high, amounting to `r percent_excluded` of participants who completed the survey. The high exclusions rates were notably driven by an accumulation of survey administrations which participants completed very quickly (in these analyses, defined as a completion taking less than 8.5 minutes). Many of the survey administrations excluded for fast completion had missing demographic information reported: Among WG participants excluded for too-fast completions, `r percent_no_eth_wg` did not report ethnicity, and among WS participants excluded for the same reason, `r percent_no_eth_ws` did not report ethnicity. After exclusions, full sample size was N = `r nrow(wg_ses)` WG completions and N = `r nrow(ws_ses)` completions.
+
+```{r}
+
+#Putting together a dataframe of all the demographic info in the ses sample
+demographics_df_ses <- 
+  bind_rows(
+    wg_ses %>% 
+      select(
+        study_name,
+        subject_id,
+        sex,
+        age,
+        ethnicity, 
+        maternal_ed, 
+        produced
+      ),
+    ws_ses %>% 
+      select(
+        study_name,
+        subject_id,
+        sex,
+        age,
+        ethnicity,
+        maternal_ed,
+        produced
+      )
+  )
+
+```
+
+
+```{r}
+#Prepare the gender plots and numbers for the caption.
+wg_gender_ses <- 
+  wg_ses %>% 
+  select(age, produced, sex)
+
+ws_gender_ses <- 
+  ws_ses %>% 
+  select(age, produced, sex)
+
+all_d_gender_ses <- 
+  bind_rows(ws_gender_ses, wg_gender_ses) 
+
+all_d_gender_count_ses <- all_d_gender_ses %>% count(sex)
+
+n_females_ses <- all_d_gender_count_ses %>% slice(1) %>% pull(2)
+n_males_ses <- all_d_gender_count_ses %>% slice(2) %>% pull(2)
+n_other_ses <- all_d_gender_count_ses %>% slice(3) %>% pull(2)
+
+all_gender_n_ses <- all_d_gender_count_ses$n %>% sum()
+
+gender_caption_ses <- str_c(
+  "Individual children’s vocabulary production scores from the entire Web-CDI sample plotted by children’s age and gender (both WG and WS, N = ",
+  formatC(all_gender_n_ses - n_other_ses, big.mark = ",", big.interval = 3),
+  ", with ",
+  formatC(n_females_ses, big.mark = ",", big.interval = 3),
+  " girls). Lines are best linear fits with associated 95% confidence intervals. Children with a different or no reported gender (N = ",
+  n_other_ses,
+  ") are omitted here."
+)
+```
+
+```{r genderses, fig.cap=gender_caption_ses}
+
+all_d_gender_ses %>% 
+  filter(sex != "Other") %>% 
+  ggplot(aes(age, produced, color = sex)) +
+  ggthemes::theme_few() +
+  geom_jitter(alpha = 0.3, width = 0.225) +
+  geom_smooth(method = "lm") +
+  coord_cartesian(ylim = c(0, 686)) +
+  labs(
+    x = "Age in months", 
+    y = "Total words produced",
+    color = "Child gender"
+  ) 
+
+```
+
+
+```{r}
+#Make tibble to show vocab scores by maternal education
+
+momed_ses_df <- 
+  demographics_df_ses %>% 
+  mutate(highschool = case_when(
+    maternal_ed == "Some high school or less" ~ "High school",
+    maternal_ed == "High school diploma" ~ "High school",
+    maternal_ed == "Some college education" ~ "College",
+    maternal_ed == "College diploma or more" ~ "College"
+  ))
+
+#Caption for momed plot
+momed_caption_ses <- 
+  str_c(
+    "Individual children's vocabulary production scores plotted by age and level of primary caregiver education, binned into those with a high school diploma or less education and those with some college education or a college diploma (N = ",
+    nrow(wg_ses) + nrow(ws_ses),
+    "). Lines show best linear fits and associated 95% confidence intervals."
+  )
+
+```
+
+
+```{r momedses, fig.cap=momed_caption_ses}
+momed_ses_df %>% 
+  filter(
+    age <= 30
+  ) %>% 
+  ggplot(aes(age, produced, color = highschool)) +
+  geom_jitter(alpha = 0.3, width = 0.225) +
+  geom_smooth(method = "lm") +
+  labs(
+    x = "age in months",
+    y = "words produced"
+  ) +
+  ggthemes::theme_few() +
+  theme(legend.title = element_blank())
+```
+
+
+```{r}
+#Ethnicity and maternal ed plot for the SES norming sample
+
+ethnicity_plot_df_ses <- 
+  demographics_df_ses %>% 
+  getEthnicitySummary() %>% 
+  filter(
+    !is.na(ethnicity),
+    ethnicity != "No ethnicity reported"
+  ) %>% 
+  mutate(`Current study` = prop.table(n)) %>% 
+  left_join(old_ethnicity_numbers, by = "ethnicity") %>% 
+  left_join(census_ethnicity_numbers, by = "ethnicity") %>% 
+  select(-n) %>% 
+  pivot_longer(
+    cols = c(`Current study`, `2007 manual`, `U.S. Census Estimates`),
+    names_to = "study",
+    values_to = "proportion"
+  )
+
+ethnicity_plot_ses <-
+  ethnicity_plot_df_ses %>% 
+  ggplot(aes(ethnicity, proportion, fill = study)) +
+  geom_col(position = "dodge") +
+  labs(
+    y = "Proportion of\nrespondents"
+  ) +
+  ggthemes::theme_few() +
+  theme(
+    legend.title = element_blank(), 
+    axis.text.x = element_text(
+       angle = 25, 
+       vjust = 0.9, 
+       hjust = 1
+     )
+  ) +
+  labs(x = "Ethnicity") +
+  scale_fill_viridis_d()
+
+maternal_ed_plot_df_ses <- 
+  demographics_df_ses %>% 
+  count(maternal_ed) %>% 
+  mutate(`Current study` = prop.table(n)) %>% 
+  left_join(old_momed_numbers, by = "maternal_ed") %>% 
+  left_join(census_momed_numbers, by = "maternal_ed") %>% 
+  select(-n) %>% 
+  pivot_longer(
+    cols = c(`Current study`, `2007 manual`, `U.S. Census Estimates`),
+    names_to = "study",
+    values_to = "proportion"
+  ) %>% 
+  mutate(
+    maternal_ed = fct_relevel(
+      maternal_ed,
+      "Some high school or less",
+      "High school diploma",
+      "Some college education",
+      "College diploma or more"
+    )
+  )
+
+
+x_axis_labs <- c(
+  "Some high school\n or less",
+  "High school\ndiploma",
+  "Some college\neducation",
+  "College diploma\nor more"
+)
+
+maternal_ed_plot_ses <- 
+  maternal_ed_plot_df_ses %>% 
+  filter(maternal_ed != "Not reported") %>% 
+  ggplot(aes(maternal_ed, proportion, fill = study)) +
+  geom_col(position = "dodge") +
+  labs(x = "Primary caregiver education") +
+  ggthemes::theme_few() +
+  theme(
+    legend.title = element_blank(),
+    axis.text.x = element_text(angle = 25, vjust = 0.9, hjust = 1)
+  ) + 
+  scale_x_discrete(labels = x_axis_labs) +
+  scale_fill_viridis_d() +
+  coord_cartesian(ylim = c(0, .81))
+
+prow_ses <- cowplot::plot_grid(
+  ethnicity_plot_ses + 
+    theme(
+      legend.position = "none", 
+      plot.margin = (margin(r = 2, l = 0)),
+      axis.text = element_text(size = 21),
+      axis.title = element_text(size = 21)
+    ),
+  maternal_ed_plot_ses + 
+    ylab(NULL) + 
+    theme(
+      legend.position = "none", 
+      plot.margin = (margin(r = 2, l = 2)),
+      axis.text = element_text(size = 21),
+      axis.title = element_text(size = 21)
+    ),
+  align = "hv",
+  labels = c("A", "B")
+)
+
+legend_ses <- 
+  get_legend(
+    ethnicity_plot_ses + 
+      # guides(color = guide_legend(nrow = 1)) + 
+      # theme(legend.position = "bottom")
+      theme(
+        legend.box.margin = margin(0, 0, 0, 15),
+        legend.text = element_text(size = 18)
+      )
+  )
+
+demo_barplot_ses <- plot_grid(prow_ses, legend_ses, rel_widths = c(3, .5))
+
+ggsave(
+  "demo_barplot_ses.png", 
+  plot = demo_barplot_ses,
+  path = fig_directory,
+  width = 20,
+  height = 8
+)
+
+demo_barplot_caption_ses <- 
+  str_c("Proportion of respondents plotted by child race (A) and educational level of primary caregiver (B) from recent data collection efforts aimed towards oversampling non-white, lower-SES families (N = ",
+        nrow(wg_ses) + nrow(ws_ses),
+        "), compared with norming sample demographics from Fenson (2007). Latinx participants can be of any race.")
+```
+
+```{r demobarses, fig.cap=demo_barplot_caption_ses}
+
+img_5 <- png::readPNG(path(fig_directory, "demo_barplot_ses.png"))
+
+grid::grid.raster(img_5)
+
+```
+
+The results from our recent data collection efforts focused on lower-SES, non-white participants show overall similar patterns to the full Web-CDI sample in several regards. Word production scores from both the WG and WS administrations reflect growing productive vocabulary across the second and third years, with a very small gender effect such that female children’s vocabularies grow at a slightly faster rate than males’ (Figure \ref{fig:genderses}). The relationship between caregivers’ reported levels of maternal education and child’s vocabulary score is not as clear as it is in the full Web-CDI sample (Figure \ref{fig:momedses}); however, children of college-educated parents show slightly faster vocabulary growth than do children of parents without any college degree. 
+
+Importantly, recent data collection efforts showed a substantial improvement in reaching non-white or less highly-educated participants. After exclusions, the Web-CDI data we collected through Facebook and Prolific have a higher proportion of non-white participants than the overall Web-CDI sample and the norms established by @fenson2007 (Figure \ref{fig:demobarses}). Black participants in particular showed a marked increase in representation, from `r ethnicity_plot_df_ses %>% slice(5) %>% pull(3) %>% percent(accuracy = 0.1)` in the 2007 norms to `r ethnicity_plot_df_ses %>% slice(4) %>% pull(3) %>% percent(accuracy = 0.1)` in the recent sample, while the proportion of white participants decreased from `r ethnicity_plot_df_ses %>% slice(11) %>% pull(3) %>% percent(accuracy = 0.1)` in the 2007 norms to `r ethnicity_plot_df_ses %>% slice(10) %>% pull(3) %>% percent(accuracy = 0.1)` in the recent sample. Representation on the basis of families’ reported primary caregiver education also improved (Figure \ref{fig:demobarses}). Participants with only a high school diploma accounted for `r maternal_ed_plot_df_ses %>% slice(7) %>% pull(3) %>% percent(accuracy = 0.1)` of the recent sample as compared to `r maternal_ed_plot_df_ses %>% slice(8) %>% pull(3) %>% percent(accuracy = 0.1)` in the 2007 norms, and representation of those with a college diploma or more education decreased from `r maternal_ed_plot_df_ses %>% slice(2) %>% pull(3) %>% percent(accuracy = 0.1)` in the 2007 norms to `r maternal_ed_plot_df_ses %>% slice(1) %>% pull(3) %>% percent(accuracy = 0.1)` in the recent sample. 
+
+### Discussion
+
+Taken together, these recent results indicate that Web-CDI could be a promising avenue through which to collect vocabulary development data in non-white, lower-SES communities when paired with online recruitment methods that yield legitimate, representative participant samples. These data do, however, convey clear limitations of our approach. Perhaps most conspicuously, more than half of completed administrations in this sample had to be excluded, in many cases because the information provided by participants appeared rushed or incomplete: over 40% of administrations were completed in fewer than 8.5 minutes, and of these quick completions, well over 90% were missing demographic information that is rarely missing in other administrations of the form. Determining the precise reasons for the high exclusion rate, and how (if at all) this may skew data reflecting demographic trends in vocabulary development, requires a more thorough assessment of who is submitting hastily-completed forms, which is beyond the scope of the current study. However, all respondents who got to the end of the form were compensated regardless of how thoroughly they completed it, creating the possibility that some participants who clicked the anonymous link may not have been members of the population of interest, but rather were other individuals motivated by the ending compensation. General scarcity of demographic information on these individuals prevents us from making speculative claims about which groups constituted the bulk of participant exclusions.
+
+Additionally, the exclusion rates described previously only provide information on those participants who did, at some point, submit a completed form, but many individuals clicked the advertisement link and did not subsequently continue on to complete the form. Without an in-depth exploration of who is clicking the link and why they might choose not to continue, we cannot draw conclusions about the representativeness of the current sample with regards to the communities we would like to include in our research. As such, a more thorough understanding of how users from different communities respond to various recruitment and sampling methods is needed in future work in order to draw conclusions about demographic trends above and beyond those already established in the literature.
+
+In a similar vein, participants in this study were recruited through a targeted post on social media, a technique that is considerably more anonymous than recruitment strategies which entail face-to-face or extended contact between researchers and community members. For future research, it should be considered that online recruitment methods may not be suitable for all communities, especially when researchers ask participants to report potentially sensitive information about the health and development of their children (even when such information is stored anonymously). Our goal here was to assess whether general trends in past literature could be recovered using such an online strategy, but future research should take into account that other more personal methods of recruitment, such as those through more direct community out reach or liaison contacts, may improve participants’ experiences and their willingness to engage with the study. 
+
+Finally, a significant limitation of the current data collection process is that many people in the population of interest - particularly lower-income families - do not have reliable internet access. Having participants complete the Web-CDI on a mobile device may alleviate some of the issues caused by differential access to Wi-Fi, since the vast majority of American adults own a smartphone (Pew Research Center, 2018 - NEED TO ADD MANUALLY TO REFS). Accordingly, improving Web-CDI’s user experience on mobile platforms will be an important step towards ensuring that caregivers across the socioeconomic spectrum can easily complete the survey. For smartphone users on pay-as-you-go plans, who may be reluctant to use data to complete a study, a possible solution could be compensating participants for the amount of “internet time” they incurred completing the form.
+
+## Conclusions
+
+In this paper, we presented Web-CDI, a comprehensive online interface for researchers to measure children’s vocabulary by administering the MacArthur-Bates Communicative Development Inventory family of parent-report instruments. Web-CDI provides a convenient researcher management interface, built-in data privacy protections, and a variety of features designed to make both longitudinal and social-media sampling easy. To date, over 4,000 valid administrations of the WG and WS forms have been collected on Web-CDI from more than a dozen researchers in the United States after applying strict exclusion criteria derived from previous norming studies) [@fenson1994; @fenson2007].
+
+Many research laboratories, not only in the United States but around the world, collect vocabulary development data using the MacArthur-Bates CDI [@Frank2021]. With traditional paper-based forms, combining insights from various research groups can prove challenging, as each group may have slightly different ways of formatting and managing data from CDI forms. By contrast, if all of these groups’ data come to be stored in a single repository with a consistent database structure, data from disparate sources can easily be collated and analyzed in a uniform fashion. As such, a centralized repository such as Web-CDI provides a streamlined data-aggregation pipeline that facilitates cross-lab collaborations, multisite research projects and the curation of large datasets that provide more power to characterize the vast individual differences present in children’s vocabulary development.
+
+Beyond the goal of simply getting more data, we hope that Web-CDI can advance efforts to expand the reach of vocabulary research past convenience samples into diverse communities. A key question in the field of vocabulary development concerns the mechanisms through which sociodemographic variables, such as race, ethnicity, income and education are linked to group differences in vocabulary outcomes. Large, population-representative samples of vocabulary development data are needed to understand these mechanisms, but most research to date (including the full sample of Web-CDI administrations) oversamples white participants and those with advanced levels of education. We explored the use of Web-CDI as part of a potential strategy to collect data from non-white, lower-SES communities in two phases. Several overall patterns emerged from the resulting data which we expected: vocabulary scores grew with age, providing a basic validity check of the Web-CDI measure; females held a slight advantage in word learning over males; and children of parents with a college education showed slightly higher vocabulary scores. 
+
+Nonetheless, the insights from these data, while aligned with past norming studies, are necessarily constrained by several features of our method. First, exclusion rates among data collected on Facebook were very high, well over 50%, mostly due to a large quantity of hasty completions. Second, a rigorous evaluation of the population-representativeness of those who were counted in the final sample was not feasible here. Given our findings, we maintain that web-based data collection can capture useful information about vocabulary development from diverse communities, but future research will need to examine which sampling methods can yield accurate, population-representative data that can advance our understanding of the link between sociodemographic variation and variation in language outcomes.
 
 
 \newpage

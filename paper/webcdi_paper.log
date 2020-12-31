@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.12.26)  30 DEC 2020 00:47
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.12.26)  31 DEC 2020 01:06
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1253,87 +1253,134 @@ Underfull \vbox (badness 7649) has occurred while \output is active []
 (webcdi_paper.ttt) [9] [10] [11]
 Underfull \vbox (badness 5519) has occurred while \output is active []
 
-[12] [13] [14] [15] [16] [17] [18] [19] AED endfloat: Processing end Figures an
-d Tables [20] (./webcdi_paper.ttt [21
+[12] [13] [14] [15] [16] [17] [18] [19] [20] [21] [22] [23] [24] [25] [26] AED 
+endfloat: Processing end Figures and Tables [27] (./webcdi_paper.ttt [28
 
 
-] [22]
+] [29]
 Overfull \hbox (38.31871pt too wide) in paragraph at lines 36--50
  [][] 
  []
 
-) [23
+[30
+
+]
+Overfull \hbox (38.31871pt too wide) in paragraph at lines 59--73
+ [][] 
+ []
+
+) [31
 
 ] (./webcdi_paper.fff
-<webcdi_paper_files/figure-latex/pictorial-1.pdf, id=228, 469.755pt x 325.215pt
+<webcdi_paper_files/figure-latex/pictorial-1.pdf, id=286, 469.755pt x 325.215pt
 >
 File: webcdi_paper_files/figure-latex/pictorial-1.pdf Graphic file (type pdf)
 <use webcdi_paper_files/figure-latex/pictorial-1.pdf>
 Package pdftex.def Info: webcdi_paper_files/figure-latex/pictorial-1.pdf  used 
 on input line 5.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[24
+[32
 
  <./webcdi_paper_files/figure-latex/pictorial-1.pdf>]
-<webcdi_paper_files/figure-latex/demobarfig-1.pdf, id=239, 469.755pt x 325.215p
+<webcdi_paper_files/figure-latex/demobarfig-1.pdf, id=297, 469.755pt x 325.215p
 t>
 File: webcdi_paper_files/figure-latex/demobarfig-1.pdf Graphic file (type pdf)
 <use webcdi_paper_files/figure-latex/demobarfig-1.pdf>
 Package pdftex.def Info: webcdi_paper_files/figure-latex/demobarfig-1.pdf  used
  on input line 14.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[25
+[33
 
  <./webcdi_paper_files/figure-latex/demobarfig-1.pdf>]
-<webcdi_paper_files/figure-latex/genderfig-1.pdf, id=249, 469.755pt x 325.215pt
+<webcdi_paper_files/figure-latex/genderfig-1.pdf, id=306, 469.755pt x 325.215pt
 >
 File: webcdi_paper_files/figure-latex/genderfig-1.pdf Graphic file (type pdf)
 <use webcdi_paper_files/figure-latex/genderfig-1.pdf>
 Package pdftex.def Info: webcdi_paper_files/figure-latex/genderfig-1.pdf  used 
 on input line 23.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[26
+[34
 
  <./webcdi_paper_files/figure-latex/genderfig-1.pdf>]
-<webcdi_paper_files/figure-latex/wgglm-1.pdf, id=264, 469.755pt x 325.215pt>
+<webcdi_paper_files/figure-latex/wgglm-1.pdf, id=321, 469.755pt x 325.215pt>
 File: webcdi_paper_files/figure-latex/wgglm-1.pdf Graphic file (type pdf)
 <use webcdi_paper_files/figure-latex/wgglm-1.pdf>
 Package pdftex.def Info: webcdi_paper_files/figure-latex/wgglm-1.pdf  used on i
 nput line 32.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[27
+[35
 
  <./webcdi_paper_files/figure-latex/wgglm-1.pdf>]
-<webcdi_paper_files/figure-latex/wgmedfig-1.pdf, id=279, 469.755pt x 325.215pt>
+<webcdi_paper_files/figure-latex/wgmedfig-1.pdf, id=335, 469.755pt x 325.215pt>
 
 File: webcdi_paper_files/figure-latex/wgmedfig-1.pdf Graphic file (type pdf)
 <use webcdi_paper_files/figure-latex/wgmedfig-1.pdf>
 Package pdftex.def Info: webcdi_paper_files/figure-latex/wgmedfig-1.pdf  used o
 n input line 41.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[28
+[36
 
  <./webcdi_paper_files/figure-latex/wgmedfig-1.pdf>]
-<webcdi_paper_files/figure-latex/wsglm-1.pdf, id=288, 469.755pt x 325.215pt>
+<webcdi_paper_files/figure-latex/wsglm-1.pdf, id=344, 469.755pt x 325.215pt>
 File: webcdi_paper_files/figure-latex/wsglm-1.pdf Graphic file (type pdf)
 <use webcdi_paper_files/figure-latex/wsglm-1.pdf>
 Package pdftex.def Info: webcdi_paper_files/figure-latex/wsglm-1.pdf  used on i
 nput line 50.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-) [29
+[37
 
- <./webcdi_paper_files/figure-latex/wsglm-1.pdf>] (./webcdi_paper.aux)
+ <./webcdi_paper_files/figure-latex/wsglm-1.pdf>]
+<webcdi_paper_files/figure-latex/facebookad-1.pdf, id=359, 469.755pt x 325.215p
+t>
+File: webcdi_paper_files/figure-latex/facebookad-1.pdf Graphic file (type pdf)
+<use webcdi_paper_files/figure-latex/facebookad-1.pdf>
+Package pdftex.def Info: webcdi_paper_files/figure-latex/facebookad-1.pdf  used
+ on input line 59.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+[38
+
+ <./webcdi_paper_files/figure-latex/facebookad-1.pdf>]
+<webcdi_paper_files/figure-latex/genderses-1.pdf, id=370, 469.755pt x 325.215pt
+>
+File: webcdi_paper_files/figure-latex/genderses-1.pdf Graphic file (type pdf)
+<use webcdi_paper_files/figure-latex/genderses-1.pdf>
+Package pdftex.def Info: webcdi_paper_files/figure-latex/genderses-1.pdf  used 
+on input line 68.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+[39
+
+ <./webcdi_paper_files/figure-latex/genderses-1.pdf>]
+<webcdi_paper_files/figure-latex/momedses-1.pdf, id=385, 469.755pt x 325.215pt>
+
+File: webcdi_paper_files/figure-latex/momedses-1.pdf Graphic file (type pdf)
+<use webcdi_paper_files/figure-latex/momedses-1.pdf>
+Package pdftex.def Info: webcdi_paper_files/figure-latex/momedses-1.pdf  used o
+n input line 77.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+[40
+
+ <./webcdi_paper_files/figure-latex/momedses-1.pdf>]
+<webcdi_paper_files/figure-latex/demobarses-1.pdf, id=400, 469.755pt x 325.215p
+t>
+File: webcdi_paper_files/figure-latex/demobarses-1.pdf Graphic file (type pdf)
+<use webcdi_paper_files/figure-latex/demobarses-1.pdf>
+Package pdftex.def Info: webcdi_paper_files/figure-latex/demobarses-1.pdf  used
+ on input line 86.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+) [41
+
+ <./webcdi_paper_files/figure-latex/demobarses-1.pdf>] (./webcdi_paper.aux)
 Package rerunfilecheck Info: File `webcdi_paper.out' has not changed.
-(rerunfilecheck)             Checksum: 40D8BEA0D132DEA133AE93D575B59C87;2768.
+(rerunfilecheck)             Checksum: E13D3AD681DA364C695765FDAE5B5835;3387.
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 25294 strings out of 481330
- 460655 string characters out of 5915179
- 748252 words of memory out of 5000000
- 41536 multiletter control sequences out of 15000+600000
+ 25350 strings out of 481330
+ 462348 string characters out of 5915179
+ 749614 words of memory out of 5000000
+ 41565 multiletter control sequences out of 15000+600000
  480946 words of font info for 93 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  94i,11n,98p,1910b,591s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1353,10 +1400,10 @@ fb><c:/Users/bdemayo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/p
 ublic/lm/lmr8.pfb><c:/Users/bdemayo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dis
 t/fonts/type1/public/lm/lmri12.pfb><c:/Users/bdemayo.PRINCETON/AppData/Roaming/
 TinyTeX/texmf-dist/fonts/type1/public/lm/lmss8.pfb>
-Output written on webcdi_paper.pdf (29 pages, 1113936 bytes).
+Output written on webcdi_paper.pdf (41 pages, 2589135 bytes).
 PDF statistics:
- 359 PDF objects out of 1000 (max. 8388607)
- 299 compressed objects within 3 object streams
- 83 named destinations out of 1000 (max. 500000)
- 163 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 473 PDF objects out of 1000 (max. 8388607)
+ 389 compressed objects within 4 object streams
+ 106 named destinations out of 1000 (max. 500000)
+ 199 words of extra memory for PDF output out of 10000 (max. 10000000)
 

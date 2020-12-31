@@ -50,3 +50,39 @@
 \includegraphics{webcdi_paper_files/figure-latex/wsglm-1.pdf}
 \caption{\label{fig:wsglm}Individual children's vocabulary production scores plotted by children's age and maternal education level of primary caregiver education as reported in the sample of Words and Sentences Web-CDI administrations collected as of November 2020 (N = 1,948). Lines are smoothed quantile regressions showing the estimated median vocabulary score within each education group at each age.}
 \end{figure*}
+\efloatseparator
+ 
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+\centering
+\includegraphics{webcdi_paper_files/figure-latex/facebookad-1.pdf}
+\caption{\label{fig:facebookad}Example Facebook advertisement in Phase 1 of recent data collection.}
+\end{figure*}
+\efloatseparator
+ 
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+\centering
+\includegraphics{webcdi_paper_files/figure-latex/genderses-1.pdf}
+\caption{\label{fig:genderses}Individual children's vocabulary production scores from the entire Web-CDI sample plotted by children's age and gender (both WG and WS, N = 238, with 116 girls). Lines are best linear fits with associated 95\% confidence intervals. Children with a different or no reported gender (N = 3) are omitted here.}
+\end{figure*}
+\efloatseparator
+ 
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+\centering
+\includegraphics{webcdi_paper_files/figure-latex/momedses-1.pdf}
+\caption{\label{fig:momedses}Individual children's vocabulary production scores plotted by age and level of primary caregiver education, binned into those with a high school diploma or less education and those with some college education or a college diploma (N = 241). Lines show best linear fits and associated 95\% confidence intervals.}
+\end{figure*}
+\efloatseparator
+ 
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+\centering
+\includegraphics{webcdi_paper_files/figure-latex/demobarses-1.pdf}
+\caption{\label{fig:demobarses}Proportion of respondents plotted by child race (A) and educational level of primary caregiver (B) from recent data collection efforts aimed towards oversampling non-white, lower-SES families (N = 241), compared with norming sample demographics from Fenson (2007). Latinx participants can be of any race.}
+\end{figure*}

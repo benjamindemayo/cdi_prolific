@@ -490,7 +490,7 @@ save(
 ```
 
 Looking at people who did and didn't take enough time to finish
-```{r}
+```{r include=FALSE}
 #All data, incomplete and complete
 all_d <- 
   bind_rows(
@@ -672,7 +672,7 @@ ethnicity_plot_ses <-
     plot.caption = element_text(hjust = 0)
   )
 
-ethnicity_plot_ses
+
 
 ```
 
@@ -815,7 +815,7 @@ plot_grid(prow, legend, rel_widths = c(3, .5))
 
 ```{r}
 momed_ses_df <- 
-  demographics_df %>% 
+  demographics_df_ses %>% 
   mutate(highschool = case_when(
     maternal_ed == "Some high school or less" ~ "High school",
     maternal_ed == "High school diploma" ~ "High school",
@@ -829,7 +829,7 @@ momed_ses_df %>%
   filter(
     age <= 30
   ) %>% 
-  ggplot(aes(age, words_produced, color = highschool)) +
+  ggplot(aes(age, produced, color = highschool)) +
   geom_jitter(alpha = 0.3, width = 0.225) +
   geom_smooth(method = "lm") +
   labs(
