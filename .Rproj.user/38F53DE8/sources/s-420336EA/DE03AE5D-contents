@@ -1,0 +1,67 @@
+library(tidyverse)
+
+subject_id <- 
+  sample(
+    x = 1001:9999,
+    size = 100,
+    replace = FALSE
+  )
+
+#part 3a
+#define Y_0, array of numbers that represents participants' scores in the hard (noisy) condition
+Y_0 <- 
+  sample(
+    x = 0:30,
+    size = 100,
+    replace = TRUE
+  )
+
+Y_1 <- Y_0 + 3
+
+#here are the means: 
+mean(Y_0)
+mean(Y_1)
+
+#part 3b
+options <- c("silent", "noise")
+condition <- 
+  sample(
+    options,
+    size = 100,
+    replace = TRUE
+  )
+
+#part 3c
+dat <- 
+  tibble(
+    subject_id,
+    Y_0,
+    Y_1,
+    condition
+  )
+
+#part 4a
+
+#extract observed data for Y0 (noise condition) and take the mean
+Y_0_mean <- mean(dat %>% filter(condition == "noise") %>% pull(Y_0))
+
+#extract observed data for Y1 (silent condition) and take the mean
+Y_1_mean <- mean(dat %>% filter(condition == "silent") %>% pull(Y_1))
+
+#take the difference to find the ATE
+ate <- Y_1_mean - Y_0_mean
+
+ate
+
+#part 4b
+
+#No, the estimated ATE is not biased, since we randomly assigned people to conditions.
+
+#part 5
+
+save(dat, file = "dat.RData")
+
+
+
+
+
