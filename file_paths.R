@@ -36,3 +36,123 @@ fb_ws_directory <-
 #functions that are useful for Web-CDI data processing
 functions_script <- 
   fs::path(project_root, "analysis", "cdi_functions.R")
+
+##All data
+
+##All data WS1
+all_data_ws1_path <- 
+  fs::path(project_root, "data/full_dataset/raw/webcdi_ws1_screened.csv")
+
+all_data_ws2_path <- 
+  fs::path(project_root, "data/full_dataset/raw/webcdi_ws2_screened.csv")
+
+all_data_wg_path <- 
+  fs::path(project_root, "data/full_dataset/raw/webcdi_wg_screened.csv")
+
+##Unfiltered data
+wg_unfiltered_path <- 
+  fs::path(
+    project_root, 
+    "data", 
+    "full_dataset", 
+    "unfiltered", 
+    "wg_unfiltered.RData"
+  )
+
+ws_unfiltered_path <- 
+  fs::path(
+    project_root, 
+    "data", 
+    "full_dataset", 
+    "unfiltered", 
+    "ws_unfiltered.RData"
+  )
+
+wg_filtered_path <- 
+  fs::path(
+    project_root, 
+    "data", 
+    "full_dataset", 
+    "filtered", 
+    "wg_filtered.RData"
+  )
+
+##Filtered data
+ws_filtered_path <- 
+  fs::path(
+    project_root, 
+    "data", 
+    "full_dataset", 
+    "filtered", 
+    "ws_filtered.RData"
+  )
+
+##SES data - unfiltered
+
+wg_unfiltered_ses_path <- 
+  fs::path(
+    project_root, 
+    "data", 
+    "ses_norming", 
+    "unfiltered", 
+    "wg_unfiltered_ses.RData"
+  )
+
+ws_unfiltered_ses_path <- 
+  fs::path(
+    project_root, 
+    "data", 
+    "ses_norming", 
+    "unfiltered", 
+    "ws_unfiltered_ses.RData"
+  )
+
+##SES data - filtered
+
+wg_filtered_ses_path <- 
+  fs::path(
+    project_root, 
+    "data", 
+    "ses_norming", 
+    "filtered", 
+    "wg_filtered_ses.RData"
+  )
+
+ws_filtered_ses_path <- 
+  fs::path(
+    project_root, 
+    "data", 
+    "ses_norming", 
+    "filtered", 
+    "ws_filtered_ses.RData"
+  )
+
+##figures
+
+fig_directory <- 
+  fs::path(
+    project_root,
+    "paper",
+    "figs"
+  )
+
+##exclusion tables
+
+full_sample_exclusions <- 
+  fs::path(
+    project_root,
+    "data",
+    "exclusion_tables",
+    "full_sample_norming_exclusions",
+    ext = "RData"
+  )
+
+ses_sample_exclusions <- 
+  fs::path(
+    project_root,
+    "data",
+    "exclusion_tables",
+    "ses_norming_exclusions",
+    ext = "RData"
+  )
+

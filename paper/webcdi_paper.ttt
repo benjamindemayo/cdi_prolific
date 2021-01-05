@@ -1,0 +1,73 @@
+\begin{longtable}[t]{>{\raggedright\arraybackslash}p{2.2in}>{\raggedright\arraybackslash}p{1in}>{\raggedright\arraybackslash}p{2.2in}}
+\caption{\label{tab:unnamed-chunk-1}Settings customizable by researchers when creating new studies to be run on the Web-CDI platform.}\\
+\toprule
+\textbf{Study setting} & \textbf{Default value } & \textbf{Notes}\\
+\midrule
+\endfirsthead
+\caption[]{\label{tab:unnamed-chunk-1}Settings customizable by researchers when creating new studies to be run on the Web-CDI platform. \textit{(continued)}}\\
+\toprule
+\textbf{Study setting} & \textbf{Default value } & \textbf{Notes}\\
+\midrule
+\endhead
+
+\endfoot
+\bottomrule
+\endlastfoot
+Study name & none & NA\\
+Instrument & none & NA\\
+Number of days before study expiration & 14 & Must be between 1 and 28 days.\\
+Measurement units for birth weight & Pounds and ounces & Weight can also be measured in kilograms (kg).\\
+Minimum time (minutes) a parent must take to complete the study & 6 & NA\\
+Waiver of documentation & blank & Can be filled in by researchers to include a Waiver of Documentation for the participant to approve before proceeding to the experiment.\\
+Pre-fill data for longitudinal participants? & “No, do not populate any part of the form” & Researchers can choose to pre-fill the background information and the vocabulary checklist.\\
+Would you like to pay subjects in the form of Amazon gift cards? & No & If checked, researchers can enter gift codes to distribute to participants once they have completed the survey.\\
+Do you plan on collecting only anonymous data in this study? (e.g., posting ads on social media, mass emails, etc) & No & If checked, researchers can set a limit for the maximum number of participants, as well as select an option that asks participants to verify that the information entered is accurate.\\
+Would you like to show participants graphs of their data after completion? & Yes & NA\\
+Would you like participants to be able to share their Web-CDI results via Facebook? & No & NA\\*
+\end{longtable}
+\efloatseparator
+ 
+\begin{table*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+
+\caption{\label{tab:unnamed-chunk-2}Exclusions from full WebCDI sample}
+\centering
+\begin{tabular}[t]{>{\raggedright\arraybackslash}p{2.2in}>{\raggedright\arraybackslash}p{1in}>{\raggedright\arraybackslash}p{1in}>{\raggedright\arraybackslash}p{1in}>{\raggedright\arraybackslash}p{1in}}
+\toprule
+\textbf{Exclusion} & \textbf{WG exclusions} & \textbf{\% of full WG sample excluded} & \textbf{WS exclusions} & \textbf{\% of full WS sample excluded}\\
+\midrule
+Not first administration & 163 & 5.68\% & 444 & 12.35\%\\
+Premature or low birthweight & 37 & 1.29\% & 67 & 1.86\%\\
+Multilingual exposure & 449 & 15.66\% & 492 & 13.69\%\\
+Illnesses/Vision/Hearing & 191 & 6.66\% & 203 & 5.65\%\\
+Out of age range & 88 & 3.07\% & 200 & 5.56\%\\
+Completed survey too quickly & 363 & 12.66\% & 236 & 6.57\%\\
+System error in word tabulation & 1 & 0.03\% & 4 & 0.11\%\\
+Total exclusions & 1292 & 45\% & 1646 & 46\%\\
+\bottomrule
+\end{tabular}
+\end{table*}
+\efloatseparator
+ 
+\begin{table*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+
+\caption{\label{tab:unnamed-chunk-9}Exclusions from recent data collection using Facebook and Prolific.}
+\centering
+\begin{tabular}[t]{>{\raggedright\arraybackslash}p{2.2in}>{\raggedright\arraybackslash}p{1in}>{\raggedright\arraybackslash}p{1in}>{\raggedright\arraybackslash}p{1in}>{\raggedright\arraybackslash}p{1in}}
+\toprule
+\textbf{Exclusion} & \textbf{WG exclusions} & \textbf{\% of full WG sample excluded} & \textbf{WS exclusions} & \textbf{\% of full WS sample excluded}\\
+\midrule
+Not first administration & 0 & 0.00\% & 0 & 0.00\%\\
+Premature or low birthweight & 7 & 2.53\% & 1 & 0.33\%\\
+Multilingual exposure & 18 & 6.50\% & 23 & 7.62\%\\
+Illnesses/Vision/Hearing & 4 & 1.44\% & 4 & 1.32\%\\
+Out of age range & 1 & 0.36\% & 26 & 8.61\%\\
+Completed survey too quickly & 132 & 47.65\% & 122 & 40.40\%\\
+System error in word tabulation & 0 & 0.00\% & 0 & 0.00\%\\
+Total exclusions & 162 & 58\% & 176 & 58\%\\
+\bottomrule
+\end{tabular}
+\end{table*}

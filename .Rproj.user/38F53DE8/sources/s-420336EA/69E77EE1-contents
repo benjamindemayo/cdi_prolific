@@ -1,0 +1,29 @@
+---
+title: "Full dataset analysis"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(png)
+library(knitr)
+library(markdown)
+library(lmerTest)
+library(ggthemes)
+library(psych)
+library(magrittr)
+library(tidyboot)
+library(fs)
+library(ggmap)
+library(lubridate)
+
+source(path(here::here(), "file_paths.R"))
+source(functions_script)
+
+#Variables to tinker with
+min_completion_time = 8.5
+```
+
+First read in 
