@@ -53,8 +53,7 @@ linenumbers       : yes
 mask              : no
 draft             : no
 
-documentclass     : "apa7"
-classoption       : "man"
+class             : "man"
 output            : papaja::apa6_pdf
 ---
 
@@ -90,11 +89,9 @@ set.seed(42)
 knitr::opts_chunk$set(cache.extra = knitr::rand_seed, warning = FALSE, message = FALSE)
 ```
 
-Children vary tremendously in their vocabulary development [@Frank2021;@fenson1994]. Characterizing this variability is central to understanding the mechanisms that drive early language acquisition, yet capturing this variation in broad, diverse samples of children has been a significant challenge for cognitive scientists for decades. The MacArthur-Bates Communicative Development Inventory (MB-CDI, or CDI for short) is a commonly-used parent report instrument for assessing vocabulary development in early childhood [@fenson2007] that was introduced in part to create a cost-effective method for measuring variability across individuals. 
+Children vary tremendously in their vocabulary development [@Frank2021;@fenson1994]. Characterizing this variability is central to understanding the mechanisms that drive early language acquisition, yet capturing this variation in broad, diverse samples of children has been a significant challenge for cognitive scientists for decades. The MacArthur-Bates Communicative Development Inventories (MB-CDI, or CDI for short) are a set of commonly-used parent report instrument for assessing vocabulary development in early childhood [@fenson2007] that was introduced in part to create a cost-effective method for measuring variability across individuals. 
 
 In this paper, we introduce a web-based tool, Web-CDI, which was developed to address the need for collecting CDI data in an online format. Web-CDI allows researchers to increase the convenience of CDI administration, further decrease costs associated with data collection and entry, and access participant samples that have traditionally been difficult to reach in language development research. Our purpose in this paper is twofold: first, we describe Web-CDI as a platform which streamlines the process of collecting MB-CDI data and collates the data in a way that facilitates the creation of large-scale, multisite collaborative datasets. Second, we profile usage of Web-CDI thus far, with a particular focus on broadening the reach of traditional paper-based methods of collecting vocabulary development data.
-
-<!-- We begin by discussing parent report as a powerful method by which to address the challenge of measuring early language outcomes, as well as previous online parent report instruments. We then describe Web-CDI and its use from the perspective of participants and researchers. Finally, we report on our use of Web-CDI thus far and discuss the potential of Web-CDI to acquire vocabulary data from diverse, population-representative samples. We end with some challenges for future research. -->
 
 # The Importance of Parent Report Data
 
@@ -110,15 +107,15 @@ Here, we report on our recent efforts to create and distribute a web-based versi
 
 # Introducing Web-CDI 
 
-Web-CDI is a web-based platform for CDI administration and management. Web-CDI allows researchers to communicate with families by sharing URLs via email or social media, facilitating access to families in areas distant from an academic institution and eliminating costly mailings and laboratory visits. Web-CDI also standardizes electronic administration and scoring of CDI forms across labs and institutions, facilitating aggregation of CDI data for later reuse and comparison across administrations by different labs. Indeed, users of Web-CDI grant the CDI Advisory Board to access and analyze the resulting data on an opt-out basis, providing a path towards continual improvement of CDI instruments. Since 2018, more than 3500 CDIs have been collected by 15 research groups throughout the US who are using Web-CDI, demonstrating the potential for large-scale data collection and aggregation.  
+Web-CDI is a web-based platform for CDI administration and management. Web-CDI allows researchers to communicate with families by sharing URLs via email or social media, facilitating access to families in areas distant from an academic institution and eliminating costly mailings and laboratory visits. Web-CDI also standardizes electronic administration and scoring of CDI forms across labs and institutions, making possible the aggregation of CDI data for later reuse and comparison across administrations by different labs. Indeed, users of Web-CDI grant the CDI Advisory Board to access and analyze the resulting data on an opt-out basis, providing a path towards continual improvement of CDI instruments. Since 2018, more than 3,500 CDIs have been collected by 15 research groups throughout the US who are using Web-CDI, demonstrating the potential for large-scale data collection and aggregation.  
 
 Below, we outline how Web-CDI is used. We begin by detailing the consent obtention process and participant experience. Second, we describe the interface that researchers use to collect data using Web-CDI, specifying a number of common use cases for the platform.
 
 ## Participant interface
 
-Participants can complete the Web-CDI on a variety of devices, including personal computers and tablets. Web-CDI can be administered on a smartphone, although the experience is not as ideal for the user due to the length of the survey. (As Web-CDI moves in the future to incorporate more short forms and adaptive forms, smartphone responsive design will become a priority). When a participant clicks a URL shared by a researcher, they are directed to a website displaying their own personal administration of the Web-CDI, regardless of whether the link was participant-specific or general-purpose. In some cases, they may be asked to read and accept a waiver of consent documentation, depending on whether the researcher has chosen to use that feature (see also Researcher Interface below). 
+Participants can complete the Web-CDI on a variety of devices, including personal computers and tablets. Web-CDI can be administered on a smartphone, although the experience is not as ideal for the user due to the length of the survey. (As Web-CDI moves in the future to incorporate more short forms and adaptive forms, smartphone-responsive design will become a priority.) When a participant clicks a URL shared by a researcher, they are directed to a website displaying their own personal administration of the Web-CDI, regardless of whether the link was participant-specific or general-purpose. In some cases, they may be asked to read and accept a waiver of consent documentation, depending on whether the researcher has chosen to use that feature (see also Researcher Interface below). 
 
-*Demographics.* The parent is next asked to provide demographic information about their family and any health conditions that might impact their child’s vocabulary development. The specific demographic questions asked of participants can be adjusted to vary between different versions of the form, allowing researchers to tailor the demographic questions to local norms. For example, the Dutch CDI omits questions about participant ethnicity, since census data in the Netherlands does not include ethnicity. Researchers can customize the presentation of these demographic questions in three ways. First, they can elect to show all of the demographics items on the landing page or to present the majority of these questions at the end of the instrument. This choice is provided because some pilot work in the United Kingdom indicated that answering questions regarding personal health information early in administration may deter participants from completing the instrument. Second, certain demographic questions can be asked at both the beginning and the end of the form to serve as validity checks, providing a check that can be used to screen for hasty or illegitimate completions. Third, researchers can tailor the questions to the societal and cultural context of their participants (e.g., country-specific education level descriptors and income categories).
+*Demographics.* The participant is next asked to provide demographic information about their family and any health conditions that might impact their child’s vocabulary development. Researchers can customize the presentation of these demographic questions in three ways. First, they can elect to show all of the demographics items on the landing page or to present the majority of these questions at the end of the instrument. This choice is provided because some pilot work in the United Kingdom indicated that answering questions regarding personal health information early in administration may deter participants from completing the instrument. Second, certain demographic questions can be asked at both the beginning and the end of the form to serve as validity checks, such that participants' answers to redundant questions can be compared in order to screen for hasty or illegitimate completions. Third, researchers can tailor the questions to the societal and cultural context of their participants (e.g., country-specific education level descriptors, income categories, ethnicity definitions, etc.).
 
 ```{r pictorial, fig.cap= "Pictorial instructions in the Web-CDI Words and Sentences instrument."}
 
@@ -127,10 +124,18 @@ img <- png::readPNG(path(fig_directory, "pictorial_instructions.png"))
 grid::grid.raster(img)
 ```
 
+```{r firstitems, fig.cap= "(A) Sample items from the American English Words and Gestures form. (B) Sample items from the American English Words and Sentences form."}
+
+img <- png::readPNG(path(fig_directory, "cdi_instructions.png"))
+
+grid::grid.raster(img)
+
+```
+
 
 *Instructions.* After completing the first demographics page, participants are provided with instructions that are appropriate for either the Words & Gestures or Words & Sentences version (see Figure \ref{fig:pictorial}). At the top of the page are general instructions that inform participants that they should expect the study to take at least 30 minutes and that they should try to complete it in a quiet setting (e.g., while their child is sleeping). In addition, there are more detailed instructions for completing the vocabulary checklist. Unlike the traditional paper versions, instructions on how to properly choose responses are provided both in written and pictorial form. The pictorial instructions (Figure 1) aim to further increase caregivers’ understanding of how to complete the checklist. For example, these instructions clarify that the child’s understanding of a word requires them to have some understanding of the object that the word refers to or some aspect of the word’s meaning. In addition, caregivers are reassured that "child-like" forms (e.g., "raff" for "giraffe") or family- or dialect-specific forms (e.g., "nana" for "grandma" are acceptable).  Lastly, caregivers are reminded that the child should be able to produce the words "on their own" and that imitations are not acceptable. These general "rules of thumb" for completing the form should be familiar to researchers who are distributing the forms to parents so they can field any questions that may arise. While this is not possible for certain use-cases (e.g., collecting data via Facebook), these instructions should ideally also be reviewed either in writing (e.g., via email) or verbally (e.g., over the phone), so that these pictured instructions serve merely as a reminder to caregivers when completing the form.   
 
-*Completing the instrument.* The majority of the participant’s time in the study is spent completing the main sections of the instruments. As shown in Figure 2, on the American English Words and Gestures form, the vocabulary checklist portion of the form (396 items) asks parents to indicate whether their child can "understand" or "understand and say" each word. Gesture communication and other early milestones are also assessed. In the American English Words and Sentences form, the vocabulary checklist (680 items) only asks parents to indicate which words their child "says". Additional items assess children’s production of their three longest sentences, as well as morphological and syntactic development more broadly. All of these items are broken up across multiple screens for easier navigation through the form. 
+*Completing the instrument.* The majority of the participant’s time in the study is spent completing the main sections of the instruments. As shown in Figure \ref{fig:firstitems}, on the American English Words and Gestures form, the vocabulary checklist portion of the form (396 items) asks parents to indicate whether their child can "understand" or "understand and say" each word. Gesture communication and other early milestones are also assessed. In the American English Words and Sentences form, the vocabulary checklist (680 items) only asks parents to indicate which words their child "says". Additional items assess children’s production of their three longest sentences, as well as morphological and syntactic development more broadly. All of these items are broken up across multiple screens for easier navigation through the form. 
 
 At the completion of the form, a graph is displayed illustrating the proportion of words from each semantic category that the child currently produces or understands. In addition, data from the norming studies are used to estimate the ‘hardest’ (i.e., most advanced) word that the child currently understands or produces. This feedback to parents is intended to provide parents with a fun "thank you" and is intentionally not designed to provide specific feedback about their child’s progress relative to other children or any normative standard. The closing page also reminds parents that their participation does not constitute a clinical evaluation and that they should contact their pediatrician or primary care physician if they have any concerns about their child’s development. 
 
@@ -157,10 +162,10 @@ options_table %>%
   ) %>% 
   kable_styling(
     position = "center",
-    latex_options = "repeat_header"
+    latex_options = c("scale_down", "repeat_header")
   ) %>% 
   column_spec(c(1, 3), width = "2.2in") %>% 
-  column_spec(2, width = "1in") %>% 
+  column_spec(2, width = "1.2in") %>% 
   row_spec(0, bold = TRUE)
   
 
@@ -186,10 +191,6 @@ Below, we outline several possible use cases of Web-CDI, as well the features wh
 *Paid participation.* If researchers choose to compensate participants directly through the Web-CDI interface, Web-CDI has built-in functionality to distribute redeemable gift codes when a participant reaches the end of the survey. Web-CDI contains several features to facilitate integration with third-party crowdsourcing applications and survey vendors should they choose to handle participant compensation through another platform. For example, when creating studies, researchers can enter a URL to redirect participants to when they reach the end of the survey. Researchers using the behavioral research platform Prolific can configure their study to collect participants’ unique Prolific IDs and pre-fill them in the survey.
 
 *Cross-linguistic research.* Web-CDI forms are currently available in English (U.S. American and Canadian), Spanish, French (Quebecois), Hebrew, Dutch and Korean. We are looking to add more language forms to the tool as the paper version of the forms has been adapted into more than 100 different languages and further ongoing adaptations have been approved by the MB-CDI board (http://mb-cdi.stanford.edu/adaptations).
-
-<!-- ## Administrator interface -->
-
-<!-- System administrators who oversee the development and usage of Web-CDI can log into a specific interface provided by Django, the open-source web framework used to develop Web-CDI. This Django interface gives access to the entire dataset collected by all participating researchers, as well as all of the instrument forms that can be distributed to participants. Administrators approve new researchers’ requests to create accounts on Web-CDI, and give individual researchers access to specific instrument forms. As an example, if a researcher wants to distribute the Spanish Words and Gestures form to participants, an administrator would need to give a researcher access to this instrument. Administrator privileges are limited to a handful of individuals, as most of the functionality accessible to administrators is not relevant to researchers using the survey for their own purposes. -->
 
 ## System Design
 
@@ -234,7 +235,7 @@ exclusion_tbl_full %>%
   kable_styling(
     position = "center"
   ) %>% 
-  column_spec(1, width = "2.2in") %>% 
+  column_spec(1, width = "2.4in") %>% 
   column_spec(2:5, width = "1in") %>% 
   row_spec(0, bold = TRUE)
 
@@ -243,7 +244,7 @@ exclusion_tbl_full %>%
 
 One of the key benefits of Web-CDI use is that the system in effect becomes a centralized repository for standardized administrations of the CDI, contributing anonymized data (again, on an opt-out basis) to future research and norming efforts. In this section, we provide some preliminary analyses of the American English Web-CDI, demonstrating the potential of the Web-CDI system to provide a distributed platform for gathering large CDI datasets. 
 
-At time of writing, researchers from 15 universities in the United States have collected over 5,000 administrations of the American English CDI using Web-CDI since it was launched in late 2017, with `r formatC(unfiltered_n_wg, big.mark = ",", big.interval = 3)` administrations of the WG form and `r formatC(unfiltered_n_ws, big.mark = ",", big.interval = 3)` administrations of the WS form. We excluded participants from the subsequent analyses based on a set of stringent criteria intended for the creation of future normative datasets. We excluded participants if it was not their first administration of the survey; if they were born prematurely or had a birthweight under 5.5 lbs (< 2.5 kg); reported more than 16 hours of exposure to a language other than English per week on average (amounting to >10% exposure to English); had serious vision impairments, hearing deficits or other developmental disorders or medical issues^[Exclusions on the basis of child health were decided on a case-by-case basis by author V.M. in consultation with Philip Dale, Donna Thal, and Larry Fenson.]; completed the survey unrealistically quickly (defined here as in fewer than 8.5 minutes; see below for some justification of this number   ); or were outside of the correct age range for the survey. The exclusion criteria we used were similar to those used in @fenson2007, who adopted stringent criteria to establish vocabulary norms that reflect typically developing children’s vocabulary trajectories. A complete breakdown of the number of participants excluded on each criterion is in Table 2. Of the completed WG forms, `r formatC(exclusions_n_wg, big.mark = ",", big.interval = 3)` were excluded, leading to a final WG sample size of `r formatC(filtered_n_wg, big.mark = ",", big.interval = 3)` administrations, and `r formatC(exclusions_n_ws, big.mark = ",", big.interval = 3)` WS administrations were excluded, leading to a final WS sample size of `r formatC(filtered_n_ws, big.mark = ",", big.interval = 3)`. 
+At time of writing, researchers from 15 universities in the United States have collected over 5,000 administrations of the American English CDI using Web-CDI since it was launched in late 2017, with `r formatC(unfiltered_n_wg, big.mark = ",", big.interval = 3)` administrations of the WG form before exclusions and `r formatC(unfiltered_n_ws, big.mark = ",", big.interval = 3)` administrations of the WS form before exclusions. We excluded participants from the subsequent analyses based on a set of stringent criteria intended for the creation of future normative datasets. We excluded participants if it was not their first administration of the survey; if they were born prematurely or had a birthweight under 5.5 lbs (< 2.5 kg); reported more than 16 hours of exposure to a language other than English per week on average (amounting to >10% exposure to English); had serious vision impairments, hearing deficits or other developmental disorders or medical issues^[Exclusions on the basis of child health were decided on a case-by-case basis by author V.M. in consultation with Philip Dale, Donna Thal, and Larry Fenson.]; completed the survey unrealistically quickly (defined here as in fewer than 8.5 minutes; see below for some justification of this number   ); or were outside of the correct age range for the survey. The exclusion criteria we used were similar to those used in @fenson2007, who adopted stringent criteria to establish vocabulary norms that reflect typically developing children’s vocabulary trajectories. A complete breakdown of the number of participants excluded on each criterion is in Table 2. Of the completed WG forms, `r formatC(exclusions_n_wg, big.mark = ",", big.interval = 3)` were excluded, leading to a final WG sample size of `r formatC(filtered_n_wg, big.mark = ",", big.interval = 3)` administrations, and `r formatC(exclusions_n_ws, big.mark = ",", big.interval = 3)` WS administrations were excluded, leading to a final WS sample size of `r formatC(filtered_n_ws, big.mark = ",", big.interval = 3)`. 
 
 ```{r}
 
@@ -285,7 +286,13 @@ ethnicity_plot_df <-
     cols = c(`Web-CDI sample`, `2007 manual`, `U.S. Census Estimates`),
     names_to = "study",
     values_to = "proportion"
-  )
+  ) %>% 
+  mutate(study = fct_relevel(
+    study,
+    "Web-CDI sample", 
+    "2007 manual", 
+    "U.S. Census Estimates"
+  ))
 
 #ethnicity plot
 ethnicity_plot <-
@@ -328,7 +335,13 @@ maternal_ed_plot_df <-
       "Some college education",
       "College diploma or more"
     )
-  )
+  ) %>% 
+  mutate(study = fct_relevel(
+    study,
+    "Web-CDI sample", 
+    "2007 manual", 
+    "U.S. Census Estimates"
+  ))
 
 x_axis_labs <- c(
   "Some high school\n or less",
@@ -357,16 +370,16 @@ prow <- cowplot::plot_grid(
     theme(
       legend.position = "none", 
       plot.margin = (margin(r = 2, l = 0)),
-      axis.text = element_text(size = 21),
-      axis.title = element_text(size = 21)
+      axis.text = element_text(size = 15),
+      axis.title = element_text(size = 15)
     ),
   maternal_ed_plot + 
     ylab(NULL) + 
     theme(
       legend.position = "none", 
       plot.margin = (margin(r = 2, l = 2)),
-      axis.text = element_text(size = 21),
-      axis.title = element_text(size = 21)
+      axis.text = element_text(size = 15),
+      axis.title = element_text(size = 15)
     ),
   align = "hv",
   labels = c("A", "B")
@@ -379,17 +392,18 @@ legend <-
       # theme(legend.position = "bottom")
       theme(
         legend.box.margin = margin(0, 0, 0, 15),
-        legend.text = element_text(size = 18)
+        legend.text = element_text(size = 15),
+        legend.position = "bottom"
       )
   )
 
-demo_barplot <- plot_grid(prow, legend, rel_widths = c(3, .5))
+demo_barplot <- plot_grid(prow, legend, ncol = 1, rel_heights = c(1, .1))
 
 ggsave(
   "demo_barplot.png", 
   plot = demo_barplot,
   path = fig_directory,
-  width = 20,
+  width = 12,
   height = 8
 )
 
@@ -449,7 +463,7 @@ ws_hispanic_percent <-
 
 ## Demographic distribution and exclusions
 
-Figure \ref{fig:demobarfig} shows the distribution of participant ethnicities as compared with previously reported numbers in a large scale norming study of the paper-based CDI form by @fenson2007. White participants still comprised nearly three quarters of the Web-CDI sample, while a higher proportion of participants report mixed ethnic identification as compared to the 2007 norms. Few participants identified as Hispanic/Latino: `r wg_hispanic_percent` of WG participants and `r ws_hispanic_percent` of WS participants reported Hispanic of Latino heritage. The low percentage of Hispanic/Latino participants was due in part to our exclusion of children with substantial exposure to languages other than English. Participants’ educational attainment level was similarly skewed. Over 80% of children in the Web-CDI sample came from families with college-educated mothers compared to 43% from the same group in the 2007 norms (Figure 3). Furthermore, less than 1 percent of participants in our families report a maternal education level less than a high school degree, compared to 7% from the same group in the 2007 norms. The overrepresentation of white Americans with high levels of education attainment in this sample points to a general challenge encountered in vocabulary development research, which we return to when we detail our efforts to recruit more diverse participants.
+Figure \ref{fig:demobarfig} shows the distribution of participant ethnicities as compared with previously reported numbers in a large scale norming study of the paper-based CDI form by @fenson2007. White participants still comprised nearly three quarters of the Web-CDI sample, while a higher proportion of participants report mixed ethnic identification as compared to the 2007 norms. Few participants identified as Hispanic/Latino: `r wg_hispanic_percent` of WG participants and `r ws_hispanic_percent` of WS participants reported Hispanic of Latino heritage. The low percentage of Hispanic/Latino participants was due in part to our exclusion of children with substantial exposure to languages other than English. Participants’ educational attainment level was similarly skewed. Over 80% of children in the Web-CDI sample came from families with college-educated mothers compared to 43% from the same group in the 2007 norms (Figure \ref{fig:demobarfig}). Furthermore, less than 1 percent of participants in our families report a maternal education level less than a high school degree, compared to 7% from the same group in the 2007 norms. The overrepresentation of white Americans with high levels of education attainment in this sample points to a general challenge encountered in vocabulary development research, which we return to when we detail our efforts to recruit more diverse participants.
 
 ## Results
 
@@ -629,13 +643,20 @@ wg_med_plot <-
     color = "Maternal education level",
     x = "age in months",
     y = "number of words"
-  ) 
+  )+
+   theme(
+    axis.text = element_text(size = 15),
+    axis.title = element_text(size = 16),
+    legend.title = element_text(size = 16),
+    legend.text = element_text(size = 15),
+    strip.text = element_text(size = 15)
+  )
 
 ggsave(
   "median_plot.png", 
   plot = last_plot(),
   path = fig_directory,
-  width = 9,
+  width = 12,
   height = 4.5
 )
 
@@ -647,6 +668,7 @@ medplot_caption <- "Median vocabulary production (left) and comprehension (right
 img_3 <- png::readPNG(path(fig_directory, "median_plot.png"))
 
 grid::grid.raster(img_3)
+
 
 ```
 
@@ -695,7 +717,7 @@ ws_momed_fits <-
   mutate(fitted = fitted * wg_total_words)
 
 wsglm_caption <- 
-  str_c("Individual children’s vocabulary production scores plotted by children’s age and maternal education level of primary caregiver education as reported in the sample of Words and Sentences Web-CDI administrations collected as of November 2020 (N = ", formatC(filtered_n_ws, big.mark = ",", big.interval = 3), ").   Lines are smoothed quantile regressions showing the estimated median vocabulary score within each education group at each age.")
+  str_c("Individual children’s vocabulary production scores plotted by children’s age and maternal education level of primary caregiver education as reported in the sample of Words and Sentences Web-CDI administrations collected as of November 2020 (N = ", formatC(filtered_n_ws, big.mark = ",", big.interval = 3), ").   Curves show generalized linear models fits.")
 
 #number of WS participants with less than high school education
 
@@ -796,7 +818,7 @@ exclusion_tbl_ses %>%
   kable_styling(
     position = "center"
   ) %>% 
-  column_spec(1, width = "2.2in") %>% 
+  column_spec(1, width = "2.4in") %>% 
   column_spec(2:5, width = "1in") %>% 
   row_spec(0, bold = TRUE)
 
@@ -1021,7 +1043,13 @@ ethnicity_plot_df_ses <-
     cols = c(`Current study`, `2007 manual`, `U.S. Census Estimates`),
     names_to = "study",
     values_to = "proportion"
-  )
+  ) %>% 
+  mutate(study = fct_relevel(
+    study,
+    "Current study", 
+    "2007 manual", 
+    "U.S. Census Estimates"
+  ))
 
 ethnicity_plot_ses <-
   ethnicity_plot_df_ses %>% 
@@ -1040,7 +1068,8 @@ ethnicity_plot_ses <-
      )
   ) +
   labs(x = "Ethnicity") +
-  scale_fill_viridis_d()
+  scale_fill_viridis_d() +
+  coord_cartesian(ylim = c(0, .81))
 
 maternal_ed_plot_df_ses <- 
   demographics_df_ses %>% 
@@ -1062,7 +1091,13 @@ maternal_ed_plot_df_ses <-
       "Some college education",
       "College diploma or more"
     )
-  )
+  ) %>% 
+  mutate(study = fct_relevel(
+    study,
+    "Current study", 
+    "2007 manual", 
+    "U.S. Census Estimates"
+  ))
 
 
 x_axis_labs <- c(
@@ -1092,16 +1127,16 @@ prow_ses <- cowplot::plot_grid(
     theme(
       legend.position = "none", 
       plot.margin = (margin(r = 2, l = 0)),
-      axis.text = element_text(size = 21),
-      axis.title = element_text(size = 21)
+      axis.text = element_text(size = 15),
+      axis.title = element_text(size = 15)
     ),
   maternal_ed_plot_ses + 
     ylab(NULL) + 
     theme(
       legend.position = "none", 
       plot.margin = (margin(r = 2, l = 2)),
-      axis.text = element_text(size = 21),
-      axis.title = element_text(size = 21)
+      axis.text = element_text(size = 15),
+      axis.title = element_text(size = 15)
     ),
   align = "hv",
   labels = c("A", "B")
@@ -1114,17 +1149,19 @@ legend_ses <-
       # theme(legend.position = "bottom")
       theme(
         legend.box.margin = margin(0, 0, 0, 15),
-        legend.text = element_text(size = 18)
+        legend.text = element_text(size = 15),
+        legend.position = "bottom"
       )
   )
 
-demo_barplot_ses <- plot_grid(prow_ses, legend_ses, rel_widths = c(3, .5))
+demo_barplot_ses <- 
+  plot_grid(prow_ses, legend_ses, ncol = 1, rel_heights = c(1, .1))
 
 ggsave(
   "demo_barplot_ses.png", 
   plot = demo_barplot_ses,
   path = fig_directory,
-  width = 20,
+  width = 12,
   height = 8
 )
 
@@ -1159,7 +1196,7 @@ Finally, a significant limitation of the current data collection process is that
 
 # Conclusions
 
-In this paper, we presented Web-CDI, a comprehensive online interface for researchers to measure children’s vocabulary by administering the MacArthur-Bates Communicative Development Inventory family of parent-report instruments. Web-CDI provides a convenient researcher management interface, built-in data privacy protections, and a variety of features designed to make both longitudinal and social-media sampling easy. To date, over 4,000 valid administrations of the WG and WS forms have been collected on Web-CDI from more than a dozen researchers in the United States after applying strict exclusion criteria derived from previous norming studies) [@fenson1994; @fenson2007].
+In this paper, we presented Web-CDI, a comprehensive online interface for researchers to measure children’s vocabulary by administering the MacArthur-Bates Communicative Development Inventory family of parent-report instruments. Web-CDI provides a convenient researcher management interface, built-in data privacy protections, and a variety of features designed to make both longitudinal and social-media sampling easy. To date, over 3,500 valid administrations of the WG and WS forms have been collected on Web-CDI from more than a dozen researchers in the United States after applying strict exclusion criteria derived from previous norming studies) [@fenson1994; @fenson2007].
 
 Many research laboratories, not only in the United States but around the world, collect vocabulary development data using the MacArthur-Bates CDI. With traditional paper-based forms, combining insights from various research groups can prove challenging, as each group may have slightly different ways of formatting and managing data from CDI forms. By contrast, if all of these groups’ data come to be stored in a single repository with a consistent database structure, data from disparate sources can easily be collated and analyzed in a uniform fashion. As such, a centralized repository such as Web-CDI provides a streamlined data-aggregation pipeline that facilitates cross-lab collaborations, multisite research projects and the curation of large datasets that provide more power to characterize the vast individual differences present in children’s vocabulary development.
 

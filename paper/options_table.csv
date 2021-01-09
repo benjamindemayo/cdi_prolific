@@ -1,6 +1,7 @@
 ﻿Study setting,Default value ,Notes
  Study name,none,
 Instrument,none,
+Age range for study,none,Defaults based on instrument selected.
 Number of days before study expiration,14,Must be between 1 and 28 days.
 Measurement units for birth weight,Pounds and ounces,Weight can also be measured in kilograms (kg).
 Minimum time (minutes) a parent must take to complete the study,6,
@@ -10,6 +11,8 @@ Would you like to pay subjects in the form of Amazon gift cards?,No,"If checked,
 "Do you plan on collecting only anonymous data in this study? (e.g., posting ads on social media, mass emails, etc)",No,"If checked, researchers can set a limit for the maximum number of participants, as well as select an option that asks participants to verify that the information entered is accurate."
 Would you like to show participants graphs of their data after completion?,Yes,
 Would you like participants to be able to share their Web-CDI results via Facebook?,No,
-,,
-,,
-,,
+Would you like participants to answer the confirmation questions?,No,Asks redundant demographic questions to serve as attention checks.
+Provide redirect button at completion of study?,No,Used to redirect users to external site after form completion.
+Capture the Prolific Id for the participant?,No,For integration with Prolific.
+Allow participant to print their responses at end of Study?,No,
+End message,Standard end-of-study message,Can be changed to customize end-of-study message.
