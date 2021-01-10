@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2021.1.8)  9 JAN 2021 01:21
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2021.1.8)  9 JAN 2021 22:55
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -903,40 +903,40 @@ Overfull \hbox (52.77249pt too wide) in paragraph at lines 269--283
  [][] 
  []
 
-[17] [18]
-<webcdi_paper_files/figure-latex/demobarfig-1.pdf, id=178, 469.755pt x 325.215p
+[17]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[18]
+<webcdi_paper_files/figure-latex/demobarfig-1.pdf, id=179, 469.755pt x 325.215p
 t>
 File: webcdi_paper_files/figure-latex/demobarfig-1.pdf Graphic file (type pdf)
 <use webcdi_paper_files/figure-latex/demobarfig-1.pdf>
 Package pdftex.def Info: webcdi_paper_files/figure-latex/demobarfig-1.pdf  used
  on input line 291.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[19 <./webcdi_paper_files/figure-latex/demobarfig-1.pdf>]
-<webcdi_paper_files/figure-latex/genderfig-1.pdf, id=192, 469.755pt x 325.215pt
+[19]
+<webcdi_paper_files/figure-latex/genderfig-1.pdf, id=190, 469.755pt x 325.215pt
 >
 File: webcdi_paper_files/figure-latex/genderfig-1.pdf Graphic file (type pdf)
 <use webcdi_paper_files/figure-latex/genderfig-1.pdf>
 Package pdftex.def Info: webcdi_paper_files/figure-latex/genderfig-1.pdf  used 
 on input line 305.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[20]
-<webcdi_paper_files/figure-latex/wgglm-1.pdf, id=199, 469.755pt x 325.215pt>
+[20 <./webcdi_paper_files/figure-latex/demobarfig-1.pdf>]
+<webcdi_paper_files/figure-latex/wgglm-1.pdf, id=201, 469.755pt x 325.215pt>
 File: webcdi_paper_files/figure-latex/wgglm-1.pdf Graphic file (type pdf)
 <use webcdi_paper_files/figure-latex/wgglm-1.pdf>
 Package pdftex.def Info: webcdi_paper_files/figure-latex/wgglm-1.pdf  used on i
 nput line 313.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<webcdi_paper_files/figure-latex/wgmedfig-1.pdf, id=200, 469.755pt x 325.215pt>
+<webcdi_paper_files/figure-latex/wgmedfig-1.pdf, id=202, 469.755pt x 325.215pt>
 
 File: webcdi_paper_files/figure-latex/wgmedfig-1.pdf Graphic file (type pdf)
 <use webcdi_paper_files/figure-latex/wgmedfig-1.pdf>
 Package pdftex.def Info: webcdi_paper_files/figure-latex/wgmedfig-1.pdf  used o
 n input line 319.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<webcdi_paper_files/figure-latex/wsglm-1.pdf, id=201, 469.755pt x 325.215pt>
+<webcdi_paper_files/figure-latex/wsglm-1.pdf, id=203, 469.755pt x 325.215pt>
 File: webcdi_paper_files/figure-latex/wsglm-1.pdf Graphic file (type pdf)
 <use webcdi_paper_files/figure-latex/wsglm-1.pdf>
 Package pdftex.def Info: webcdi_paper_files/figure-latex/wsglm-1.pdf  used on i
@@ -946,7 +946,7 @@ nput line 325.
 Underfull \vbox (badness 3623) has occurred while \output is active []
 
 [21 <./webcdi_paper_files/figure-latex/genderfig-1.pdf>]
-Underfull \vbox (badness 2932) has occurred while \output is active []
+Underfull \vbox (badness 2626) has occurred while \output is active []
 
 [22 <./webcdi_paper_files/figure-latex/wgglm-1.pdf>]
 Underfull \vbox (badness 3623) has occurred while \output is active []
@@ -954,11 +954,8 @@ Underfull \vbox (badness 3623) has occurred while \output is active []
 [23 <./webcdi_paper_files/figure-latex/wgmedfig-1.pdf>]
 Underfull \vbox (badness 3623) has occurred while \output is active []
 
-[24 <./webcdi_paper_files/figure-latex/wsglm-1.pdf>]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[25]
-<webcdi_paper_files/figure-latex/facebookad-1.pdf, id=269, 469.755pt x 325.215p
+[24 <./webcdi_paper_files/figure-latex/wsglm-1.pdf>] [25]
+<webcdi_paper_files/figure-latex/facebookad-1.pdf, id=271, 469.755pt x 325.215p
 t>
 File: webcdi_paper_files/figure-latex/facebookad-1.pdf Graphic file (type pdf)
 <use webcdi_paper_files/figure-latex/facebookad-1.pdf>
@@ -974,21 +971,21 @@ Overfull \hbox (52.77249pt too wide) in paragraph at lines 357--371
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [27] [28]
-<webcdi_paper_files/figure-latex/genderses-1.pdf, id=293, 469.755pt x 325.215pt
+<webcdi_paper_files/figure-latex/genderses-1.pdf, id=295, 469.755pt x 325.215pt
 >
 File: webcdi_paper_files/figure-latex/genderses-1.pdf Graphic file (type pdf)
 <use webcdi_paper_files/figure-latex/genderses-1.pdf>
 Package pdftex.def Info: webcdi_paper_files/figure-latex/genderses-1.pdf  used 
 on input line 383.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<webcdi_paper_files/figure-latex/momedses-1.pdf, id=294, 469.755pt x 325.215pt>
+<webcdi_paper_files/figure-latex/momedses-1.pdf, id=296, 469.755pt x 325.215pt>
 
 File: webcdi_paper_files/figure-latex/momedses-1.pdf Graphic file (type pdf)
 <use webcdi_paper_files/figure-latex/momedses-1.pdf>
 Package pdftex.def Info: webcdi_paper_files/figure-latex/momedses-1.pdf  used o
 n input line 389.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<webcdi_paper_files/figure-latex/demobarses-1.pdf, id=295, 469.755pt x 325.215p
+<webcdi_paper_files/figure-latex/demobarses-1.pdf, id=297, 469.755pt x 325.215p
 t>
 File: webcdi_paper_files/figure-latex/demobarses-1.pdf Graphic file (type pdf)
 <use webcdi_paper_files/figure-latex/demobarses-1.pdf>
@@ -1013,8 +1010,8 @@ Package rerunfilecheck Info: File `webcdi_paper.out' has not changed.
 (rerunfilecheck)             Checksum: 0859F767562A5A4803E37DEAF2CF2844;2428.
  ) 
 Here is how much of TeX's memory you used:
- 15120 strings out of 481258
- 230582 string characters out of 5913213
+ 15121 strings out of 481258
+ 230593 string characters out of 5913213
  557612 words of memory out of 5000000
  31641 multiletter control sequences out of 15000+600000
  476300 words of font info for 91 fonts, out of 8000000 for 9000
@@ -1034,10 +1031,10 @@ ppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb><c:/Users/bdem
 ayo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri12.p
 fb><c:/Users/bdemayo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/p
 ublic/lm/lmss8.pfb>
-Output written on webcdi_paper.pdf (37 pages, 2607684 bytes).
+Output written on webcdi_paper.pdf (37 pages, 3289322 bytes).
 PDF statistics:
- 443 PDF objects out of 1000 (max. 8388607)
- 361 compressed objects within 4 object streams
- 100 named destinations out of 1000 (max. 500000)
+ 445 PDF objects out of 1000 (max. 8388607)
+ 363 compressed objects within 4 object streams
+ 101 named destinations out of 1000 (max. 500000)
  168 words of extra memory for PDF output out of 10000 (max. 10000000)
 
