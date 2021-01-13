@@ -1,4 +1,4 @@
-﻿Study setting,Default value ,Notes
+﻿Study setting,Default value,Notes
  Study name,none,
 Instrument,none,
 Age range for study,none,Defaults based on instrument selected.
@@ -6,7 +6,7 @@ Number of days before study expiration,14,Must be between 1 and 28 days.
 Measurement units for birth weight,Pounds and ounces,Weight can also be measured in kilograms (kg).
 Minimum time (minutes) a parent must take to complete the study,6,
 Waiver of documentation,blank,Can be filled in by researchers to include a Waiver of Documentation for the participant to approve before proceeding to the experiment.
-Pre-fill data for longitudinal participants?,"“No, do not populate any part of the form”",Researchers can choose to pre-fill the background information and the vocabulary checklist.
+Pre-fill data for longitudinal participants?,"No, do not populate any part of the form",Researchers can choose to pre-fill the background information and the vocabulary checklist.
 Would you like to pay subjects in the form of Amazon gift cards?,No,"If checked, researchers can enter gift codes to distribute to participants once they have completed the survey."
 "Do you plan on collecting only anonymous data in this study? (e.g., posting ads on social media, mass emails, etc)",No,"If checked, researchers can set a limit for the maximum number of participants, as well as select an option that asks participants to verify that the information entered is accurate."
 Would you like to show participants graphs of their data after completion?,Yes,

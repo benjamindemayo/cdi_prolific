@@ -4640,4 +4640,30 @@
   publisher = {J\&R Press},
 }
 
+@Article{DeHouwer2019,
+  author       = {De Houwer, Annick},
+  date         = {2019},
+  journaltitle = {Journal of Monolingual and Bilingual Speech},
+  title        = {Equitable Evaluation Of Bilingual Children's Language Knowledge Using the CDI: It Really Matters Who You Ask},
+  number       = {1},
+  pages        = {32--54},
+  volume       = {1},
+}
+
+@Article{Astivia2019,
+  author       = {Astivia, Oscar L Olvera and Zumbo, Bruno D},
+  date         = {2019},
+  journaltitle = {Practical Assessment, Research, and Evaluation},
+  title        = {Heteroskedasticity in Multiple Regression Analysis: What it is, How to Detect it and How to Solve it with Applications in R and SPSS},
+  number       = {1},
+  pages        = {1},
+  volume       = {24},
+}
+
+@Online{2019,
+  date  = {June 12, 2019},
+  title = {Mobile Fact Sheet},
+  url   = {https://www.pewresearch.org/internet/fact-sheet/mobile/},
+}
+
 @Comment{jabref-meta: databaseType:biblatex;}

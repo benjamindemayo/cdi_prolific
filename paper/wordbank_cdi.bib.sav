@@ -4650,4 +4650,22 @@
   volume       = {1},
 }
 
+@Article{Astivia2019,
+  author       = {Astivia, Oscar L Olvera and Zumbo, Bruno D},
+  date         = {2019},
+  journaltitle = {Practical Assessment, Research, and Evaluation},
+  title        = {Heteroskedasticity in Multiple Regression Analysis: What it is, How to Detect it and How to Solve it with Applications in R and SPSS},
+  number       = {1},
+  pages        = {1},
+  volume       = {24},
+}
+
+@Online{Center2019,
+  author       = {Pew Research Center},
+  date         = {June 12, 2019},
+  title        = {Mobile Fact Sheet},
+  url          = {https://www.pewresearch.org/internet/fact-sheet/mobile/},
+  organization = {Pew Research Center},
+}
+
 @Comment{jabref-meta: databaseType:biblatex;}

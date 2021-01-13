@@ -1,0 +1,82 @@
+\clearpage
+\makeatletter
+\efloat@restorefloats
+\makeatother
+
+
+\begin{appendix}
+\section{}
+\begin{longtable}[t]{>{\raggedright\arraybackslash}p{2.2in}>{\raggedright\arraybackslash}p{1.2in}>{\raggedright\arraybackslash}p{2.2in}}
+\caption{(\#tab:unnamed-chunk-17)Settings customizable by researchers when creating new studies to be run on the Web-CDI platform.}\\
+\toprule
+\textbf{Study setting} & \textbf{Default value} & \textbf{Notes}\\
+\midrule
+\endfirsthead
+\caption[]{(\#tab:unnamed-chunk-17)Settings customizable by researchers when creating new studies to be run on the Web-CDI platform. \textit{(continued)}}\\
+\toprule
+\textbf{Study setting} & \textbf{Default value} & \textbf{Notes}\\
+\midrule
+\endhead
+
+\endfoot
+\bottomrule
+\endlastfoot
+Study name & none & --\\
+Instrument & none & --\\
+Age range for study & none & Defaults based on instrument selected.\\
+Number of days before study expiration & 14 & Must be between 1 and 28 days.\\
+Measurement units for birth weight & Pounds and ounces & Weight can also be measured in kilograms (kg).\\
+Minimum time (minutes) a parent must take to complete the study & 6 & --\\
+Waiver of documentation & blank & Can be filled in by researchers to include a Waiver of Documentation for the participant to approve before proceeding to the experiment.\\
+Pre-fill data for longitudinal participants? & No, do not populate any part of the form & Researchers can choose to pre-fill the background information and the vocabulary checklist.\\
+Would you like to pay subjects in the form of Amazon gift cards? & No & If checked, researchers can enter gift codes to distribute to participants once they have completed the survey.\\
+Do you plan on collecting only anonymous data in this study? (e.g., posting ads on social media, mass emails, etc) & No & If checked, researchers can set a limit for the maximum number of participants, as well as select an option that asks participants to verify that the information entered is accurate.\\
+Would you like to show participants graphs of their data after completion? & Yes & --\\
+Would you like participants to be able to share their Web-CDI results via Facebook? & No & --\\
+Would you like participants to answer the confirmation questions? & No & Asks redundant demographic questions to serve as attention checks.\\
+Provide redirect button at completion of study? & No & Used to redirect users to external site after form completion.\\
+Capture the Prolific Id for the participant? & No & For integration with Prolific.\\
+Allow participant to print their responses at end of Study? & No & --\\
+End message & Standard end-of-study message & Can be changed to customize end-of-study message.\\*
+\end{longtable}
+
+\newpage
+
+\begin{table}
+
+\caption{(\#tab:unnamed-chunk-18)Regression output for WG comprehension measure.}
+\centering
+\resizebox{\linewidth}{!}{
+\begin{tabular}[t]{lrrrrrrr}
+\toprule
+term & estimate & std.error & statistic & p.value & conf.low & conf.high & df\\
+\midrule
+Intercept & 124.810162 & 2.4775536 & 50.376372 & 0.0000000 & 119.9504831 & 129.669841 & 1563\\
+Age & 19.886304 & 0.7948915 & 25.017632 & 0.0000000 & 18.3271375 & 21.445470 & 1563\\
+Caregiver education: Some college & 15.211941 & 8.2460195 & 1.844762 & 0.0652613 & -0.9624853 & 31.386367 & 1563\\
+Caregiver education: High school or less & 29.590528 & 11.6323333 & 2.543817 & 0.0110604 & 6.7739047 & 52.407151 & 1563\\
+Age * Caregiver education: Some college & -2.634036 & 2.3380237 & -1.126608 & 0.2600812 & -7.2200296 & 1.951958 & 1563\\
+Age * Caregiver education: High school or less & -8.265199 & 3.2612259 & -2.534384 & 0.0113614 & -14.6620378 & -1.868360 & 1563\\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\begin{table}
+
+\caption{(\#tab:unnamed-chunk-18)Regression output for WG production measure.}
+\centering
+\resizebox{\linewidth}{!}{
+\begin{tabular}[t]{lrrrrrrr}
+\toprule
+term & estimate & std.error & statistic & p.value & conf.low & conf.high & df\\
+\midrule
+Intercept & 32.215191 & 1.4982257 & 21.5022284 & 0.0000000 & 29.276003 & 35.154379 & 1308\\
+Age & 7.818305 & 0.6165779 & 12.6801578 & 0.0000000 & 6.608715 & 9.027895 & 1308\\
+Caregiver education: Some college & 6.877730 & 5.3868563 & 1.2767613 & 0.2019131 & -3.690093 & 17.445553 & 1308\\
+Caregiver education: High school or less & 28.861313 & 9.3338396 & 3.0921158 & 0.0020294 & 10.550380 & 47.172246 & 1308\\
+Age * Caregiver education: Some college & -1.694890 & 1.5007018 & -1.1293984 & 0.2589369 & -4.638936 & 1.249156 & 1308\\
+Age * Caregiver education: High school or less & -1.816008 & 2.4989324 & -0.7267134 & 0.4675316 & -6.718362 & 3.086346 & 1308\\
+\bottomrule
+\end{tabular}}
+\end{table}
+\end{appendix}
