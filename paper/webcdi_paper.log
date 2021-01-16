@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2021.1.12)  15 JAN 2021 21:42
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2021.1.12)  15 JAN 2021 23:20
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -814,13 +814,13 @@ LaTeX Info: Redefining \rmfamily on input line 19.
 LaTeX Info: Redefining \sffamily on input line 19.
 LaTeX Info: Redefining \ttfamily on input line 19.
 
-LaTeX Warning: Label `tab:unnamed-chunk-17' multiply defined.
-
-
-LaTeX Warning: Label `tab:unnamed-chunk-17' multiply defined.
+LaTeX Warning: Label `tab:unnamed-chunk-18' multiply defined.
 
 
 LaTeX Warning: Label `tab:unnamed-chunk-18' multiply defined.
+
+
+LaTeX Warning: Label `tab:unnamed-chunk-19' multiply defined.
 
 )
 \openout1 = `webcdi_paper.aux'.
@@ -1331,10 +1331,10 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 [32] [33]
 Underfull \vbox (badness 3977) has occurred while \output is active []
 
-[34] [35] [36] [37] [38] [39
+[34] [35] [36] [37] [38] [39] [40] [41
 
 
-] [40] [41] AED endfloat: Processing end Figures and Tables [42] [43]
+] [42] [43] AED endfloat: Processing end Figures and Tables [44] [45]
 The property list \polyglossia@langsetup contains the pairs (without outer
 braces):
 >  {latex/script}  =>  {latin}
@@ -1378,15 +1378,15 @@ LaTeX Info: Redefining \ttfamily on input line 19.
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `webcdi_paper.out' has not changed.
-(rerunfilecheck)             Checksum: B25EA360A5FE5D0D1D211C37221CC7DE;2931.
+(rerunfilecheck)             Checksum: 3583D90B3A9F0EFE34F73BDA4B1C062A;3480.
  ) 
 Here is how much of TeX's memory you used:
- 20871 strings out of 479212
- 375096 string characters out of 5872217
- 855832 words of memory out of 5000000
- 40096 multiletter control sequences out of 15000+600000
+ 20875 strings out of 479212
+ 375174 string characters out of 5872217
+ 856015 words of memory out of 5000000
+ 40100 multiletter control sequences out of 15000+600000
  436129 words of font info for 100 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 98i,11n,122p,2422b,578s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 98i,11n,122p,2425b,578s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on webcdi_paper.pdf (43 pages).
+Output written on webcdi_paper.pdf (45 pages).
