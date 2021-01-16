@@ -4660,10 +4660,20 @@
   volume       = {24},
 }
 
-@Online{2019,
-  date  = {June 12, 2019},
-  title = {Mobile Fact Sheet},
-  url   = {https://www.pewresearch.org/internet/fact-sheet/mobile/},
+@Online{Center2019,
+  author       = {Pew Research Center},
+  date         = {June 12, 2019},
+  title        = {Mobile Fact Sheet},
+  url          = {https://www.pewresearch.org/internet/fact-sheet/mobile/},
+  organization = {Pew Research Center},
+}
+
+@Article{Snyder2019,
+  author       = {Snyder, Thomas D and De Brey, Cristobal and Dillow, Sally A},
+  date         = {2019},
+  journaltitle = {National Center for Education Statistics},
+  title        = {Digest of Education Statistics 2017, NCES 2018-070.},
+  publisher    = {ERIC},
 }
 
 @Comment{jabref-meta: databaseType:biblatex;}

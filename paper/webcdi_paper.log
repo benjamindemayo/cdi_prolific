@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2021.1.12)  13 JAN 2021 21:04
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2021.1.12)  15 JAN 2021 21:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1239,7 +1239,10 @@ ts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
-] [2] [3] [4] [5] [6]
+] [2] [3]
+Underfull \vbox (badness 7649) has occurred while \output is active []
+
+[4] [5] [6]
 File: webcdi_paper_files/figure-latex/pictorial-1.pdf Graphic file (type pdf)
 <use webcdi_paper_files/figure-latex/pictorial-1.pdf>
 File: webcdi_paper_files/figure-latex/firstitems-1.pdf Graphic file (type pdf)
@@ -1255,43 +1258,46 @@ Underfull \vbox (badness 3623) has occurred while \output is active []
 
 [9] [10] [11] [12] [13]
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 10.0pt on input line 226.
+(Font)              scaled to size 10.0pt on input line 224.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 7.0pt on input line 226.
+(Font)              scaled to size 7.0pt on input line 224.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 5.0pt on input line 226.
+(Font)              scaled to size 5.0pt on input line 224.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 10.00092pt on input line 226.
+(Font)              scaled to size 10.00092pt on input line 224.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 7.00064pt on input line 226.
+(Font)              scaled to size 7.00064pt on input line 224.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 5.00046pt on input line 226.
+(Font)              scaled to size 5.00046pt on input line 224.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 9.99893pt on input line 226.
+(Font)              scaled to size 9.99893pt on input line 224.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 6.99925pt on input line 226.
+(Font)              scaled to size 6.99925pt on input line 224.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 4.99947pt on input line 226.
-[14] [15]
-Underfull \vbox (badness 1342) has occurred while \output is active []
+(Font)              scaled to size 4.99947pt on input line 224.
+[14]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[15]
+Underfull \vbox (badness 5316) has occurred while \output is active []
 
 [16]
 File: webcdi_paper_files/figure-latex/demobarfig-1.pdf Graphic file (type pdf)
 <use webcdi_paper_files/figure-latex/demobarfig-1.pdf>
 [17]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[18]
 File: webcdi_paper_files/figure-latex/genderfig-1.pdf Graphic file (type pdf)
 <use webcdi_paper_files/figure-latex/genderfig-1.pdf>
-[18]
+[19]
 File: webcdi_paper_files/figure-latex/wgglm-1.pdf Graphic file (type pdf)
 <use webcdi_paper_files/figure-latex/wgglm-1.pdf>
 File: webcdi_paper_files/figure-latex/wgmedfig-1.pdf Graphic file (type pdf)
 <use webcdi_paper_files/figure-latex/wgmedfig-1.pdf>
 File: webcdi_paper_files/figure-latex/wsglm-1.pdf Graphic file (type pdf)
 <use webcdi_paper_files/figure-latex/wsglm-1.pdf>
-
-Underfull \vbox (badness 3623) has occurred while \output is active []
-
-[19] [20]
+[20]
 Underfull \vbox (badness 2626) has occurred while \output is active []
 
 [21]
@@ -1325,10 +1331,10 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 [32] [33]
 Underfull \vbox (badness 3977) has occurred while \output is active []
 
-[34] [35] [36] [37] [38
+[34] [35] [36] [37] [38] [39
 
 
-] [39] [40] AED endfloat: Processing end Figures and Tables [41] [42]
+] [40] [41] AED endfloat: Processing end Figures and Tables [42] [43]
 The property list \polyglossia@langsetup contains the pairs (without outer
 braces):
 >  {latex/script}  =>  {latin}
@@ -1377,10 +1383,10 @@ Package rerunfilecheck Info: File `webcdi_paper.out' has not changed.
 Here is how much of TeX's memory you used:
  20871 strings out of 479212
  375096 string characters out of 5872217
- 858823 words of memory out of 5000000
+ 855832 words of memory out of 5000000
  40096 multiletter control sequences out of 15000+600000
  436129 words of font info for 100 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  98i,11n,122p,2422b,578s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on webcdi_paper.pdf (42 pages).
+Output written on webcdi_paper.pdf (43 pages).
