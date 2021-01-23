@@ -387,12 +387,12 @@ all_d_gender %>%
 ```{r}
 #Counting hispanic and latino heritage
 wg_filtered %>% 
-  mutate(hispanic = !is.na(child_hispanic_latino) & child_hispanic_latino == TRUE) %>% 
+  mutate(hispanic = !is.na(child_hispanic_latino) & child_hispanic_latino == "TRUE") %>% 
   count(hispanic) %>% 
   mutate(prop = n / sum(n))
 
 ws_filtered %>% 
-  mutate(hispanic = !is.na(child_hispanic_latino) & child_hispanic_latino == TRUE) %>%
+  mutate(hispanic = !is.na(child_hispanic_latino) & child_hispanic_latino == "TRUE") %>%
   count(hispanic)%>% 
   mutate(prop = n / sum(n))
 ```
@@ -405,6 +405,7 @@ ws_filtered %>%
 demographics_df <- 
   bind_rows(
     wg_filtered %>% 
+      mutate(hispanic = !is.na(child_hispanic_latino) & child_hispanic_latino == "TRUE") %>%
       select(
         study_name,
         subject_id,
@@ -412,9 +413,11 @@ demographics_df <-
         ethnicity, 
         maternal_ed, 
         produced,
-        sex
+        sex,
+        hispanic
       ),
     ws_filtered %>% 
+      mutate(hispanic = !is.na(child_hispanic_latino) & child_hispanic_latino == "TRUE") %>% 
       select(
         study_name,
         subject_id,
@@ -422,13 +425,14 @@ demographics_df <-
         ethnicity,
         maternal_ed,
         produced,
-        sex
+        sex,
+        hispanic
       )
   )
 
 ethnicity_plot_df <- 
   demographics_df %>% 
-  getEthnicitySummary() %>% 
+  count(ethnicity) %>% 
   filter(!is.na(ethnicity)) %>% 
   filter(ethnicity != "No ethnicity reported") %>% 
   mutate(`Web-CDI sample` = prop.table(n)) %>% 
@@ -439,6 +443,51 @@ ethnicity_plot_df <-
     names_to = "study",
     values_to = "proportion"
   )
+
+whites_vs_census <- 
+  demographics_df %>% 
+  mutate(ethnicity = as.character(ethnicity)) %>% 
+  mutate(ethnicity = factor(case_when(
+    ethnicity == "White" & !hispanic ~ "White, non-Hispanic",
+    ethnicity == "White" & hispanic ~ "White, Hispanic",
+    TRUE ~ ethnicity
+  ))) %>% 
+  count(ethnicity) %>% 
+  filter(ethnicity != "No ethnicity reported") %>% 
+  mutate(`Web-CDI sample` = prop.table(n)) %>% 
+  left_join(census_ethnicity_hispanic_white, by = "ethnicity") %>% 
+  select(-n) %>% 
+  pivot_longer(
+    cols = c(`Web-CDI sample`, `U.S. Census Estimates`),
+    names_to = "study",
+    values_to = "proportion"
+  ) %>% 
+  mutate(study = fct_relevel(
+    study, 
+    levels = c("Web-CDI sample", "U.S. Census Estimates")
+  ))
+
+white_hispanic_plot <- 
+  whites_vs_census %>% 
+  ggplot(aes(ethnicity, proportion, fill = study)) +
+  geom_col(position = "dodge") +
+  labs(
+    y = "Proportion of\nrespondents"
+  ) +
+  theme_few() +
+  theme(
+    legend.title = element_blank(), 
+    axis.text.x = element_text(
+       angle = 25, 
+       vjust = 0.9, 
+       hjust = 1
+     )
+  ) +
+  labs(x = "Race") +
+  scale_fill_viridis_d() +
+  coord_cartesian(ylim = c(0, .81))
+
+white_hispanic_plot
 
 ethnicity_plot <-
   ethnicity_plot_df %>% 

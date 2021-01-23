@@ -147,8 +147,20 @@ old_ethnicity_numbers <-
 census_ethnicity_numbers <- 
   tibble(
     ethnicity = c("Asian", "Black", "Mixed/other", "White"),
-    `U.S. Census Estimates` = c(.059, .134, .102, .763)
+    `U.S. Census Estimates` = c(.065, .152, .046, .730)
   )
+
+census_ethnicity_hispanic_white <- 
+  tibble(
+    ethnicity = c(
+      "Asian", 
+      "Black", 
+      "Mixed/other", 
+      "White, non-Hispanic", 
+      "White, Hispanic"
+    ),
+    `U.S. Census Estimates` = c(.065, .152, .046, .539, .191)
+  ) 
 
 #Add a boolean column for each ethnicity, 
 #and mutate the ethnicity column into desired categories
@@ -177,7 +189,7 @@ getEthnicities <- function(data) {
   return(clean_data)
 }
 
-#Get an ethnicity cummary table
+#Get an ethnicity summary table
 getEthnicitySummary <- function(data) {
   data %>% 
     count(ethnicity)
