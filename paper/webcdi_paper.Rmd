@@ -375,7 +375,7 @@ whites_vs_census <-
   ) %>% 
   mutate(study = fct_relevel(
     study, 
-    levels = c("Dataset 1: Web-CDI sample", "U.S. Census Estimates")
+    levels = c("Dataset 1: Full Web-CDI sample", "U.S. Census Estimates")
   ))
 
 white_hispanic_plot <-
@@ -397,6 +397,8 @@ white_hispanic_plot <-
   labs(x = "Race") +
   scale_fill_viridis_d() +
   coord_cartesian(ylim = c(0, .81))
+
+white_hispanic_plot
 
 
 maternal_ed_plot_df <- 
@@ -483,6 +485,7 @@ plot3 <-
       ),
       axis.title.x = element_blank()
     )
+
 
 #align the plots vertically
 all_demo_plots <- 
