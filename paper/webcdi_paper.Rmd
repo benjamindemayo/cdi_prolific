@@ -892,7 +892,7 @@ ws_momed_fits <-
   })) %>%
   select(fits) %>%
   unnest(fits) %>%
-  mutate(fitted = fitted * wg_total_words)
+  mutate(fitted = fitted * ws_total_words)
 
 wsglm_caption <- 
   str_c("Individual children’s vocabulary production scores from Dataset 1 (full Web-CDI sample) plotted by children’s age and primary caregiver education level of primary caregiver education as reported in the sample of Words and Sentences Web-CDI administrations collected as of November 2020 (N = ", formatC(filtered_n_ws, big.mark = ",", big.interval = 3), ").   Curves show generalized linear models fits.")
@@ -911,7 +911,7 @@ no_hs_ws <-
 ggplot(ws_momed, aes(age, produced, color = maternal_ed)) +
   geom_jitter(alpha = 0.2, width = 0.225) +
   geom_line(aes(y = fitted), size = 1, data = ws_momed_fits) +
-  coord_cartesian(ylim = c(0, 396)) +
+  coord_cartesian(ylim = c(0, ws_total_words)) +
   ggthemes::theme_few() +
   labs(
     color = "Primary caregiver education level", 
