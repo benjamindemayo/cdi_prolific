@@ -398,8 +398,6 @@ white_hispanic_plot <-
   scale_fill_viridis_d() +
   coord_cartesian(ylim = c(0, .81))
 
-white_hispanic_plot
-
 
 maternal_ed_plot_df <- 
   demographics_df %>% 
