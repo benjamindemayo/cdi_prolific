@@ -33,7 +33,7 @@ min_completion_time = 8.5
 
 First read in all of the relevant data.
 
-```{r message=FALSE}
+```{r warning=FALSE}
 all_ws_1 <- 
   readInWebCDI(all_data_ws1_path) %>% 
   select( #drop a bunch of columns that were screwing up the merge with prolific data
@@ -161,7 +161,7 @@ nrow(all_ws_raw)
 ```
 
 
-```{r}
+```{r eval=FALSE}
 #Comprehension and production measures
 medians <- 
   ws_filtered %>%
@@ -302,7 +302,7 @@ wg_filtered %>%
 ```
 
 Inferential statistics on SES and gender
-```{r}
+```{r eval=FALSE}
 
 wg_lm_df <- 
   wg_filtered %>% 
@@ -352,7 +352,7 @@ summary(gender_ws_lm)
 
 
 Gender analyses
-```{r}
+```{r eval=FALSE}
 
 wg_filtered_gender <- 
   wg_filtered %>% 
@@ -384,7 +384,7 @@ all_d_gender %>%
 ```
 
 
-```{r}
+```{r eval=FALSE}
 #Counting hispanic and latino heritage
 wg_filtered %>% 
   mutate(hispanic = !is.na(child_hispanic_latino) & child_hispanic_latino == "TRUE") %>% 
@@ -398,7 +398,7 @@ ws_filtered %>%
 ```
 
 
-```{r}
+```{r eval=FALSE}
 #Demographic analyses on the entire sample
 
 
@@ -523,7 +523,7 @@ ethnicity_plot
 ```
 
 
-```{r fig.width=12, fig.height=5}
+```{r eval=FALSE, fig.width=12, fig.height=5}
 #Maternal ed analysis on the full sample
 
 maternal_ed_plot_df <- 
@@ -859,24 +859,5 @@ save(
 )
 
 
-```
-
-Options table
-```{r}
-options_table <- 
-  read_csv(
-    path(
-      project_root,
-      "paper",
-      "options_table",
-      ext = "csv"
-    )
-  ) %>% 
-  filter(!is.na(`Study setting`)) %>% 
-  knitr::kable()
-
-options_table
-
-knitr::kable(options_table)
 ```
 
