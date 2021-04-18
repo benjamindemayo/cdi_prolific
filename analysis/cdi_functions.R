@@ -5,6 +5,20 @@ library(fs)
 wg_total_words <- 396
 ws_total_words <- 680
 
+
+recode_na_value <- function(value) {
+  if(is.na(value)){value = 0}
+  return(value)
+}
+
+recode_na_vector <- function(value_vector) {
+  recode_vector <- map_dbl(
+    .x = value_vector,
+    .f = recode_na_value
+  )
+  return(recode_vector)
+}
+
 #accepts: path to directory of CDI data, either all WS or WG
 #returns: df of CDI data from every file in the directory
 readInWebCDI <- function(directory) {
@@ -27,7 +41,14 @@ readInWebCDI <- function(directory) {
           contains("father"),
           contains("age")
         )
-    ) 
+    ) %>% 
+    #recode NA's in the vocab columns as 0's. Because we don't want NA's.
+    mutate(
+      across(
+        .cols = c(contains("Produced"), contains("Understood")),
+        .fns = recode_na_vector
+      )
+    )
   return(clean_data)
 }
 
@@ -203,12 +224,13 @@ getMaternalEd <- function(data) {
       maternal_ed = case_when(
         #primary_caregiver_other == "Pre Form Filler Field" & 
           #mother_education == 0 ~ "Not reported",
-        mother_education <= 11 ~ "Some high school or less",
+        mother_education <= 11 & mother_education > 0 ~ 
+          "Some high school or less",
         mother_education == 12 ~ "High school diploma",
         mother_education %in% seq.int(13, 15) ~ 
           "Some college education",
         mother_education >= 16 ~ "College diploma or more",
-        is.na(mother_education) ~ "Not reported"
+        is.na(mother_education) | mother_education == 0 ~ "Not reported"
       )
     ) %>% 
     mutate(

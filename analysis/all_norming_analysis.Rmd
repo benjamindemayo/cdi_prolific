@@ -28,8 +28,11 @@ library(cowplot)
 source(path(here::here(), "file_paths.R"))
 source(functions_script)
 
+load(wg_cutoffs_path)
+load(ws_cutoffs_path)
+
 #Variables to tinker with
-min_completion_time = 8.5
+min_completion_time = 7
 ```
 
 ```{r}
@@ -123,9 +126,18 @@ wg_ses <-
   getCompletionInterval() %>% 
   getEthnicities() %>% 
   getMaternalEd() %>% 
-  filter(completion_time >= min_completion_time) %>% 
   filter_age_wg() %>% 
-  filter_nwords_wg()
+  filter_nwords_wg() %>% 
+  left_join(facebook_wg_cutoffs, by = "age") %>% 
+  filter(completion_time >= minimum_time)
+
+# wg_ses %>% 
+#   filter(completion_time < 15) %>% 
+#   mutate(mom_age = 2020 - mother_yob) %>% 
+#   filter(mom_age < 100) %>% 
+#   ggplot(aes(mom_age, completion_time, color = produced)) +
+#   geom_point() +
+#   scale_color_viridis_c()
 
 save(
   wg_ses,
@@ -180,9 +192,11 @@ ws_ses <-
   getCompletionInterval() %>% 
   getEthnicities() %>% 
   getMaternalEd() %>% 
-  filter(completion_time >= min_completion_time) %>% 
   filter_age_ws() %>% 
-  filter_nwords_ws()
+  filter_nwords_ws() %>% 
+  left_join(prolific_ws_cutoffs, by = "age") %>% 
+  filter(completion_time >= minimum_time)
+
 
 save(
   ws_ses,
@@ -195,12 +209,133 @@ save(
   )
 )
 
-prolific_filtered_n <- 
-  ws_ses %>% 
-  filter(str_detect(study_name, "prolific")) %>% 
-  nrow()
+# prolific_filtered_n <- 
+#   ws_ses %>% 
+#   filter(str_detect(study_name, "prolific")) %>% 
+#   nrow()
+# 
+# ws_ses %>% 
+#   filter(completion_time < 10) %>% 
+#   ggplot(aes(completion_time, produced, color = `Total Produced Percentile-sex`)) +
+#   geom_point(position = position_jitter(width = 0.2)) +
+#   geom_smooth(method = "lm") +
+#   scale_color_viridis_c()
+# 
+# prolific_ws <- 
+#   ws_ses %>% 
+#   filter(str_detect(study_name, "prolific")) %>% 
+#   mutate(factor_age = case_when(
+#     age %in% 16:24 ~ "16 - 24 months",
+#     age %in% 25:30 ~ "25 - 30 months"
+#   ))
+# 
+# younger_ws_quantiles <- 
+#   prolific_ws %>% 
+#   filter(factor_age == "16 - 24 months") %>% 
+#   pull(completion_time) %>% 
+#   quantile(seq(0, 1, .01))
+# 
+# older_ws_quantiles <- 
+#   prolific_ws %>% 
+#   filter(factor_age == "25 - 30 months") %>% 
+#   pull(completion_time) %>% 
+#   quantile(seq(0, 1, .01))
+# 
+# prolific_ws %>% 
+#   ggplot(aes(factor_age, completion_time)) +
+#   geom_boxplot() +
+#   geom_point(
+#     aes(color = produced),
+#     alpha = 0.5,
+#     position = position_jitter(width = 0.2)
+#   ) +
+#   scale_color_viridis_c()
+# 
+# wg_ses %>% 
+#   mutate(factor_age = case_when(
+#     age %in% 8:12 ~ "8 - 12 months",
+#     age %in% 13:18 ~ "13 - 18 months"
+#   )) %>% 
+#   mutate(factor_age = fct_relevel(factor_age, "8 - 12 months")) %>% 
+#   filter(completion_time < 100) %>% 
+#   ggplot(aes(factor_age, completion_time)) +
+#   geom_boxplot() +
+#   geom_point(
+#     aes(color = age),
+#     alpha = 0.5,
+#     position = position_jitter(width = 0.2)
+#   ) +
+#   scale_color_viridis_c()
+
+``` 
+
+```{r eval=FALSE}
+#exploring mom age
+
+demographics_df_ses <- 
+  bind_rows(
+    wg_ses %>% 
+      select(
+        study_name,
+        subject_id,
+        sex,
+        age,
+        ethnicity, 
+        maternal_ed, 
+        produced,
+        completion_time,
+        mother_yob
+      ) %>% 
+      mutate(mom_age = 2020 - mother_yob) %>% 
+      filter(mom_age < 100)
+    ,
+    ws_ses %>% 
+      select(
+        study_name,
+        subject_id,
+        sex,
+        age,
+        ethnicity,
+        maternal_ed,
+        produced,
+        completion_time,
+        mother_yob
+      ) %>% 
+      mutate(mom_age = 2020 - mother_yob) %>% 
+      filter(mom_age < 100)
+  )
+
+demographics_df_ses %>% 
+  arrange(desc(mom_age)) %>% View()
+
+momed_ses_df <- 
+  demographics_df_ses %>% 
+  mutate(highschool = case_when(
+    maternal_ed == "Some high school or less" ~ "High school",
+    maternal_ed == "High school diploma" ~ "High school",
+    maternal_ed == "Some college education" ~ "College",
+    maternal_ed == "College diploma or more" ~ "College"
+  )) %>% 
+  filter(completion_time > 8.5)
+
+momed_ses_df %>% 
+  filter(
+    age <= 30
+  ) %>% 
+  ggplot(aes(age, produced, shape = highschool, color = mom_age)) +
+  geom_jitter(alpha = 0.5, width = 0.225) +
+  geom_smooth(aes(linetype = highschool), method = "lm") +
+  labs(
+    x = "Age in months",
+    y = "Words produced"
+  ) +
+  ggthemes::theme_few() +
+  theme(legend.title = element_blank()) +
+  scale_color_viridis_c()
+
 
 ```
+
 
 ```{r}
 #Calculating exclusions
@@ -378,13 +513,15 @@ names(age) <- excl_col_names
 
 wg_minus_fakes <- 
   wg_minus_age %>% 
-  filter(completion_time >= min_completion_time)
+  left_join(facebook_wg_cutoffs, by = "age") %>% 
+  filter(completion_time >= minimum_time)
 
 wg_fake_n <- nrow(wg_minus_age) - nrow(wg_minus_fakes)
 
 ws_minus_fakes <- 
   ws_minus_age %>% 
-  filter(completion_time >= min_completion_time)
+  left_join(prolific_ws_cutoffs, by = "age") %>% 
+  filter(completion_time >= minimum_time)
 
 ws_fake_n <- nrow(ws_minus_age) - nrow(ws_minus_fakes)
 

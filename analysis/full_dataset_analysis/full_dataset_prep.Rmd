@@ -23,12 +23,13 @@ library(lubridate)
 library(scales)
 library(estimatr)
 library(cowplot)
+library(quantreg)
 
 source(path(here::here(), "file_paths.R"))
 source(functions_script)
 
 #Variables to tinker with
-min_completion_time = 8.5
+min_completion_time = 6
 ```
 
 First read in all of the relevant data.
@@ -94,8 +95,11 @@ Filter out: multilingual exposure, illnesses, vision and hearing problems.
 ```{r}
 #original sample size of 2868
 #WG
-wg_filtered <- 
+
+#First we do all of the exclusions EXCEPT FOR TIMING.
+wg_almost_filtered <- 
   all_wg_raw %>% 
+  filter(completed == TRUE) %>% 
   filter(repeat_num == "1") %>% 
   filterBirthweight() %>% 
   filterMultilingual() %>% 
@@ -105,13 +109,44 @@ wg_filtered <-
   getCompletionInterval() %>% 
   getEthnicities() %>% 
   getMaternalEd() %>% 
-  filter(completion_time >= min_completion_time) %>% 
   filter_age_wg() %>% 
   filter_nwords_wg() #changes Words Understood to "understood" and likewise with Total Produced
 
+##Now we look at Danielle's Facebook data to determine the cutoffs for WG
+
+facebook_wg <- 
+  wg_almost_filtered %>% 
+  filter(study_name == "Facebook-2-WG2")
+
+#use a quantile regression on Danielle's sample to figure out 5th percentile by age
+facebook_wg_model <- 
+  facebook_wg %>% 
+  nest() %>% 
+  mutate(model = map(data, function(fb_wg_data) {
+    rq(completion_time ~ age, data = fb_wg_data, tau = .05)
+  }))
+
+data_cells_wg <- facebook_wg %>% distinct(age)
+
+facebook_wg_cutoffs <- 
+  facebook_wg_model %>% 
+  mutate(fits = map(model, function(m) {
+    data_cells_wg %>% 
+      mutate(fitted = predict(m, newdata = data_cells_wg, type = "response"))
+  })) %>% 
+  select(fits) %>% 
+  unnest(fits) %>% 
+  rename(minimum_time = fitted)
+
+#get rid of people who took survey too fast
+wg_filtered <- 
+  wg_almost_filtered %>% 
+  left_join(facebook_wg_cutoffs, by = "age") %>% 
+  filter(completion_time >= minimum_time)
 
 wg_exclusion_n <- nrow(all_wg_raw) - nrow(wg_filtered)
 
+#save filtered dataset to the project repo
 save(
   wg_filtered,
   file = path(
@@ -123,8 +158,25 @@ save(
   )
 )
 
-ws_filtered <- 
+#save the quantile regression cutoffs to the project repo
+
+save(
+  facebook_wg_cutoffs,
+  file = path(
+    project_root, 
+    "data", 
+    "cutoffs", 
+    "wg_cutoffs.RData"
+  )
+)
+
+```
+
+
+```{r}
+ws_almost_filtered <- 
   all_ws_raw %>% 
+  filter(completed == TRUE) %>% 
   filter(repeat_num == "1") %>% 
   filterBirthweight() %>% 
   filterMultilingual() %>% 
@@ -134,9 +186,38 @@ ws_filtered <-
   getCompletionInterval() %>% 
   getEthnicities() %>% 
   getMaternalEd() %>% 
-  filter(completion_time >= min_completion_time) %>% 
   filter_age_ws() %>% 
   filter_nwords_ws() #changes Words Understood to "understood" and likewise with Total Produced
+
+#Get the prolific data that we are going to use for the WS cutoffs.
+prolific_ws <- 
+  ws_almost_filtered %>% 
+  filter(str_detect(study_name, "prolific"))
+
+prolific_ws_model <- 
+  prolific_ws %>% 
+  nest() %>% 
+  mutate(model = map(data, function(prolific_wg_data) {
+    rq(completion_time ~ age, data = prolific_wg_data, tau = .05)
+  }))
+
+data_cells_ws <- prolific_ws %>% distinct(age)
+
+prolific_ws_cutoffs <- 
+  prolific_ws_model %>% 
+  mutate(fits = map(model, function(m) {
+    data_cells_ws %>% 
+      mutate(fitted = predict(m, newdata = data_cells_ws, type = "response"))
+  })) %>% 
+  select(fits) %>% 
+  unnest(fits) %>% 
+  rename(minimum_time = fitted)
+
+ws_filtered <- 
+  ws_almost_filtered %>% 
+  left_join(prolific_ws_cutoffs, by = "age") %>% 
+  filter(completion_time >= minimum_time)
+
 
 ws_exclusion_n <- nrow(all_ws_raw) - nrow(ws_filtered)
 
@@ -148,6 +229,16 @@ save(
     "full_dataset", 
     "filtered", 
     "ws_filtered.RData"
+  )
+)
+
+save(
+  prolific_ws_cutoffs,
+  file = path(
+    project_root, 
+    "data", 
+    "cutoffs", 
+    "ws_cutoffs.RData"
   )
 )
 
@@ -405,7 +496,12 @@ ws_filtered %>%
 demographics_df <- 
   bind_rows(
     wg_filtered %>% 
-      mutate(hispanic = !is.na(child_hispanic_latino) & child_hispanic_latino == "TRUE") %>%
+      mutate(
+        hispanic = !is.na(child_hispanic_latino) & 
+          child_hispanic_latino == "TRUE",
+        year_of_test = year(created_date),
+        mom_age = year_of_test - mother_yob
+      ) %>%
       select(
         study_name,
         subject_id,
@@ -414,10 +510,17 @@ demographics_df <-
         maternal_ed, 
         produced,
         sex,
-        hispanic
+        hispanic,
+        mom_age,
+        completion_time
       ),
     ws_filtered %>% 
-      mutate(hispanic = !is.na(child_hispanic_latino) & child_hispanic_latino == "TRUE") %>% 
+      mutate(
+        hispanic = !is.na(child_hispanic_latino) & 
+          child_hispanic_latino == "TRUE",
+        year_of_test = year(created_date),
+        mom_age = year_of_test - mother_yob
+      ) %>% 
       select(
         study_name,
         subject_id,
@@ -426,9 +529,15 @@ demographics_df <-
         maternal_ed,
         produced,
         sex,
-        hispanic
+        hispanic,
+        completion_time
       )
+  ) %>% 
+  filter(
+    !(study_name %in% ses_studies),
+    completion_time != 0
   )
+
 
 ethnicity_plot_df <- 
   demographics_df %>% 
@@ -763,13 +872,15 @@ names(age) <- excl_col_names
 
 wg_minus_fakes <- 
   wg_minus_age %>% 
-  filter(completion_time >= min_completion_time)
+  left_join(facebook_wg_cutoffs, by = "age") %>% 
+  filter(completion_time >= minimum_time)
 
 wg_fake_n <- nrow(wg_minus_age) - nrow(wg_minus_fakes)
 
 ws_minus_fakes <- 
   ws_minus_age %>% 
-  filter(completion_time >= min_completion_time)
+  left_join(prolific_ws_cutoffs, by = "age") %>% 
+  filter(completion_time >= minimum_time)
 
 ws_fake_n <- nrow(ws_minus_age) - nrow(ws_minus_fakes)
 

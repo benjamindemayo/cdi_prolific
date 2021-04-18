@@ -156,3 +156,19 @@ ses_sample_exclusions <-
     ext = "RData"
   )
 
+wg_cutoffs_path <- 
+  fs::path(
+    project_root, 
+    "data", 
+    "cutoffs", 
+    "wg_cutoffs.RData"
+  )
+
+ws_cutoffs_path <- 
+  fs::path(
+    project_root, 
+    "data", 
+    "cutoffs", 
+    "ws_cutoffs.RData"
+  )
+
