@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2021.1.12)  20 APR 2021 02:15
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2021.1.12)  22 APR 2021 19:20
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -823,13 +823,16 @@ LaTeX Info: Redefining \rmfamily on input line 19.
 LaTeX Info: Redefining \sffamily on input line 19.
 LaTeX Info: Redefining \ttfamily on input line 19.
 
-LaTeX Warning: Label `tab:unnamed-chunk-24' multiply defined.
+LaTeX Warning: Label `tab:unnamed-chunk-22' multiply defined.
+
+
+LaTeX Warning: Label `tab:unnamed-chunk-22' multiply defined.
+
+
+LaTeX Warning: Label `tab:unnamed-chunk-23' multiply defined.
 
 
 LaTeX Warning: Label `tab:unnamed-chunk-24' multiply defined.
-
-
-LaTeX Warning: Label `tab:unnamed-chunk-25' multiply defined.
 
 )
 \openout1 = `webcdi_paper.aux'.
@@ -1252,23 +1255,28 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 Underfull \vbox (badness 7649) has occurred while \output is active []
 
 [4] [5] [6]
-File: webcdi_paper_files/figure-latex/pictorial-1.pdf Graphic file (type pdf)
-<use webcdi_paper_files/figure-latex/pictorial-1.pdf>
+File: C:/Users/bdemayo.PRINCETON/Desktop/cdi_prolific/paper/figs/WS_instruction
+s.pdf Graphic file (type pdf)
+<use C:/Users/bdemayo.PRINCETON/Desktop/cdi_prolific/paper/figs/WS_instructions
+.pdf>
+
+LaTeX Warning: Float too large for page by 33.9915pt on input line 203.
+
 File: webcdi_paper_files/figure-latex/firstitems-1.pdf Graphic file (type pdf)
 <use webcdi_paper_files/figure-latex/firstitems-1.pdf>
-[7]
-Underfull \vbox (badness 3623) has occurred while \output is active []
-
-[8]
+[7] [8]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[9] [10]
-Underfull \vbox (badness 3977) has occurred while \output is active []
+[9]
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[11] [12]
-Underfull \vbox (badness 7649) has occurred while \output is active []
+[10]
+Underfull \vbox (badness 1838) has occurred while \output is active []
 
-[13]
+[11] [12] [13]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[14]
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
 (Font)              scaled to size 10.0pt on input line 248.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
@@ -1287,18 +1295,12 @@ LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
 (Font)              scaled to size 6.99925pt on input line 248.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
 (Font)              scaled to size 4.99947pt on input line 248.
-[14]
-Underfull \vbox (badness 1681) has occurred while \output is active []
-
 [15] [16] [17]
 File: webcdi_paper_files/figure-latex/demobarfig-1.pdf Graphic file (type pdf)
 <use webcdi_paper_files/figure-latex/demobarfig-1.pdf>
 File: webcdi_paper_files/figure-latex/whitecolplot-1.pdf Graphic file (type pdf
 )
 <use webcdi_paper_files/figure-latex/whitecolplot-1.pdf>
-
-Underfull \vbox (badness 7925) has occurred while \output is active []
-
 [18] [19]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
@@ -1330,7 +1332,10 @@ File: webcdi_paper_files/figure-latex/facebookad-1.pdf Graphic file (type pdf)
 [29]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[30] [31]
+[30]
+Underfull \vbox (badness 4595) has occurred while \output is active []
+
+[31]
 File: webcdi_paper_files/figure-latex/genderses-1.pdf Graphic file (type pdf)
 <use webcdi_paper_files/figure-latex/genderses-1.pdf>
 File: webcdi_paper_files/figure-latex/momedses-1.pdf Graphic file (type pdf)
@@ -1344,21 +1349,21 @@ Underfull \vbox (badness 3623) has occurred while \output is active []
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [34]
-Underfull \vbox (badness 2189) has occurred while \output is active []
+Underfull \vbox (badness 1817) has occurred while \output is active []
 
 [35]
-Underfull \vbox (badness 3977) has occurred while \output is active []
+Underfull \vbox (badness 7649) has occurred while \output is active []
 
 [36] [37]
-Underfull \vbox (badness 3977) has occurred while \output is active []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [38] [39] [40] [41] [42]
 Underfull \vbox (badness 3199) has occurred while \output is active []
 
-[43] [44] [45] [46] [47] [48] [49] [50
+[43] [44] [45] [46] [47] [48
 
 
-] [51] [52] AED endfloat: Processing end Figures and Tables [53] [54]
+] [49] [50] [51] AED endfloat: Processing end Figures and Tables [52] [53]
 The property list \polyglossia@langsetup contains the pairs (without outer
 braces):
 >  {latex/script}  =>  {latin}
@@ -1402,15 +1407,15 @@ LaTeX Info: Redefining \ttfamily on input line 19.
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `webcdi_paper.out' has not changed.
-(rerunfilecheck)             Checksum: CF7770B7A4BE9762EDAB5E8CD0343469;3875.
+(rerunfilecheck)             Checksum: A4A997C38FCBFF3277D8012908EE535C;3875.
  ) 
 Here is how much of TeX's memory you used:
- 20975 strings out of 479212
- 376979 string characters out of 5872217
- 865217 words of memory out of 5000000
- 40195 multiletter control sequences out of 15000+600000
+ 20976 strings out of 479212
+ 377236 string characters out of 5872217
+ 859195 words of memory out of 5000000
+ 40194 multiletter control sequences out of 15000+600000
  436145 words of font info for 102 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  98i,11n,122p,2333b,585s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on webcdi_paper.pdf (54 pages).
+Output written on webcdi_paper.pdf (53 pages).

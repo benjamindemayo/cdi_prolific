@@ -66,6 +66,10 @@ rownames <-
 comp_table <-
   ses_wg_lm_comp %>%
   tidy() %>%
+  mutate(across(
+    .cols = 2:7,
+    .fns = ~ round(., digits = 3)
+  )) %>% 
   mutate(term = rownames) %>%
   select(-outcome) %>%
   kbl(
@@ -83,6 +87,10 @@ comp_table
 prod_table <-
   ses_wg_lm_prod %>%
   tidy() %>%
+  mutate(across(
+    .cols = 2:7,
+    .fns = ~ round(., digits = 3)
+  )) %>% 
   mutate(term = rownames) %>%
   select(-outcome) %>%
   kbl(
@@ -96,5 +104,58 @@ prod_table <-
   )
 
 prod_table
+```
+
+\newpage
+
+```{r}
+
+load(ws_cutoffs_path)
+load(wg_cutoffs_path)
+
+facebook_wg_cutoffs %>%
+  arrange(age) %>% 
+  mutate(minimum_time = round(minimum_time, digits = 3)) %>% 
+  mutate(
+    age = as.character(age), 
+    minimum_time = as.character(minimum_time)
+  ) %>% 
+  rename(
+    "Age in months" = age,
+    "Minimum time to\ncompletion (minutes)" = minimum_time
+  ) %>% 
+  kbl(
+    align = "l", 
+    linesep = "", 
+    caption = "Minimum times to completion, WG measure", 
+    booktabs = TRUE
+  ) %>% 
+  kable_styling(
+    position = "center",
+  ) %>% 
+  column_spec(column = 2, width = "2.2in")
+
+prolific_ws_cutoffs %>%
+  arrange(age) %>% 
+  mutate(minimum_time = round(minimum_time, digits = 3)) %>% 
+  mutate(
+    age = as.character(age), 
+    minimum_time = as.character(minimum_time)
+  ) %>% 
+  rename(
+    "Age in months" = age,
+    "Minimum time to\ncompletion (minutes)" = minimum_time
+  ) %>% 
+  kbl(
+    align = "l", 
+    linesep = "", 
+    caption = "Minimum times to completion, WG measure", 
+    booktabs = TRUE
+  ) %>% 
+  kable_styling(
+    position = "center",
+  ) %>% 
+  column_spec(column = 2, width = "2.2in")
+
 ```
 

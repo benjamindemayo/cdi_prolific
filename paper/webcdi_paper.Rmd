@@ -53,7 +53,7 @@ author:
       - Project Administration
       - Supervision
     email: caroline.rowland@mpi.nl
-  - name: Michael Frank
+  - name: Michael C. Frank
     affiliation: '5'
     role:
       - Conceptualization
@@ -64,7 +64,7 @@ author:
       - Writing - Original Draft Preparation
       - Writing - Review & Editing
     email: mcfrank@stanford.edu
-  - name: Virginia Marchman
+  - name: Virginia A. Marchman
     affiliation: '5'
     role:
       - Conceptualization
@@ -166,7 +166,7 @@ The popularity of CDI instruments has remained strong over the years, leading to
 
 While the reliability and validity of the original CDI instruments is well-established for the American English versions of the forms, existing norming samples are skewed toward families with more years of formal education and away from non-white groups [@fenson2007]. Representation in these norming samples is generally restricted to families living on the U.S. east and west coasts. Further, although paper survey administration is a time-tested method, increasingly researchers and participants would prefer to use an electronic method to administer and fill CDI forms, obviating the need to track (and sometimes mail) paper forms, and the need to key in hundreds of item-wise responses for each child.  
 
-Here, we report on our recent efforts to create and distribute a web-based version of the CDIs in order to address some of the limitations of the standard paper versions. Online administration of the CDI is not a novel innovation – a variety of research groups have created purpose-build platforms for administering the CDI in particular languages. For example, @kristoffersen2013 collected a large normative sample of Norwegian CDIs using a custom online platform. Similarly, the Slovak adaptation of the CDI uses an online administration format [@Kapalkova2007]. And many groups have used general purpose survey software such as Qualtrics and Survey Monkey to administer CDIs and variants online [e.g., @Caselli2020]. The innovation of Web-CDI is to provide a comprehensive researcher management interface for the administration of a wide range of CDI forms, allowing researchers to manage longitudinal administrations, download scores, and share links easily, all while satisfying strong guarantees regarding privacy and anonymity. Moreover, a key benefit of a unified data collection and storage system such as Web-CDI is that data from disparate sources are combined into a single repository. This substantially reduces the overhead efforts associated with bringing together data collected by researchers across the world and allows for the analysis of large comparative datasets with the power to detect general trends in vocabulary development that may emerge across languages. Finally, due to an agreement between the CDI Advisory Board and Brooks Publishing, the publisher of the print versions of the CDI suite, Web-CDI is free of charge for researchers to use.
+Here, we report on our recent efforts to create and distribute a web-based version of the CDIs in order to address some of the limitations of the standard paper versions. Online administration of the CDI is not a novel innovation – a variety of research groups have created purpose-build platforms for administering the CDI in particular languages. For example, @kristoffersen2013 collected a large normative sample of Norwegian CDIs using a custom online platform. Similarly, the Slovak adaptation of the CDI uses an online administration format [@Kapalkova2007]. And many groups have used general purpose survey software such as Qualtrics and Survey Monkey to administer CDIs and variants online [e.g., @Caselli2020]. The innovation of Web-CDI is to provide a comprehensive researcher management interface for the administration of a wide range of CDI forms, allowing researchers to manage longitudinal administrations, download scores, and share links easily, all while satisfying strong guarantees regarding privacy and anonymity. Moreover, a key benefit of a unified data collection and storage system such as Web-CDI is that data from disparate sources are combined into a single repository. This substantially reduces the overhead efforts associated with bringing together data collected by researchers across the world and allows for the analysis of large comparative datasets with the power to detect general trends in vocabulary development that may emerge across languages. Finally, due to an agreement between the CDI Advisory Board and Brookes Publishing, the publisher of the print versions of the CDI suite, Web-CDI is free of charge for those researchers who agree to contribute their data for the renorming of the long form instruments.
 
 # Introducing Web-CDI 
 
@@ -176,15 +176,19 @@ Below, we outline how Web-CDI is used. We begin by detailing the consent obtenti
 
 ## Participant interface
 
-Participants can complete the Web-CDI on a variety of devices, including personal computers and tablets. Web-CDI can be administered on a smartphone, although the experience is not as ideal for the user due to the length of the survey. As Web-CDI moves in the future to incorporate more short forms and adaptive forms [e.g., @Chai2020; @makransky2016; @Mayor2019], smartphone-responsive design will become a priority. 
+Participants can complete the Web-CDI on a variety of devices, including personal computers and tablets. Web-CDI can be administered on a smartphone, although the experience is not as ideal for the user due to the length of the survey. As Web-CDI moves in the future to incorporate more short forms and computer adaptive tests (CATs) formats [e.g., @Chai2020; @makransky2016; @Mayor2019], smartphone-responsive design will become a priority. 
 
 When a participant clicks a URL shared by a researcher, they are directed to a website displaying their own personal administration of the Web-CDI. In some cases, they may be asked to read and accept a waiver of consent documentation, depending on whether the researcher has chosen to use that feature (see also Researcher Interface below). 
 
 ```{r pictorial, fig.cap= "Pictorial instructions in the Web-CDI Words and Sentences instrument."}
 
-img <- png::readPNG(path(fig_directory, "pictorial_instructions.png"))
+# img <- png::readPNG(path(fig_directory, "pictorial_instructions.png"))
+# 
+# grid::grid.raster(img)
 
-grid::grid.raster(img)
+knitr::include_graphics(
+  path = path(fig_directory, "WS_instructions.pdf")
+)
 ```
 
 ```{r firstitems, fig.cap= "(A) Sample items from the American English Words and Gestures form. (B) Sample items from the American English Words and Sentences form."}
@@ -196,7 +200,7 @@ grid::grid.raster(img)
 ```
 
 
-*Instructions.* After completing the first demographics page, participants are provided with detailed instructions that are appropriate for either the Words & Gestures or Words & Sentences version (see Figure \ref{fig:pictorial}). In addition, there are more detailed instructions for completing the vocabulary checklist. Unlike the traditional paper versions, instructions on how to properly choose responses are provided both in written and pictorial form. The pictorial instructions (Figure \ref{fig:pictorial}) aim to further increase caregivers’ understanding of how to complete the checklist. For example, these instructions clarify that the child’s understanding of a word requires them to have some understanding of the object that the word refers to or some aspect of the word’s meaning. In addition, caregivers are reassured that "child-like" forms (e.g., "raff" for "giraffe") or family- or dialect-specific forms (e.g., "nana" for "grandma") are acceptable.  Lastly, caregivers are reminded that the child should be able to produce the words "on their own" and that imitations are not acceptable. These general "rules of thumb" for completing the form should be familiar to researchers who are distributing the forms to caregivers so they can field any questions that may arise. While this is not possible for certain use-cases (e.g., social media recruitment), these instructions should ideally also be reviewed either in writing (e.g., via email) or verbally (e.g., over the phone), so that these pictured instructions serve merely as a reminder to caregivers when completing the form.   
+*Instructions.* After completing the first demographics page, participants are provided with detailed instructions that are appropriate for either the Words & Gestures or Words & Sentences version (see Figure \ref{fig:pictorial}). In addition, there are more detailed instructions for completing the vocabulary checklist. Unlike the traditional paper versions, instructions on how to properly choose responses are provided both in written and pictorial form. The pictorial instructions (Figure \ref{fig:pictorial}) aim to further increase caregivers’ understanding of how to complete the checklist. For example, these instructions clarify that the child’s understanding of a word requires them to have some understanding of the object that the word refers to or some aspect of the word’s meaning. In addition, caregivers are reassured that "child-like" forms (e.g., "raff" for "giraffe") or family- or dialect-specific forms (e.g., "nana" for "grandma") are acceptable.  Lastly, caregivers are reminded that the child should be able to produce the words "on their own" and that imitations are not acceptable. These general "rules of thumb" for completing the form should be familiar to researchers who are distributing the forms to caregivers so they can field any questions that may arise. While this is not possible for certain use-cases (e.g., social media recruitment), these instructions should ideally also be reviewed either in writing (e.g., via email) or verbally (e.g., over the phone), so that these pictured instructions serve merely as a reminder to caregivers when completing the form. Pictured instructions are available for download on the MB-CDI website at http://mb-cdi.stanford.edu/about.html. 
 
 *Completing the instrument.* The majority of the participant’s time is spent completing the main sections of the instruments. As shown in Figure \ref{fig:firstitems}, on the American English Words and Gestures form, the vocabulary checklist portion (396 items) asks caregivers to indicate whether their child can "understand" or "understand and say" each word; they can also indicate that their child neither understands nor says the word by checking neither box. Additionally, gesture communication and other early milestones are assessed. In the American English Words and Sentences form, the vocabulary checklist (680 items) only asks caregivers to indicate which words their child "says". Additional items assess children’s production of their three longest sentences, as well as morphological and syntactic development more broadly. All of these items are broken up across multiple screens for easier navigation through the form. 
 
@@ -222,7 +226,7 @@ Below, we outline several possible use cases of Web-CDI, as well the features wh
 
 *Paid participation.* If researchers choose to compensate participants directly through the Web-CDI interface, Web-CDI has built-in functionality to distribute redeemable gift codes when a participant reaches the end of the survey. Web-CDI contains several features to facilitate integration with third-party crowdsourcing applications and survey vendors should they choose to handle participant compensation through another platform. For example, when creating studies, researchers can enter a URL to redirect participants to when they reach the end of the survey. Researchers using the behavioral research platform Prolific can configure their study to collect participants’ unique Prolific IDs and pre-fill them in the survey.
 
-*Cross-linguistic research.* Web-CDI forms are currently available in English (U.S. American and Canadian), Spanish, French (Quebecois), Hebrew, Dutch and Korean. We are looking to add more language forms to the tool, as the paper version of the forms has been adapted into more than 100 different languages and further ongoing adaptations have been approved by the MB-CDI board (http://mb-cdi.stanford.edu/adaptations).
+*Cross-linguistic research.* Web-CDI forms are currently available in English (U.S. American and Canadian), Spanish, French (Quebecois), Hebrew, Dutch and Korean. We are looking to add more language forms to the tool, as the paper version of the forms has been adapted into more than 100 different languages and dialects, and further ongoing adaptations have been approved by the MB-CDI board (http://mb-cdi.stanford.edu/adaptations).
 
 ## System Design
 
@@ -279,62 +283,6 @@ exclusion_tbl_full %>%
 ```
 
 In this section, we provide some preliminary analyses of Dataset 1, which consists of the full sample of American English Web-CDI administrations collected before autumn 2020. At time of writing, researchers from 15 universities in the United States have collected over 5,000 administrations of the American English CDI using Web-CDI since it was launched in late 2017, with `r formatC(unfiltered_n_wg, big.mark = ",", big.interval = 3)` administrations of the WG form before exclusions and `r formatC(unfiltered_n_ws, big.mark = ",", big.interval = 3)` administrations of the WS form before exclusions. We excluded participants from the subsequent analyses based on a set of stringent criteria intended for the creation of future normative datasets. We excluded participants if it was not their first administration of the survey; if they were born prematurely or had a birthweight under 5.5 lbs (< 2.5 kg); reported more than 16 hours of exposure to a language other than English per week on average (amounting to > 10% exposure to English); had serious vision impairments, hearing deficits or other developmental disorders or medical issues^[Exclusions on the basis of child health were decided on a case-by-case basis by author V.M. in consultation with Philip Dale, Donna Thal, and Larry Fenson.]; were outside of the correct age range for the survey; or spent less time on the survey than a pre-specified timing cutoff. Timing cutoffs were determined by selecting two studies within Dataset 1 that, upon a visual inspection, appeared to contain high-quality responses (i.e., did not contain a disproportionate number of extremely quick responders), and using these to estimate the 5th percentile of completion time by the child's age in months with a quantile regression. Thus, for each age on the WG and WS measures, we obtained an estimate of the 5th percentile of completion time and used this estimate as the shortest amount of time participants could spend on the Web-CDI without being excluded from our analyses here.
-
-```{r}
-
-load(ws_cutoffs_path)
-load(wg_cutoffs_path)
-
-facebook_wg_cutoffs %>%
-  arrange(age) %>% 
-  mutate(minimum_time = round(minimum_time, digits = 3)) %>% 
-  mutate(
-    age = as.character(age), 
-    minimum_time = as.character(minimum_time)
-  ) %>% 
-  rename(
-    "Age in months" = age,
-    "Minimum time to\ncompletion (minutes)" = minimum_time
-  ) %>% 
-  kbl(
-    align = "l", 
-    linesep = "", 
-    caption = "Minimum times to completion, WG measure", 
-    booktabs = TRUE
-  ) %>% 
-  kable_styling(
-    position = "center",
-  ) %>% 
-  column_spec(column = 2, width = "2.2in")
-```
-
-```{r}
-
-load(ws_cutoffs_path)
-load(wg_cutoffs_path)
-
-prolific_ws_cutoffs %>%
-  arrange(age) %>% 
-  mutate(minimum_time = round(minimum_time, digits = 3)) %>% 
-  mutate(
-    age = as.character(age), 
-    minimum_time = as.character(minimum_time)
-  ) %>% 
-  rename(
-    "Age in months" = age,
-    "Minimum time to\ncompletion (minutes)" = minimum_time
-  ) %>% 
-  kbl(
-    align = "l", 
-    linesep = "", 
-    caption = "Minimum times to completion, WG measure", 
-    booktabs = TRUE
-  ) %>% 
-  kable_styling(
-    position = "center",
-  ) %>% 
-  column_spec(column = 2, width = "2.2in")
-```
 
 The exclusion criteria we used were designed to be generally comparable with those used in @fenson2007, who adopted stringent criteria to establish vocabulary norms that reflect typically developing children’s vocabulary trajectories. A complete breakdown of the number of participants excluded on each criterion is in Table 1. Of the completed WG forms, `r formatC(exclusions_n_wg, big.mark = ",", big.interval = 3)` were excluded, leading to a final WG sample size of `r formatC(filtered_n_wg, big.mark = ",", big.interval = 3)` administrations, and `r formatC(exclusions_n_ws, big.mark = ",", big.interval = 3)` WS administrations were excluded, leading to a final WS sample size of `r formatC(filtered_n_ws, big.mark = ",", big.interval = 3)`. 
 
@@ -790,7 +738,7 @@ grid::grid.raster(img)
 
 Figure \ref{fig:demobarfig} shows the distribution of participant ethnicities in Dataset 1 as compared with previously reported numbers in a large scale norming study of the paper-based CDI form by @fenson2007. Several issues pertaining to sample representativeness are appreciable. First, as shown in Figure \ref{fig:demobarfig}A, white participants comprised nearly three quarters of Dataset 1, which is comparable to U.S Census estimates in 2019 of U.S. residents between the ages of 15 and 34 in 2019; however, Figure \ref{fig:demobarfig}C shows that, compared with U.S. Census estimates, many more white participants in Dataset 1 were non-Hispanic than is true of the U.S. population in general, indicating that Web-CDI is significantly oversampling white, non-Hispanic individuals (the breakdown of white participants into Hispanic and non-Hispanic is not reported in the 2007 norms). Moreover, few participants identified as Hispanic/Latinx: `r wg_hispanic_percent` of WG participants and `r ws_hispanic_percent` of WS participants reported Hispanic or Latinx heritage. The low percentage of Hispanic/Latinx participants was due in part to our exclusion of children with substantial exposure to languages other than English: before exclusions, `r wg_all_hispanic_percent` of WG participants were Hispanic/Latinx, and `r ws_all_hispanic_percent` of WS participants were Hispanic/Latinx. Finally, representation of Black participants is generally lower in Dataset 1 (`r black_dataset_1`) than in the 2007 norms (`r black_norms`), which is in turn lower U.S. Census estimates (`r black_census`). This indicates that both Web-CDI data and existing norming samples tend to underrepresent Black participants.
 
-Participants’ educational attainment level, as measured by the primary caregiver's highest educational level reached^[Maternal education level is a common measure of family socioeconomic status, but we probe *primary caregiver* education level here to accommodate family structures in which child-rearing may not primarily be the responsibility of the child's mother.], was similarly skewed. In Dataset 1, `r college_above_webcdi` of responses came from families with college-educated primary caregivers compared to `r college_above_norms` from the same group in the 2007 norms and `r college_above_census` (Figure \ref{fig:demobarfig}). Furthermore, less than 1% of participants report a primary caregiver education level less than a high school degree, compared to 7% from the same group in the 2007 norms. The overrepresentation of white, non-Hispanic Americans and those with high levels of education attainment points to a general challenge encountered in vocabulary development research, which we return to when we detail our efforts to recruit more diverse participants. Figure \ref{fig:whitecolplot} shows that, of the recruitment methods used in Dataset 1, the studies conducted using the platform Prolific (which we detail in the *Dataset 2* section) contributed the least to the high proportion of white, non-Hispanic, college educated participants. Respondents not known to be recruited through an online channel or crowdsourcing platform (labeled "Other method" in Figure \ref{fig:whitecolplot}) showed the most overrepresentation of white, college educated participants, suggesting that reliance on university convenience samples may be driving the demographic skewness of Dataset 1 most acutely.
+Participants’ educational attainment level, as measured by the primary caregiver's highest educational level reached^[Maternal education level is a common measure of family socioeconomic status; we probe *primary caregiver* education level here to accommodate family structures in which child-rearing may not primarily be the responsibility of the child's mother, but we expect that in the vast majority of cases this corresponds to the child's mother.], was similarly skewed. In Dataset 1, `r college_above_webcdi` of responses came from families with college-educated primary caregivers compared to `r college_above_norms` from the same group in the 2007 norms and `r college_above_census` (Figure \ref{fig:demobarfig}). Furthermore, less than 1% of participants report a primary caregiver education level less than a high school degree, compared to 7% from the same group in the 2007 norms. The overrepresentation of white, non-Hispanic Americans and those with high levels of education attainment points to a general challenge encountered in vocabulary development research, which we return to when we detail our efforts to recruit more diverse participants. Figure \ref{fig:whitecolplot} shows that, of the recruitment methods used in Dataset 1, the studies conducted using the platform Prolific (which we detail in the *Dataset 2* section) contributed the least to the high proportion of white, non-Hispanic, college educated participants. Respondents not known to be recruited through an online channel or crowdsourcing platform (labeled "Other method" in Figure \ref{fig:whitecolplot}) showed the most overrepresentation of white, college educated participants, suggesting that reliance on university convenience samples may be driving the demographic skewness of Dataset 1 most acutely.
 
 ### Results: Dataset 1
 
@@ -937,7 +885,8 @@ combined_gender_plot <-
     y = "Words Produced"
   ) +
   ggthemes::theme_few() +
-  theme(legend.title = element_blank())
+  theme(legend.title = element_blank()) +
+  scale_color_viridis_d(begin = 0.25, end = 0.75)
 
 ggsave(
   "combined_gender_plot.png",
@@ -1067,7 +1016,7 @@ wordbank_wg_n <-
 
 wgglm_caption <- 
   str_c(
-    "Individual children's word production (top panels) and comprehension (bottom panels) scores from Dataset 1 (full Web-CDI sample) plotted by age and primary caregiver’s level of education (binned into \"High school diploma or less\", \"Some college education\", and \"College diploma or more\"). Left panels show results from the sample of Words and Gestures Web-CDI administrations collected as of November 2020 (N = ", formatC(filtered_n_wg, big.mark = ",", big.interval = 3), "), and right panels show the subset of American English administrations from Wordbank (Frank et al., 2020) that contain information about caregiver education (N = ", formatC(wordbank_wg_n, big.mark = ",", big.interval = 3), ") for comparison. Curves show generalized linear model fits."
+    "Individual children's word production (top panels) and comprehension (bottom panels) scores from Dataset 1 (full Web-CDI sample) plotted by age and primary caregiver’s level of education (binned into \"High school diploma or less\", \"Some college education\", and \"College diploma or more\"). Left panels show results from the sample of Words and Gestures Web-CDI administrations collected as of November 2020 (N = ", formatC(filtered_n_wg, big.mark = ",", big.interval = 3), "), and right panels show the subset of American English administrations from Wordbank (Frank et al., 2021) that contain information about caregiver education (N = ", formatC(wordbank_wg_n, big.mark = ",", big.interval = 3), ") for comparison. Curves show generalized linear model fits."
   )
 
 #4-facet plot of WG glm for wordbank and web-cdi
@@ -1076,8 +1025,8 @@ wgglm <-
   mutate(measure = fct_relevel(measure, "Words Understood")) %>% 
   ggplot(aes(age, words, color = maternal_ed)) +
   facet_wrap(measure~sample) +
-  geom_jitter(alpha = 0.2, width = 0.225) +
-  geom_line(aes(y = fitted), data = wg_momed_fits, size = 1.2) +
+  geom_jitter(alpha = 0.15, width = 0.225) +
+  geom_line(aes(y = fitted), data = wg_momed_fits, size = 1.7, alpha = 0.8) +
   coord_cartesian(ylim = c(0, 396)) +
   ggthemes::theme_few() +
   labs(
@@ -1087,22 +1036,24 @@ wgglm <-
     linetype = "Primary caregiver education"
   ) +
   scale_x_continuous(breaks = seq(from = 8, to = 18, by = 2)) +
+  scale_color_viridis_d(option = "inferno", begin = .3, end = .8) +
   theme(
     legend.position = "bottom",
     axis.title = element_text(size = 20),
     axis.text = element_text(size = 17),
     legend.title = element_text(size = 20),
     legend.text = element_text(size = 17),
-    strip.text = element_text(size = 17)
+    strip.text = element_text(size = 17),
+    panel.spacing.y = unit(2, "lines")
   ) +
-  guides(color = guide_legend(title.position = "top"))
+  guides(color = guide_legend(title.position = "top")) 
 
 ggsave(
   "wgglm.png",
   plot = wgglm,
   path = fig_directory,
   width = 13,
-  height = 10
+  height = 11.5
 )
 
 ```
@@ -1195,7 +1146,8 @@ wg_med_plot <-
     strip.text = element_text(size = 15),
     legend.position = "bottom",
     legend.title = element_blank()
-  )
+  ) +
+  scale_color_viridis_d(option = "inferno", begin = 0.3, end = 0.8)
 
 wg_med_plot_v2 <- 
   wg_filtered %>% 
@@ -1336,7 +1288,7 @@ wordbank_ws_n <-
   nrow()
 
 wsglm_caption <- 
-  str_c("Individual children’s vocabulary production scores from Dataset 1 (full Web-CDI sample) plotted by children’s age and primary caregiver education level of primary caregiver education on as reported in the sample of Words and Sentences Web-CDI administrations collected as of November 2020 (N = ", formatC(filtered_n_ws, big.mark = ",", big.interval = 3), ", right panel) and in the WordBank repository (N = ", formatC(wordbank_ws_n, big.mark = ",", big.interval = 3), ", left panel).   Curves show generalized linear model fits.")
+  str_c("Individual children’s vocabulary production scores from Dataset 1 (full Web-CDI sample) plotted by children’s age and primary caregiver education level of primary caregiver education on as reported in the sample of Words and Sentences Web-CDI administrations collected as of November 2020 (N = ", formatC(filtered_n_ws, big.mark = ",", big.interval = 3), ", left panel) and in the WordBank repository (N = ", formatC(wordbank_ws_n, big.mark = ",", big.interval = 3), ", right panel).   Curves show generalized linear model fits.")
 
 #number of WS participants with less than high school education
 
@@ -1348,8 +1300,8 @@ no_hs_ws <-
 wsglm <- 
   ggplot(ws_momed, aes(age, produced, color = maternal_ed)) +
   facet_grid(~sample) +
-  geom_jitter(alpha = 0.2, width = 0.225) +
-  geom_line(aes(y = fitted), size = 1, data = ws_momed_fits) +
+  geom_jitter(alpha = 0.12, width = 0.225) +
+  geom_line(aes(y = fitted), data = ws_momed_fits, size = 1.75, alpha = 0.8) +
   coord_cartesian(ylim = c(0, ws_total_words)) +
   ggthemes::theme_few() +
   labs(
@@ -1358,6 +1310,7 @@ wsglm <-
     y = "Number of words"
   ) +
   scale_x_continuous(breaks = seq(from = 16, to = 30, by = 2)) +
+  scale_color_viridis_d(option = "inferno", begin = .3, end = .8) +
   theme(legend.position = "bottom") +
   guides(color = guide_legend(title.position = "top"))
 
@@ -1480,7 +1433,7 @@ ggsave(
 
 On the WG form, respondents’ reports of children’s vocabulary comprehension and production both increased with children’s age (Figure \ref{fig:wgglm}). We replicate overall patterns found by @feldman2000 in that, on both the "Words Understood" and "Words Produced" measures, vocabulary scores were slightly negatively correlated with primary caregivers’ education level, such that those caregivers without any college education reported higher vocabulary scores on both scales. A linear regression model with robust standard errors predicting comprehension scores with children’s age and primary caregivers’ education level (binned into categories of "High school diploma or less", "Some college education" and "College diploma or more"^["High school diploma or less" corresponds to 12 or fewer years of education; "Some college" corresponds to 13 - 15 years of education; "College diploma or more" refers to 16 or more years of education.]) as predictors shows main effects of both age ($\beta$ = `r round(beta_age_comp, 3)`, $p$ < 0.001) and caregiver primary education ($\beta_{high school}$ = `r round(beta_hs_ed_comp, 3)`, $p$ = `r round(p_hs_ed_comp, 3)`). Similarly, a linear regression model with robust standard errors predicting production scores by children’s age and primary caregivers’ education level shows main effects of age ($\beta$ = `r round(beta_age_prod, 3)`, $p$ < 0.001) and caregiver primary education ($\beta_{high school}$ = `r round(beta_hs_ed_prod, 4)`, $p$ = `r broman::myround(p_hs_ed_prod, digits = 3)`). These analyses were not preregistered, but generally follow the analytic strategy in @Frank2021; additionally, we fit linear models with robust standard errors to account for heteroskedasticity in the data [@Astivia2019]. Generalized linear model predictions for Web-CDI shown in Figure \ref{fig:wgglm} differ somewhat from those for WordBank; prediction curves for caregivers of different education attainment levels diverge slightly more in the Web-CDI sample than in the WordBank sample.
 
-The pattern of results seen in the WG subsample of Dataset 1 is consistent with prior findings indicating that respondents with lower levels of education attainment report higher vocabulary comprehension and production on the CDI-WG form [@fenson1994; @feldman2000]. Although caregivers with lower levels of education attainment report higher mean levels of vocabulary production and comprehension, median vocabulary scores (which are more robust to outliers) show no clear pattern of difference across primary caregiver education levels (Figure \ref{fig:wgmedfig}). This discrepancy between the regression effects and a group-median analysis suggests that the regression effects described previously are driven in part by differential interpretation of the survey items, such that a few caregivers with lower levels of education attainment are more liberal in reporting their children’s productive and comprehensive vocabularies, especially for the youngest children, driving up the mean scores for this demographic group.
+The pattern of results seen in the WG subsample of Dataset 1 is consistent with prior findings indicating that respondents with lower levels of education attainment report higher vocabulary comprehension and production on the CDI-WG form [@fenson1994; @feldman2000]. Although caregivers with lower levels of education attainment report higher mean levels of vocabulary production and comprehension, median vocabulary scores (which are more robust to outliers) show no clear pattern of difference across primary caregiver education levels (Figure \ref{fig:wgmedfig}). This discrepancy between the regression effects and a group-median analysis suggests that the regression effects described previously are driven in part by differential interpretation of the survey items, such that a few caregivers with lower levels of education attainment are more liberal in reporting their children’s production and comprehension vocabulary scores, especially for the youngest children, driving up the mean scores for this demographic group.
 
 ```{r}
 ws_med_plot <- 
@@ -1528,7 +1481,8 @@ ws_med_plot <-
     strip.text = element_text(size = 15),
     legend.position = "bottom",
     legend.title = element_blank()
-  )
+  ) +
+  scale_color_viridis_d(option = "inferno", begin = 0.3, end = 0.8)
 
 ggsave(
   "wsmedplot.png",
@@ -1672,7 +1626,7 @@ percent_excluded <-
 ```
 
 
-Across both phases (Facebook and Prolific recruitment), we used the same exclusion criteria as in the full Web-CDI sample to screen participants. A complete tally of all excluded participants is shown in Table 2. In both the WG and WS surveys, exclusion rates in Dataset 2 were high, amounting to `r percent_excluded` of participants who completed the survey. The high exclusion rates were notably driven by an accumulation of survey administrations which participants completed more quickly than our time cutoffs allow (Tables 2 and 3). Many of the survey administrations excluded for fast completion had missing demographic information reported: Among WG participants excluded for too-fast completions, `r percent_no_eth_wg` did not report ethnicity, and among WS participants excluded for the same reason, `r percent_no_eth_ws` did not report ethnicity. Absence of these data prevents us from drawing conclusions about the origin or demographic profile of administrations that were excluded. After exclusions, full sample size in Dataset 2 was N = `r nrow(wg_ses)` WG completions and N = `r nrow(ws_ses)` WS completions.
+Across both phases (Facebook and Prolific recruitment), we used the same exclusion criteria as in the full Web-CDI sample to screen participants. A complete tally of all excluded participants is shown in Table 2. In both the WG and WS surveys, exclusion rates in Dataset 2 were high, amounting to `r percent_excluded` of participants who completed the survey. The high exclusion rates were notably driven by an accumulation of survey administrations which participants completed more quickly than our time cutoffs allow (Tables A4 and A5). Many of the survey administrations excluded for fast completion had missing demographic information reported: Among WG participants excluded for too-fast completions, `r percent_no_eth_wg` did not report ethnicity, and among WS participants excluded for the same reason, `r percent_no_eth_ws` did not report ethnicity. Absence of these data prevents us from drawing conclusions about the origin or demographic profile of administrations that were excluded. After exclusions, full sample size in Dataset 2 was N = `r nrow(wg_ses)` WG completions and N = `r nrow(ws_ses)` WS completions.
 
 ```{r}
 
@@ -1750,7 +1704,8 @@ genderses_v1 <-
     x = "Age in months", 
     y = "Total words produced",
     color = "Child gender"
-  ) 
+  ) +
+  scale_color_viridis_d(begin = 0.25, end = 0.75)
 
 genderses_v1
 
@@ -1821,7 +1776,9 @@ momed_ses_v1 <-
     y = "Words produced"
   ) +
   ggthemes::theme_few() +
-  theme(legend.title = element_blank())
+  theme(legend.title = element_blank()) +
+  scale_color_viridis_d(option = "inferno", begin = 0.3, end = 0.8) +
+  coord_cartesian(ylim = c(0, 600))
 
 momed_ses_v1
 
@@ -2024,7 +1981,7 @@ Importantly, Dataset 2 showed a substantial improvement in reaching non-white or
 
 ### Discussion: Dataset 2
 
-The results from Dataset 2 indicate that Web-CDI could be a promising platform to collect vocabulary development data in non-white populations and communities with lower levels of education attainment when paired with online recruitment methods that yield legitimate, representative participant samples. These data do, however, convey clear limitations of our approach. Perhaps most conspicuously, more than half of completed administrations in this sample had to be excluded, in many cases because the information provided by participants appeared rushed or incomplete: over 40% of administrations were completed in a shorter amount of time than that allowed by our cutoff criteria (Tables 2 and 3), and of these quick completions, well over 90% were missing demographic information that is rarely missing in other administrations of the form. Determining the precise reasons for the high exclusion rate, and how (if at all) this (self-)selection  may bias data reflecting demographic trends in vocabulary development, requires a more thorough assessment of who is submitting hastily-completed forms. Such an assessment is beyond the scope of the current study. However, all respondents who got to the end of the form were compensated regardless of how thoroughly they completed it, creating the possibility that some participants who clicked the anonymous link may not have been members of the population of interest, but rather were other individuals motivated by compensation. To the extent that participants moved through the form quickly because they found the length burdensome, a transition to short forms, including computer adaptive ones [e.g., @Chai2020; @makransky2016; @Mayor2019; @Kachergis], would potentially increase data quality and completion rates substantially.
+The results from Dataset 2 indicate that Web-CDI could be a promising platform to collect vocabulary development data in non-white populations and communities with lower levels of education attainment when paired with online recruitment methods that yield legitimate, representative participant samples. These data do, however, convey clear limitations of our approach. Perhaps most conspicuously, more than half of completed administrations in this sample had to be excluded, in many cases because the information provided by participants appeared rushed or incomplete: over 40% of administrations were completed in a shorter amount of time than that allowed by our cutoff criteria (Tables A4 and A5), and of these quick completions, well over 90% were missing demographic information that is rarely missing in other administrations of the form. Determining the precise reasons for the high exclusion rate, and how (if at all) this (self-)selection  may bias data reflecting demographic trends in vocabulary development, requires a more thorough assessment of who is submitting hastily-completed forms. Such an assessment is beyond the scope of the current study. However, all respondents who got to the end of the form were compensated regardless of how thoroughly they completed it, creating the possibility that some participants who clicked the anonymous link may not have been members of the population of interest, but rather were other individuals motivated by compensation. To the extent that participants moved through the form quickly because they found the length burdensome, a transition to short forms, including computer adaptive ones [e.g., @Chai2020; @makransky2016; @Mayor2019; @Kachergis], would potentially increase data quality and completion rates substantially.
 
 Additionally, the exclusion rates described previously only provide information on those participants who did, at some point, submit a completed form, but many individuals clicked the advertisement link and did not subsequently continue on to complete the form. Without an in-depth exploration of who is clicking the link and why they might choose not to continue, we cannot draw conclusions about the representativeness of the sample in Dataset 2 with regards to the communities we would like to include in our research. As such, a more thorough understanding of how users from different communities respond to various recruitment and sampling methods is needed in future work in order to draw conclusions about demographic trends above and beyond those already established in the literature.
 
@@ -2055,7 +2012,7 @@ Data collected in the United States for this project are anonymized according to
 - Materials: All code and materials for the Web-CDI are openly available at https://github.com/langcog/web-cdi. If readers wish to view the Web-CDI interface in full from the participants' or researchers' perspectives, they are encouraged to contact `webcdi-contact@stanford.edu`.  
 
 # Author contributions
-- Conceptualization: Benjamin deMayo, Danielle Kellier, Mika Braginsky, Caroline Rowland, Michael Frank and Virginia Marchman.
+- Conceptualization: Benjamin deMayo, Danielle Kellier, Mika Braginsky, Christina Bergmann, Caroline Rowland, Michael Frank and Virginia Marchman.
 - Data Curation: Benjamin deMayo, Danielle Kellier and Virginia Marchman.
 - Formal Analysis: Benjamin deMayo.
 - Funding Acquisition: Caroline Rowland and Michael Frank.
@@ -2063,7 +2020,7 @@ Data collected in the United States for this project are anonymized according to
 - Methodology: Benjamin deMayo, Danielle Kellier, Michael Frank and Virginia Marchman.
 - Project Administration: Caroline Rowland, Michael Frank and Virginia Marchman.
 - Software: Danielle Kellier, Mika Braginsky, Christina Bergmann and Cielke Hendriks.
-- Supervision: Caroline Rowland, Michael Frank and Virginia Marchman.
+- Supervision: Christina Bergmann, Caroline Rowland, Michael Frank and Virginia Marchman.
 - Visualization: Benjamin deMayo.
 - Writing - Original Draft Preparation: Benjamin deMayo, Michael Frank and Virginia Marchman.
 - Writing - Review & Editing: Benjamin deMayo, Danielle Kellier, Mika Braginsky, Christina Bergmann, Cielke Hendriks, Caroline Rowland, Michael Frank and Virginia Marchman.
