@@ -5208,4 +5208,21 @@
   howpublished = {\url{https://nces.ed.gov/programs/digest/d18/tables/dt18_104.40.asp?referer=raceindica.asp}},
 }
 
+@Misc{Braginsky2018,
+  author = {Braginsky, M},
+  date   = {2018},
+  title  = {wordbankr: Accessing the Wordbank Database. R package version 0.3. 0},
+}
+
+@Article{,
+}
+
+@Manual{R-wordbankr,
+  author = {Mika Braginsky},
+  date   = {2020},
+  title  = {wordbankr: Accessing the Wordbank Database},
+  note   = {R package version 0.3.1},
+  url    = {https://CRAN.R-project.org/package=wordbankr},
+}
+
 @Comment{jabref-meta: databaseType:biblatex;}
