@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2021.1.12)  29 APR 2021 00:15
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2021.1.12)  3 MAY 2021 11:14
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1270,10 +1270,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 [9] [10]
 Underfull \vbox (badness 1838) has occurred while \output is active []
 
-[11] [12] [13]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[14]
+[11] [12] [13] [14]
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
 (Font)              scaled to size 10.0pt on input line 248.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
@@ -1304,9 +1301,6 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 [20]
 File: webcdi_paper_files/figure-latex/genderfig-1.pdf Graphic file (type pdf)
 <use webcdi_paper_files/figure-latex/genderfig-1.pdf>
-
-Underfull \vbox (badness 5288) has occurred while \output is active []
-
 [21] [22]
 File: webcdi_paper_files/figure-latex/wgglm-1.pdf Graphic file (type pdf)
 <use webcdi_paper_files/figure-latex/wgglm-1.pdf>
@@ -1351,10 +1345,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 [35] [36] [37] [38]
 Underfull \vbox (badness 3977) has occurred while \output is active []
 
-[39] [40] [41] [42] [43]
-Underfull \vbox (badness 3199) has occurred while \output is active []
-
-[44] [45] [46] [47] [48] [49
+[39] [40] [41] [42] [43] [44] [45] [46] [47] [48] [49
 
 
 ] [50] [51] [52] AED endfloat: Processing end Figures and Tables [53] [54]
