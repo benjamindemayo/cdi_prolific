@@ -63,9 +63,12 @@ all_ws_raw <-
   mutate(completed = case_when(
     stringr::str_to_lower(completed) == "true" ~ TRUE,
     stringr::str_to_lower(completed) == "false" ~ FALSE
-  ))
+  )) %>% 
+  filter(completed == TRUE)
 
-all_wg_raw <- readInWebCDI(all_data_wg_path)
+all_wg_raw <- 
+  readInWebCDI(all_data_wg_path) %>% 
+  filter(completed = TRUE)
 
 save(
   all_ws_raw,
@@ -727,8 +730,8 @@ plot_grid(prow, legend, rel_widths = c(3, .5))
 
 #More fine grained analyses of exclusions. Copied and pasted from all_norming_analysis.Rmd.
 
-n_total_wg <- nrow(all_wg_raw)
-n_total_ws <- nrow(all_ws_raw)
+n_total_wg <- nrow(all_wg_raw %>% filter(completed == TRUE))
+n_total_ws <- nrow(all_ws_raw %>% filter(completed == TRUE))
 
 excl_col_names <- 
   c(

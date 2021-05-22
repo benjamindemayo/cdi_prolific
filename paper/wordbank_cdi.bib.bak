@@ -5214,8 +5214,6 @@
   title  = {wordbankr: Accessing the Wordbank Database. R package version 0.3. 0},
 }
 
-@Article{,
-}
 
 @Manual{R-wordbankr,
   author = {Mika Braginsky},
@@ -5223,6 +5221,17 @@
   title  = {wordbankr: Accessing the Wordbank Database},
   note   = {R package version 0.3.1},
   url    = {https://CRAN.R-project.org/package=wordbankr},
+}
+
+@Article{Bleses2016,
+  author       = {Bleses, Dorothy and Makransky, Guido and Dale, Philip S and H{\o}jen, Anders and Ari, Burcak Akt{\"u}rk},
+  date         = {2016},
+  journaltitle = {Applied Psycholinguistics},
+  title        = {Early productive vocabulary predicts academic achievement 10 years later},
+  number       = {6},
+  pages        = {1461--1476},
+  volume       = {37},
+  publisher    = {Cambridge University Press},
 }
 
 @Comment{jabref-meta: databaseType:biblatex;}
