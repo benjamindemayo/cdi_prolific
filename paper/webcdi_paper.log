@@ -1,11 +1,11 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021/W32TeX) (preloaded format=xelatex 2021.5.17)  22 MAY 2021 00:26
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021/W32TeX) (preloaded format=xelatex 2021.5.28)  12 JUN 2021 17:31
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **webcdi_paper.tex
 (./webcdi_paper.tex
 LaTeX2e <2020-10-01> patch level 4
-L3 programming layer <2021-05-11>
+L3 programming layer <2021-05-27>
 (c:/Users/bdemayo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/apa6/a
 pa6.cls
 Document Class: apa6 2020/01/13 v2.34 APA formatting (6th edition)
@@ -18,14 +18,14 @@ Document Class: article 2020/04/10 v1.4m Standard LaTeX document class
 ize12.clo
 File: size12.clo 2020/04/10 v1.4m Standard LaTeX file (size option)
 )
-\c@part=\count175
-\c@section=\count176
-\c@subsection=\count177
-\c@subsubsection=\count178
-\c@paragraph=\count179
-\c@subparagraph=\count180
-\c@figure=\count181
-\c@table=\count182
+\c@part=\count177
+\c@section=\count178
+\c@subsection=\count179
+\c@subsubsection=\count180
+\c@paragraph=\count181
+\c@subparagraph=\count182
+\c@figure=\count183
+\c@table=\count184
 \abovecaptionskip=\skip47
 \belowcaptionskip=\skip48
 \bibindent=\dimen138
@@ -33,7 +33,7 @@ File: size12.clo 2020/04/10 v1.4m Standard LaTeX file (size option)
 (c:/Users/bdemayo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/etoolb
 ox/etoolbox.sty
 Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
-\etb@tempcnta=\count183
+\etb@tempcnta=\count185
 )
 Class apa6 Info: No bibliography package was specified; defaulting to (but not 
 loading) Biblatex on input line 213.
@@ -101,9 +101,9 @@ Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 x/iftex.sty
 Package: iftex 2020/03/06 v1.0d TeX engine tests
 ))
-\Gm@cnth=\count184
-\Gm@cntv=\count185
-\c@Gm@tempcnt=\count186
+\Gm@cnth=\count186
+\Gm@cntv=\count187
+\c@Gm@tempcnt=\count188
 \Gm@bindingoffset=\dimen139
 \Gm@wd@mp=\dimen140
 \Gm@odd@mp=\dimen141
@@ -152,12 +152,12 @@ Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
 \cmidrulesep=\dimen156
 \cmidrulekern=\dimen157
 \defaultaddspace=\dimen158
-\@cmidla=\count187
-\@cmidlb=\count188
+\@cmidla=\count189
+\@cmidlb=\count190
 \@aboverulesep=\dimen159
 \@belowrulesep=\dimen160
-\@thisruleclass=\count189
-\@lastruleclass=\count190
+\@thisruleclass=\count191
+\@lastruleclass=\count192
 \@thisrulewidth=\dimen161
 )
 (c:/Users/bdemayo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/threep
@@ -192,11 +192,11 @@ Package: caption3 2020/10/21 v2.2e caption3 kernel (AR)
 \caption@hangindent=\dimen168
 Package caption Info: Standard document class detected.
 )
-\c@caption@flags=\count191
-\c@continuedfloat=\count192
+\c@caption@flags=\count193
+\c@continuedfloat=\count194
 Package caption Info: threeparttable package is loaded.
 )
-\c@APAenum=\count193
+\c@APAenum=\count195
 \@text@par@indent=\skip59
 \gr@box=\box48
 \gr@boxwidth=\skip60
@@ -211,7 +211,7 @@ Package: bm 2019/07/24 v1.2d Bold Symbol Support (DPC/FMi)
 LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 141.
 LaTeX Info: Redefining \bm on input line 209.
 )
-\c@appendix=\count194
+\c@appendix=\count196
 
 (c:/Users/bdemayo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/fancyh
 dr/fancyhdr.sty
@@ -231,17 +231,17 @@ rs
 at/endfloat.sty
 Package: endfloat 2019/04/15 v2.7 LaTeX2e package puts figures and tables at en
 d (jdm)
-\c@posttable=\count195
+\c@posttable=\count197
 \efloat@postttt=\write3
-\@ef@tttopen=\count196
-\c@postfigure=\count197
+\@ef@tttopen=\count198
+\c@postfigure=\count199
 \efloat@postfff=\write4
-\@ef@fffopen=\count198
+\@ef@fffopen=\count266
 )
 (c:/Users/bdemayo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/float/
 float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count199
+\c@float@type=\count267
 \float@exts=\toks17
 \float@box=\box49
 \@float@everytoks=\toks18
@@ -273,13 +273,13 @@ LaTeX Info: Redefining \boldsymbol on input line 28.
 h/amsopn.sty
 Package: amsopn 2016/03/08 v2.02 operator names
 )
-\inf@bad=\count266
+\inf@bad=\count268
 LaTeX Info: Redefining \frac on input line 234.
-\uproot@=\count267
-\leftroot@=\count268
+\uproot@=\count269
+\leftroot@=\count270
 LaTeX Info: Redefining \overline on input line 399.
-\classnum@=\count269
-\DOTSCASE@=\count270
+\classnum@=\count271
+\DOTSCASE@=\count272
 LaTeX Info: Redefining \ldots on input line 496.
 LaTeX Info: Redefining \dots on input line 499.
 LaTeX Info: Redefining \cdots on input line 620.
@@ -288,15 +288,15 @@ LaTeX Info: Redefining \cdots on input line 620.
 \big@size=\dimen171
 LaTeX Font Info:    Redeclaring font encoding OML on input line 743.
 LaTeX Font Info:    Redeclaring font encoding OMS on input line 744.
-\macc@depth=\count271
-\c@MaxMatrixCols=\count272
+\macc@depth=\count273
+\c@MaxMatrixCols=\count274
 \dotsspace@=\muskip16
-\c@parentequation=\count273
-\dspbrk@lvl=\count274
+\c@parentequation=\count275
+\dspbrk@lvl=\count276
 \tag@help=\toks20
-\row@=\count275
-\column@=\count276
-\maxfields@=\count277
+\row@=\count277
+\column@=\count278
+\maxfields@=\count279
 \andhelp@=\toks21
 \eqnshift@=\dimen172
 \alignsep@=\dimen173
@@ -336,20 +336,20 @@ Package: ifluatex 2019/10/25 v1.5 ifluatex legacy package. Use iftex instead.
 e-math/unicode-math.sty
 (c:/Users/bdemayo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3kern
 el/expl3.sty
-Package: expl3 2021-05-11 L3 programming layer (loader) 
+Package: expl3 2021-05-27 L3 programming layer (loader) 
 
 (c:/Users/bdemayo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3back
 end/l3backend-xetex.def
 File: l3backend-xetex.def 2021-05-07 L3 backend support: XeTeX
 (|extractbb --version)
-\c__kernel_sys_dvipdfmx_version_int=\count278
-\l__color_backend_stack_int=\count279
-\g__color_backend_stack_int=\count280
-\g__graphics_track_int=\count281
+\c__kernel_sys_dvipdfmx_version_int=\count280
+\l__color_backend_stack_int=\count281
+\g__color_backend_stack_int=\count282
+\g__graphics_track_int=\count283
 \l__pdf_internal_box=\box53
-\g__pdf_backend_object_int=\count282
-\g__pdf_backend_annotation_int=\count283
-\g__pdf_backend_link_int=\count284
+\g__pdf_backend_object_int=\count284
+\g__pdf_backend_annotation_int=\count285
+\g__pdf_backend_link_int=\count286
 ))
 Package: unicode-math 2020/01/31 v0.8q Unicode maths in XeLaTeX and LuaLaTeX
 
@@ -366,7 +366,7 @@ ages/xparse/xparse-2020-10-01.sty
 ages/xparse/xparse-generic.tex)))
 (c:/Users/bdemayo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3pack
 ages/l3keys2e/l3keys2e.sty
-Package: l3keys2e 2021-05-07 LaTeX2e option processing using LaTeX3 keys
+Package: l3keys2e 2021-05-27 LaTeX2e option processing using LaTeX3 keys
 )
 (c:/Users/bdemayo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/fontsp
 ec/fontspec.sty
@@ -376,17 +376,17 @@ Package: fontspec 2020/02/21 v2.7i Font selection for XeLaTeX and LuaLaTeX
 ec/fontspec-xetex.sty
 Package: fontspec-xetex 2020/02/21 v2.7i Font selection for XeLaTeX and LuaLaTe
 X
-\l__fontspec_script_int=\count285
-\l__fontspec_language_int=\count286
-\l__fontspec_strnum_int=\count287
-\l__fontspec_tmp_int=\count288
-\l__fontspec_tmpa_int=\count289
-\l__fontspec_tmpb_int=\count290
-\l__fontspec_tmpc_int=\count291
-\l__fontspec_em_int=\count292
-\l__fontspec_emdef_int=\count293
-\l__fontspec_strong_int=\count294
-\l__fontspec_strongdef_int=\count295
+\l__fontspec_script_int=\count287
+\l__fontspec_language_int=\count288
+\l__fontspec_strnum_int=\count289
+\l__fontspec_tmp_int=\count290
+\l__fontspec_tmpa_int=\count291
+\l__fontspec_tmpb_int=\count292
+\l__fontspec_tmpc_int=\count293
+\l__fontspec_em_int=\count294
+\l__fontspec_emdef_int=\count295
+\l__fontspec_strong_int=\count296
+\l__fontspec_strongdef_int=\count297
 \l__fontspec_tmpa_dim=\dimen178
 \l__fontspec_tmpb_dim=\dimen179
 \l__fontspec_tmpc_dim=\dimen180
@@ -406,13 +406,34 @@ s1enc.def
 File: ts1enc.def 2001/06/05 v3.0e (jk/car/fm) Standard LaTeX file
 LaTeX Font Info:    Redeclaring font encoding TS1 on input line 47.
 ))
-\g__um_fam_int=\count296
-\g__um_fonts_used_int=\count297
-\l__um_primecount_int=\count298
+\g__um_fam_int=\count298
+\g__um_fonts_used_int=\count299
+\l__um_primecount_int=\count300
 \g__um_primekern_muskip=\muskip17
 
 (c:/Users/bdemayo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/unicod
 e-math/unicode-math-table.tex)))
+(c:/Users/bdemayo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/microt
+ype/microtype.sty
+Package: microtype 2021/03/14 v2.8c Micro-typographical refinements (RS)
+\MT@toks=\toks24
+\MT@count=\count301
+LaTeX Info: Redefining \textls on input line 790.
+\MT@outer@kern=\dimen181
+LaTeX Info: Redefining \textmicrotypecontext on input line 1374.
+\MT@listname@count=\count302
+
+(c:/Users/bdemayo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/microt
+ype/microtype-xetex.def
+File: microtype-xetex.def 2021/03/14 v2.8c Definitions specific to xetex (RS)
+LaTeX Info: Redefining \lsstyle on input line 254.
+)
+Package microtype Info: Loading configuration file microtype.cfg.
+
+(c:/Users/bdemayo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/microt
+ype/microtype.cfg
+File: microtype.cfg 2021/03/14 v2.8c microtype main configuration file (RS)
+))
 (c:/Users/bdemayo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/xcolor
 /xcolor.sty
 Package: xcolor 2016/05/11 v2.12 LaTeX color extensions (UK)
@@ -480,9 +501,9 @@ Package: auxhook 2019-12-17 v1.6 Hooks for auxiliary files (HO)
 ons/kvoptions.sty
 Package: kvoptions 2020-10-07 v3.14 Key value format for package options (HO)
 )
-\@linkdim=\dimen181
-\Hy@linkcounter=\count299
-\Hy@pagecounter=\count300
+\@linkdim=\dimen182
+\Hy@linkcounter=\count303
+\Hy@pagecounter=\count304
 
 (c:/Users/bdemayo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperr
 ef/pd1enc.def
@@ -501,7 +522,7 @@ Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
 cmds/etexcmds.sty
 Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
 )
-\Hy@SavedSpaceFactor=\count301
+\Hy@SavedSpaceFactor=\count305
 
 (c:/Users/bdemayo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperr
 ef/puenc.def
@@ -515,7 +536,7 @@ Package hyperref Info: Plain pages OFF on input line 4207.
 Package hyperref Info: Backreferencing OFF on input line 4212.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4445.
-\c@Hy@tempcnt=\count302
+\c@Hy@tempcnt=\count306
 
 (c:/Users/bdemayo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/url/ur
 l.sty
@@ -523,7 +544,7 @@ l.sty
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
 LaTeX Info: Redefining \url on input line 4804.
-\XeTeXLinkMargin=\dimen182
+\XeTeXLinkMargin=\dimen183
 
 (c:/Users/bdemayo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/bits
 et/bitset.sty
@@ -534,9 +555,9 @@ ntcalc/bigintcalc.sty
 Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
 )
 ))
-\Fld@menulength=\count303
-\Field@Width=\dimen183
-\Fld@charsize=\dimen184
+\Fld@menulength=\count307
+\Field@Width=\dimen184
+\Fld@charsize=\dimen185
 Package hyperref Info: Hyper figures OFF on input line 6075.
 Package hyperref Info: Link nesting OFF on input line 6080.
 Package hyperref Info: Hyper index ON on input line 6083.
@@ -553,9 +574,9 @@ Package: atbegshi-ltx 2020/08/17 v1.0a Emulation of the original atbegshi packa
 ge
 with kernel methods
 )
-\Hy@abspage=\count304
-\c@Item=\count305
-\c@Hfootnote=\count306
+\Hy@abspage=\count308
+\c@Item=\count309
+\c@Hfootnote=\count310
 )
 Package hyperref Info: Driver (autodetected): hxetex.
 
@@ -569,10 +590,10 @@ Package: stringenc 2019/11/29 v1.12 Convert strings between diff. encodings (HO
 )
 )
 \pdfm@box=\box54
-\c@Hy@AnnotLevel=\count307
-\HyField@AnnotCount=\count308
-\Fld@listcount=\count309
-\c@bookmark@seq@number=\count310
+\c@Hy@AnnotLevel=\count311
+\HyField@AnnotCount=\count312
+\Fld@listcount=\count313
+\c@bookmark@seq@number=\count314
 
 (c:/Users/bdemayo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/rerunf
 ilecheck/rerunfilecheck.sty
@@ -608,17 +629,17 @@ Package: longtable 2020/01/07 v4.13 Multi-page Table package (DPC)
 \LTright=\skip76
 \LTpre=\skip77
 \LTpost=\skip78
-\LTchunksize=\count311
-\LTcapwidth=\dimen185
+\LTchunksize=\count315
+\LTcapwidth=\dimen186
 \LT@head=\box55
 \LT@firsthead=\box56
 \LT@foot=\box57
 \LT@lastfoot=\box58
-\LT@cols=\count312
-\LT@rows=\count313
-\c@LT@tables=\count314
-\c@LT@chunks=\count315
-\LT@p@ftn=\toks24
+\LT@cols=\count316
+\LT@rows=\count317
+\c@LT@tables=\count318
+\c@LT@chunks=\count319
+\LT@p@ftn=\toks25
 )
 (c:/Users/bdemayo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphi
 cs/lscape.sty
@@ -628,9 +649,9 @@ Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
 ow/multirow.sty
 Package: multirow 2021/03/15 v2.8 Span multiple rows of a table
 \multirow@colwidth=\skip79
-\multirow@cntb=\count316
+\multirow@cntb=\count320
 \multirow@dima=\skip80
-\bigstrutjot=\dimen186
+\bigstrutjot=\dimen187
 )
 (c:/Users/bdemayo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/
 tabularx.sty
@@ -639,21 +660,21 @@ Package: tabularx 2020/01/15 v2.11c `tabularx' package (DPC)
 (c:/Users/bdemayo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/
 array.sty
 Package: array 2020/10/01 v2.5c Tabular extension package (FMi)
-\col@sep=\dimen187
+\col@sep=\dimen188
 \ar@mcellbox=\box59
-\extrarowheight=\dimen188
-\NC@list=\toks25
+\extrarowheight=\dimen189
+\NC@list=\toks26
 \extratabsurround=\skip81
 \backup@length=\skip82
 \ar@cellbox=\box60
 )
-\TX@col@width=\dimen189
-\TX@old@table=\dimen190
-\TX@old@col=\dimen191
-\TX@target=\dimen192
-\TX@delta=\dimen193
-\TX@cols=\count317
-\TX@ftn=\toks26
+\TX@col@width=\dimen190
+\TX@old@table=\dimen191
+\TX@old@col=\dimen192
+\TX@target=\dimen193
+\TX@delta=\dimen194
+\TX@cols=\count321
+\TX@ftn=\toks27
 )
 (c:/Users/bdemayo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/threep
 arttablex/threeparttablex.sty
@@ -674,13 +695,13 @@ Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
 (c:/Users/bdemayo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/csquot
 es/csquotes.sty
 Package: csquotes 2021-02-22 v5.2l context-sensitive quotations (JAW)
-\csq@reset=\count318
-\csq@gtype=\count319
-\csq@glevel=\count320
-\csq@qlevel=\count321
-\csq@maxlvl=\count322
-\csq@tshold=\count323
-\csq@ltx@everypar=\toks27
+\csq@reset=\count322
+\csq@gtype=\count323
+\csq@glevel=\count324
+\csq@qlevel=\count325
+\csq@maxlvl=\count326
+\csq@tshold=\count327
+\csq@ltx@everypar=\toks28
 
 (c:/Users/bdemayo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/csquot
 es/csquotes.def
@@ -710,10 +731,10 @@ Package: xkeyval 2020/11/20 v2.8 package option processing (HA)
 val/xkeyval.tex
 (c:/Users/bdemayo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/xkey
 val/xkvutils.tex
-\XKV@toks=\toks28
-\XKV@tempa@toks=\toks29
+\XKV@toks=\toks29
+\XKV@tempa@toks=\toks30
 )
-\XKV@depth=\count324
+\XKV@depth=\count328
 File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
 ))
 \xpg@normalclass=\XeTeXcharclass1
@@ -788,15 +809,15 @@ Package polyglossia Info: Default language is english.
 (c:/Users/bdemayo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/
 calc.sty
 Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
-\calc@Acount=\count325
-\calc@Bcount=\count326
-\calc@Adimen=\dimen194
-\calc@Bdimen=\dimen195
+\calc@Acount=\count329
+\calc@Bcount=\count330
+\calc@Adimen=\dimen195
+\calc@Bdimen=\dimen196
 \calc@Askip=\skip87
 \calc@Bskip=\skip88
 LaTeX Info: Redefining \setlength on input line 80.
 LaTeX Info: Redefining \addtolength on input line 81.
-\calc@Ccount=\count327
+\calc@Ccount=\count331
 \calc@Cskip=\skip89
 )
 Package csquotes Info: Checking for multilingual support...
@@ -1158,6 +1179,18 @@ LaTeX Font Info:    Encoding `OMX' has changed to `TU' for symbol font
 LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
 (Font)                  OMX/lmex/m/n --> TU/latinmodern-math.otf(3)/b/n on inpu
 t line 164.
+LaTeX Info: Redefining \microtypecontext on input line 164.
+Package microtype Info: Character protrusion enabled (level 2).
+Package microtype Info: Using protrusion set `basicmath'.
+Package microtype Info: No adjustment of tracking.
+Package microtype Info: No adjustment of spacing.
+Package microtype Info: No adjustment of kerning.
+
+(c:/Users/bdemayo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/microt
+ype/mt-LatinModernRoman.cfg
+File: mt-LatinModernRoman.cfg 2021/02/21 v1.1 microtype config. file: Latin Mod
+ern Roman (RS)
+)
 Package hyperref Info: Link coloring OFF on input line 164.
 
 (c:/Users/bdemayo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperr
@@ -1172,7 +1205,7 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 itlestring/gettitlestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count328
+\c@section@level=\count332
 )
 LaTeX Info: Redefining \ref on input line 164.
 LaTeX Info: Redefining \pageref on input line 164.
@@ -1228,12 +1261,24 @@ LaTeX Font Info:    Trying to load font information for U+msa on input line 166
 ts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
+(c:/Users/bdemayo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/microt
+ype/mt-msa.cfg
+File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
+)
 LaTeX Font Info:    Trying to load font information for U+msb on input line 166
 .
 
 (c:/Users/bdemayo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfon
 ts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+(c:/Users/bdemayo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/microt
+ype/mt-msb.cfg
+File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
+)
+(c:/Users/bdemayo.PRINCETON/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/microt
+ype/mt-eur.cfg
+File: mt-eur.cfg 2006/07/31 v1.1 microtype config. file: AMS Euler Roman (RS)
 ) [1
 
 ] [2] [3]
@@ -1255,7 +1300,10 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 [9] [10]
 Underfull \vbox (badness 1838) has occurred while \output is active []
 
-[11] [12] [13] [14]
+[11] [12] [13]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[14]
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
 (Font)              scaled to size 10.0pt on input line 245.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
@@ -1274,18 +1322,25 @@ LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
 (Font)              scaled to size 6.99925pt on input line 245.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
 (Font)              scaled to size 4.99947pt on input line 245.
-[15] [16] [17]
+[15]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[16] [17]
 File: webcdi_paper_files/figure-latex/demobarfig-1.pdf Graphic file (type pdf)
 <use webcdi_paper_files/figure-latex/demobarfig-1.pdf>
+[18]
 File: webcdi_paper_files/figure-latex/whitecolplot-1.pdf Graphic file (type pdf
 )
 <use webcdi_paper_files/figure-latex/whitecolplot-1.pdf>
-[18] [19]
+[19]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [20]
-File: webcdi_paper_files/figure-latex/genderfig-1.pdf Graphic file (type pdf)
-<use webcdi_paper_files/figure-latex/genderfig-1.pdf>
+File: webcdi_paper_files/figure-latex/sexfig-1.pdf Graphic file (type pdf)
+<use webcdi_paper_files/figure-latex/sexfig-1.pdf>
+
+Underfull \vbox (badness 5288) has occurred while \output is active []
+
 [21] [22]
 File: webcdi_paper_files/figure-latex/wgglm-1.pdf Graphic file (type pdf)
 <use webcdi_paper_files/figure-latex/wgglm-1.pdf>
@@ -1309,8 +1364,8 @@ File: webcdi_paper_files/figure-latex/facebookad-1.pdf Graphic file (type pdf)
 Underfull \vbox (badness 3623) has occurred while \output is active []
 
 [30] [31]
-File: webcdi_paper_files/figure-latex/genderses-1.pdf Graphic file (type pdf)
-<use webcdi_paper_files/figure-latex/genderses-1.pdf>
+File: webcdi_paper_files/figure-latex/sexses-1.pdf Graphic file (type pdf)
+<use webcdi_paper_files/figure-latex/sexses-1.pdf>
 File: webcdi_paper_files/figure-latex/momedses-1.pdf Graphic file (type pdf)
 <use webcdi_paper_files/figure-latex/momedses-1.pdf>
 File: webcdi_paper_files/figure-latex/demobarses-1.pdf Graphic file (type pdf)
@@ -1377,15 +1432,15 @@ LaTeX Info: Redefining \ttfamily on input line 19.
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `webcdi_paper.out' has not changed.
-(rerunfilecheck)             Checksum: DC556E987201655E0746E5B802D14A79;4001.
+(rerunfilecheck)             Checksum: E1E380477A2DAB8DE97FDCE810EC0FE0;4001.
  ) 
 Here is how much of TeX's memory you used:
- 20392 strings out of 478764
- 373069 string characters out of 5861487
- 855342 words of memory out of 5000000
- 40057 multiletter control sequences out of 15000+600000
+ 21754 strings out of 478682
+ 400745 string characters out of 5860086
+ 902983 words of memory out of 5000000
+ 41461 multiletter control sequences out of 15000+600000
  436129 words of font info for 100 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 85i,12n,121p,2307b,577s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 87i,12n,120p,2317b,587s stack positions out of 5000i,500n,10000p,200000b,80000s
 
 Output written on webcdi_paper.pdf (54 pages).
